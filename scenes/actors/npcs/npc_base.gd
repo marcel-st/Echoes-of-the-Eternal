@@ -7,6 +7,7 @@ extends Area2D
 @export var interaction_radius: float = 48.0
 @export var interaction_cooldown_seconds: float = 0.25
 @export var enable_wander: bool = false
+@export var freeze_wander_during_dialogue: bool = true
 @export var wander_speed: float = 22.0
 @export var wander_radius: float = 26.0
 @export var wander_pause_seconds: float = 1.2
@@ -119,7 +120,7 @@ func _update_wander(delta: float) -> void:
 	if not enable_wander:
 		_play_idle_animation()
 		return
-	if DialogueManager.is_dialogue_active():
+	if freeze_wander_during_dialogue and DialogueManager.is_dialogue_active():
 		_play_idle_animation()
 		return
 	if _player_in_range:

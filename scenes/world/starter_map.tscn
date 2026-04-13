@@ -79,6 +79,9 @@ display_name = "Bram"
 default_dialogue_id = StringName("SQ_BRAM_01")
 prompt_text = "Talk [E]"
 enable_wander = true
+wander_speed = 14.0
+wander_radius = 20.0
+wander_pause_seconds = 1.8
 
 [node name="KestralNPC" parent="." instance=ExtResource("2_q8c4y")]
 position = Vector2(1360, 480)
@@ -103,3 +106,6 @@ display_name = "Null"
 default_dialogue_id = StringName("WORLD_FLAVOR_001")
 prompt_text = "Listen [E]"
 enable_wander = true
+wander_speed = 12.0
+wander_radius = 16.0
+wander_pause_seconds = 1.6

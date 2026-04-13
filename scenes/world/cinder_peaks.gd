@@ -6,6 +6,7 @@ const SINKING_SANDS := "res://scenes/world/sinking_sands.tscn"
 
 func _ready() -> void:
 	EventBus.request_ui_prompt.emit("Cinder Peaks: the air burns with old battles.")
+	LoreManager.mark_entry_discovered("world_lore_008")
 
 
 func resolve_transition(player_position: Vector2) -> Dictionary:
@@ -20,3 +21,5 @@ func resolve_transition(player_position: Vector2) -> Dictionary:
 			"spawn_id": "from_cinder_north",
 		}
 	return {}
+
+

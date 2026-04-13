@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/cinder_peaks.gd" id="1_cp1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_npc"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
 
 [node name="CinderPeaks" type="Node2D"]
 script = ExtResource("1_cp1")
@@ -38,3 +39,8 @@ npc_id = &"npc_knight_002"
 display_name = "Sir Kestral"
 default_dialogue_id = StringName("WORLD_FLAVOR_002")
 prompt_text = "Speak [E]"
+
+[node name="CinderLorePlinth" parent="." instance=ExtResource("3_lore")]
+position = Vector2(720, 420)
+lore_entry_id = "world_lore_008"
+lore_title = "Cinder Peaks Memory"

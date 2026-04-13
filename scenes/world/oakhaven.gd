@@ -8,6 +8,8 @@ const WEST_MAP := "res://scenes/world/sinking_sands.tscn"
 
 func _ready() -> void:
 	EventBus.request_ui_prompt.emit("Oakhaven: the last warm hearth in a fading world.")
+	EventBus.request_ui_prompt.emit("Search for lore plinths to uncover the age of remembrance.")
+	LoreManager.mark_entry_discovered("world_lore_005")
 
 
 func resolve_transition(player_position: Vector2) -> Dictionary:

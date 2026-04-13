@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/whispering_vales.gd" id="1_wv1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_wv2"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
 
 [node name="WhisperingVales" type="Node2D"]
 script = ExtResource("1_wv1")
@@ -38,3 +39,8 @@ npc_id = &"npc_spirit_004"
 display_name = "Weeping Willow"
 default_dialogue_id = StringName("WORLD_FLAVOR_001")
 prompt_text = "Commune [E]"
+
+[node name="LoreStoneVales" parent="." instance=ExtResource("3_lore")]
+position = Vector2(760, 560)
+lore_entry_id = "world_lore_006"
+lore_title = "Whispering Vales Tablet"

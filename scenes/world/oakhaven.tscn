@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/oakhaven.gd" id="1_oak"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="2_lore"]
 
 [node name="Oakhaven" type="Node2D"]
 script = ExtResource("1_oak")
@@ -39,3 +40,8 @@ position = Vector2(40, 540)
 
 [node name="EastGate" type="Marker2D" parent="."]
 position = Vector2(1880, 540)
+
+[node name="LorePlinth" parent="." instance=ExtResource("2_lore")]
+position = Vector2(760, 460)
+lore_entry_id = "world_lore_006"
+prompt_text = "Read Chronicle [E]"

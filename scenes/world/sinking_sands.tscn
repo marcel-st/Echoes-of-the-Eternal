@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/world/sinking_sands.gd" id="1_i2dp1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_0qqh8"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
 
 [node name="SinkingSands" type="Node2D"]
 script = ExtResource("1_i2dp1")
@@ -35,3 +36,8 @@ npc_id = &"npc_mercant_003"
 display_name = "Milo"
 default_dialogue_id = StringName("SQ_MILO_01")
 prompt_text = "Talk [E]"
+
+[node name="LorePlinthSands" parent="." instance=ExtResource("3_lore")]
+position = Vector2(740, 520)
+lore_entry_id = "world_lore_007"
+lore_title = "Sunken Ocean Memory"

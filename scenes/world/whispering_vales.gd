@@ -5,6 +5,7 @@ const SUNKEN_LIBRARY := "res://scenes/world/sunken_library_entry.tscn"
 
 func _ready() -> void:
 	EventBus.request_ui_prompt.emit("Whispering Vales: the trees murmur forgotten names.")
+	LoreManager.mark_entry_discovered("world_lore_006")
 
 
 func resolve_transition(player_position: Vector2) -> Dictionary:

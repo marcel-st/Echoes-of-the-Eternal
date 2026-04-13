@@ -48,6 +48,13 @@ func get_dialogue(dialogue_id: StringName) -> Dictionary:
 	return _dialogues.get(String(dialogue_id), {})
 
 
+func register_runtime_dialogue(dialogue_id: String, payload: Dictionary) -> void:
+	var key := dialogue_id.strip_edges()
+	if key.is_empty():
+		return
+	_dialogues[key] = payload.duplicate(true)
+
+
 func close_active_dialogue() -> void:
 	if _active_dialogue_id.is_empty():
 		return

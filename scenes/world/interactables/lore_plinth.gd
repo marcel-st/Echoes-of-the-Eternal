@@ -48,6 +48,7 @@ func interact(_actor: Node = null) -> void:
 		EventBus.request_ui_prompt.emit("The inscription is too faded to read.")
 		return
 	DialogueManager.request_dialogue(StringName(dialogue_id), {"lore_entry_id": lore_entry_id})
+	AudioManager.play_world_sfx("interact")
 	_cooldown = 0.3
 
 

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var move_speed: float = 140.0
+@export var footstep_interval_seconds: float = 0.24
 
 const PLAYER_ANIM_FRAMES := {
 	"idle_down": ["res://assets/sprites/world/kenney_tiny-dungeon/player_idle_down.png"],
@@ -41,12 +42,12 @@ const PLAYER_ANIM_FRAMES := {
 		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_down_b.png",
 	],
 	"attack_up": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_up_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_up_b.png",
+		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_up_a.png",
+		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_up_b.png",
 	],
 	"attack_side": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_side_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_side_b.png",
+		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_side_a.png",
+		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_side_b.png",
 	],
 }
 
@@ -55,6 +56,7 @@ var _facing := "down"
 var _facing_sign := 1
 var _action_lock := false
 var _action_animation := ""
+var _footstep_timer := 0.0
 
 @onready var visual: AnimatedSprite2D = $Visual
 
@@ -75,10 +77,15 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	if not _action_lock:
 		_update_animation(direction, direction.length() > 0.01)
+		_process_footsteps(_delta, direction.length() > 0.01)
+	else:
+		_footstep_timer = 0.0
 	if Input.is_action_just_pressed("attack"):
 		_play_action_animation("attack")
+		AudioManager.play_world_sfx("swing")
 	if Input.is_action_just_pressed("interact"):
 		_play_action_animation("interact")
+		AudioManager.play_ui_sound("confirm")
 		_interact()
 
 
@@ -161,6 +168,17 @@ func _on_visual_animation_finished() -> void:
 	if visual.sprite_frames.has_animation(idle_animation):
 		visual.play(idle_animation)
 	visual.flip_h = _facing == "side" and _facing_sign < 0
+
+
+func _process_footsteps(delta: float, is_moving: bool) -> void:
+	if not is_moving:
+		_footstep_timer = 0.0
+		return
+	_footstep_timer -= delta
+	if _footstep_timer > 0.0:
+		return
+	AudioManager.play_world_sfx("footstep")
+	_footstep_timer = footstep_interval_seconds
 
 
 func _build_visual_frames() -> void:

@@ -72,3 +72,38 @@ For every third-party asset pack, add:
 - Attribution required: no
 - Attribution text:
   - "UI Pack (RPG Expansion) by Kenney (CC0 1.0 Universal)."
+
+### Kenney Interface Sounds
+- Author: Kenney
+- Source: https://kenney.nl/assets/interface-sounds
+- License: CC0 1.0 Universal
+- Imported files:
+  - `assets/audio/sfx/ui/kenney_interface-sounds/*.ogg`
+  - `assets/audio/sfx/ui/kenney_interface-sounds/license.txt`
+- Attribution required: no
+- Attribution text:
+  - "Interface Sounds by Kenney (CC0 1.0 Universal)."
+
+### Kenney Music Jingles
+- Author: Kenney
+- Source: https://kenney.nl/assets/music-jingles
+- License: CC0 1.0 Universal
+- Imported files:
+  - `assets/audio/music/kenney_music-jingles/*.ogg`
+  - `assets/audio/music/kenney_music-jingles/license.txt`
+- Attribution required: no
+- Attribution text:
+  - "Music Jingles by Kenney (CC0 1.0 Universal)."
+
+### Kenney RPG Audio
+- Author: Kenney
+- Source: https://kenney.nl/assets/rpg-audio
+- License: CC0 1.0 Universal
+- Imported files:
+  - `assets/audio/sfx/world/kenney_rpg-audio/*.ogg`
+  - `assets/audio/ambience/kenney_rpg-audio/*.ogg`
+  - `assets/audio/sfx/world/kenney_rpg-audio/license.txt`
+  - `assets/audio/ambience/kenney_rpg-audio/license.txt`
+- Attribution required: no
+- Attribution text:
+  - "RPG Audio by Kenney (CC0 1.0 Universal)."

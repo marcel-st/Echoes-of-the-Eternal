@@ -56,6 +56,34 @@
  - Attribution text:
   - "RPG Urban Pack by Kenney (CC0)."
 
+### 4) Kenney Interface Sounds
+ - Creator: Kenney
+- Source: https://kenney.nl/assets/interface-sounds
+ - License: CC0 1.0 Universal
+ - Files used:
+  - `assets/audio/sfx/ui/kenney_interface-sounds/**`
+ - Attribution text:
+  - "Interface Sounds by Kenney (CC0)."
+
+### 5) Kenney Music Jingles
+ - Creator: Kenney
+- Source: https://kenney.nl/assets/music-jingles
+ - License: CC0 1.0 Universal
+ - Files used:
+  - `assets/audio/music/kenney_music-jingles/**`
+ - Attribution text:
+  - "Music Jingles by Kenney (CC0)."
+
+### 6) Kenney RPG Audio
+ - Creator: Kenney
+- Source: https://kenney.nl/assets/rpg-audio
+ - License: CC0 1.0 Universal
+ - Files used:
+  - `assets/audio/sfx/world/kenney_rpg-audio/**`
+  - `assets/audio/ambience/kenney_rpg-audio/**`
+ - Attribution text:
+  - "RPG Audio by Kenney (CC0)."
+
 ---
 
 ## Review checklist

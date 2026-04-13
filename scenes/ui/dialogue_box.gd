@@ -27,25 +27,30 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("cancel"):
+		AudioManager.play_ui("error")
 		DialogueManager.close_active_dialogue()
 		get_viewport().set_input_as_handled()
 		return
 
 	if _choice_mode:
 		if event.is_action_pressed("move_up"):
+			AudioManager.play_ui("select")
 			_update_choice_index(-1)
 			get_viewport().set_input_as_handled()
 			return
 		if event.is_action_pressed("move_down"):
+			AudioManager.play_ui("select")
 			_update_choice_index(1)
 			get_viewport().set_input_as_handled()
 			return
 		if event.is_action_pressed("confirm"):
+			AudioManager.play_ui("confirm")
 			_confirm_choice()
 			get_viewport().set_input_as_handled()
 		return
 
 	if event.is_action_pressed("confirm"):
+		AudioManager.play_ui("confirm")
 		_advance_dialogue()
 		get_viewport().set_input_as_handled()
 
@@ -66,6 +71,7 @@ func _on_dialogue_requested(dialogue_id: StringName, context: Dictionary) -> voi
 	_clear_choices()
 	_set_hint("Confirm: continue   Cancel: close")
 	visible = true
+	AudioManager.play_ui("open")
 	_advance_to_next_entry()
 
 
@@ -83,6 +89,7 @@ func _on_dialogue_closed(_dialogue_id: StringName) -> void:
 	portrait_panel.color = Color(0.31, 0.46, 0.74, 1.0)
 	_clear_choices()
 	visible = false
+	AudioManager.play_ui("close")
 
 
 func _advance_dialogue() -> void:

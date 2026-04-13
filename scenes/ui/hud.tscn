@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/ui/journal_panel.tscn" id="2_journal"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
@@ -25,3 +26,5 @@ text = "WASD / Left Stick to move. E / X to interact. J / A to attack."
 
 [node name="PromptLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 text = "System prompt output appears here."
+
+[node name="JournalPanel" parent="." instance=ExtResource("2_journal")]

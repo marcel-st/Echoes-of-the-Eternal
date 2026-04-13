@@ -67,6 +67,54 @@ func get_quest_state(quest_id: StringName) -> String:
 	return quest_states.get(quest_id, "unknown")
 
 
+func get_objective_progress(quest_id: StringName, objective_id: StringName) -> int:
+	var progress_by_objective := quest_progress.get(quest_id, {})
+	if typeof(progress_by_objective) != TYPE_DICTIONARY:
+		return 0
+	return int((progress_by_objective as Dictionary).get(objective_id, 0))
+
+
+func get_active_quests() -> Array:
+	var output: Array = []
+	for quest_id_variant in quest_states.keys():
+		var quest_id := StringName(quest_id_variant)
+		var state := String(quest_states.get(quest_id, "unknown"))
+		if state != "active":
+			continue
+
+		var quest := get_quest(quest_id)
+		if quest.is_empty():
+			continue
+		var objectives_output: Array = []
+		var objectives_variant := quest.get("objectives", [])
+		if typeof(objectives_variant) == TYPE_ARRAY:
+			for objective_variant in objectives_variant as Array:
+				if typeof(objective_variant) != TYPE_DICTIONARY:
+					continue
+				var objective := objective_variant as Dictionary
+				var objective_id := StringName(objective.get("id", ""))
+				if objective_id.is_empty():
+					continue
+				objectives_output.append(
+					{
+						"id": String(objective_id),
+						"description": String(objective.get("description", "")),
+						"required": int(objective.get("required", 1)),
+						"progress": get_objective_progress(quest_id, objective_id),
+					}
+				)
+
+		output.append(
+			{
+				"id": String(quest_id),
+				"title": String(quest.get("title", String(quest_id))),
+				"description": String(quest.get("description", "")),
+				"objectives": objectives_output,
+			}
+		)
+	return output
+
+
 func set_quest_state(quest_id: StringName, new_state: String) -> void:
 	if not quest_definitions.has(quest_id):
 		return
@@ -125,9 +173,17 @@ func export_state() -> Dictionary:
 
 func import_state(payload: Dictionary) -> void:
 	if payload.has("states") and typeof(payload["states"]) == TYPE_DICTIONARY:
-		quest_states = (payload["states"] as Dictionary).duplicate(true)
+		var imported_states := (payload["states"] as Dictionary).duplicate(true)
+		for quest_id_variant in quest_definitions.keys():
+			var quest_id := StringName(quest_id_variant)
+			if imported_states.has(quest_id):
+				quest_states[quest_id] = imported_states[quest_id]
 	if payload.has("progress") and typeof(payload["progress"]) == TYPE_DICTIONARY:
-		quest_progress = (payload["progress"] as Dictionary).duplicate(true)
+		var imported_progress := (payload["progress"] as Dictionary).duplicate(true)
+		for quest_id_variant in quest_definitions.keys():
+			var quest_id := StringName(quest_id_variant)
+			if imported_progress.has(quest_id) and typeof(imported_progress[quest_id]) == TYPE_DICTIONARY:
+				quest_progress[quest_id] = (imported_progress[quest_id] as Dictionary).duplicate(true)
 
 
 func _is_quest_objectives_complete(quest_id: StringName) -> bool:

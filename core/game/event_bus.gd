@@ -12,6 +12,7 @@ signal quest_started(quest_id: StringName)
 signal quest_updated(quest_id: StringName, objective_id: StringName, progress: int)
 signal quest_completed(quest_id: StringName)
 signal quest_state_changed(quest_id: String, new_state: String)
+signal quests_reloaded
 
 signal item_received(item_id: StringName, amount: int)
 signal world_flag_changed(flag_key: String, value: Variant)

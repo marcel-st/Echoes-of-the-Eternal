@@ -1,0 +1,14 @@
+{
+  "wooden_sword": {
+    "name": "Wooden Sword",
+    "type": "weapon",
+    "attack": 2,
+    "description": "A simple blade. Better than bare hands."
+  },
+  "healing_herb": {
+    "name": "Healing Herb",
+    "type": "consumable",
+    "heal": 2,
+    "description": "A bitter herb that restores a little health."
+  }
+}

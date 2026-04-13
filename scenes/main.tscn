@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bik0f2nvgv5b0"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_5vepm"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="3_fu7au"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="4_fhh3k"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="5_6q44w"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_5vepm")
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 750.0
+offset_bottom = 54.0
+text = "Booting Echoes of the Eternal..."
+
+[node name="WorldRoot" type="Node2D" parent="."]
+
+[node name="Player" parent="WorldRoot" instance=ExtResource("5_6q44w")]
+position = Vector2(960, 540)
+
+[node name="UIRoot" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UIRoot" instance=ExtResource("3_fu7au")]
+
+[node name="DialogueBox" parent="UIRoot" instance=ExtResource("4_fhh3k")]

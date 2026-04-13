@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/dialogue_box.gd" id="1_a3xra"]
+
+[node name="DialogueBox" type="Control"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -220.0
+offset_right = -24.0
+offset_bottom = -24.0
+script = ExtResource("1_a3xra")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="SpeakerLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+text = "Speaker"
+
+[node name="TextLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+autowrap_mode = 3
+text = "Dialogue text appears here."

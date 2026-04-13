@@ -1,0 +1,23 @@
+{
+  "quests": [
+    {
+      "id": "wake_the_village",
+      "title": "Wake the Village",
+      "description": "Find Elder Rowan and learn why the bell has gone silent.",
+      "state": "available",
+      "objectives": [
+        {
+          "id": "talk_to_elder",
+          "description": "Speak with Elder Rowan in the village square.",
+          "required": 1
+        }
+      ],
+      "rewards": [
+        {
+          "item_id": "old_charm",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}

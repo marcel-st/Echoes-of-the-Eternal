@@ -67,6 +67,7 @@ npc_id = &"elara_001"
 display_name = "Elara"
 default_dialogue_id = StringName("MS_ACT1_01")
 prompt_text = "Talk [E]"
+enable_wander = false
 dialogue_by_flag_true = {
 "elara_intro_complete": StringName("MS_ACT1_02")
 }
@@ -77,6 +78,7 @@ npc_id = &"npc_baker_001"
 display_name = "Bram"
 default_dialogue_id = StringName("SQ_BRAM_01")
 prompt_text = "Talk [E]"
+enable_wander = true
 
 [node name="KestralNPC" parent="." instance=ExtResource("2_q8c4y")]
 position = Vector2(1360, 480)
@@ -84,6 +86,7 @@ npc_id = &"npc_knight_002"
 display_name = "Sir Kestral"
 default_dialogue_id = StringName("WORLD_FLAVOR_002")
 prompt_text = "Listen [E]"
+enable_wander = false
 
 [node name="MiloNPC" parent="." instance=ExtResource("2_q8c4y")]
 position = Vector2(880, 420)
@@ -91,6 +94,7 @@ npc_id = &"npc_mercant_003"
 display_name = "Milo"
 default_dialogue_id = StringName("MERCHANT_SILAS_001_01")
 prompt_text = "Trade [E]"
+enable_wander = false
 
 [node name="NullNPC" parent="." instance=ExtResource("2_q8c4y")]
 position = Vector2(1480, 680)
@@ -98,3 +102,4 @@ npc_id = &"npc_cat_005"
 display_name = "Null"
 default_dialogue_id = StringName("WORLD_FLAVOR_001")
 prompt_text = "Listen [E]"
+enable_wander = true

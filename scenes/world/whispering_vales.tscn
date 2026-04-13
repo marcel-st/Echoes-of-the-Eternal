@@ -49,6 +49,7 @@ npc_id = &"npc_spirit_004"
 display_name = "Weeping Willow"
 default_dialogue_id = StringName("WORLD_FLAVOR_001")
 prompt_text = "Commune [E]"
+enable_wander = false
 
 [node name="LoreStoneVales" parent="." instance=ExtResource("3_lore")]
 position = Vector2(760, 560)

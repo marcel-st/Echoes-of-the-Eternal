@@ -63,6 +63,7 @@ npc_id = &"npc_knight_002"
 display_name = "Sir Kestral"
 default_dialogue_id = StringName("WORLD_FLAVOR_002")
 prompt_text = "Speak [E]"
+enable_wander = false
 
 [node name="CinderLorePlinth" parent="." instance=ExtResource("3_lore")]
 position = Vector2(720, 420)

@@ -1,0 +1,109 @@
+{
+  "game_title": "Echoes of the Eternal",
+  "characters": [
+    {
+      "id": "kaelen_001",
+      "name": "Kaelen",
+      "role": "Protagonist",
+      "gender": "Male",
+      "archetype": "The Living Archive / The Hollow",
+      "visuals": {
+        "initial_state": "Appears as a 'Hollow'. Desaturated skin, tattered grey rags, face obscured by a tattered cowl. No visible weapons.",
+        "final_state": "The Aegis Form. Skin glows with a faint gold luminescence. Wears 'The Mantle of Ages'—deep blue robes over silver filigree plate armor. Eyes glow like white stars.",
+        "animations": ["Stumble-walk (Early)", "Heroic-stride (Late)", "Memory-flash-idle"]
+      },
+      "speech": {
+        "style": "Evolutionary. Starts with ellipses (...) and single words. Ends with formal, archaic, and poetic prose.",
+        "key_phrase": "I remember... the weight of it."
+      },
+      "narrative_details": {
+        "backstory": "The literal vessel of human history. Shattered by Malakor to freeze time.",
+        "motivation": "To find if he is the monster Malakor claims he is, or the savior history needs.",
+        "development_arc": "Moves from a mindless survivor to a burdened god-king, eventually deciding whether to remain immortal or become a mortal man."
+      },
+      "progression_impact": "Sprite and portrait update every 2 Shards collected. Dialogue complexity increases with 'Memory Level'."
+    },
+    {
+      "id": "malakor_001",
+      "name": "Malakor",
+      "role": "Main Antagonist",
+      "gender": "Male",
+      "archetype": "The Nihilist / The Unwritten",
+      "visuals": {
+        "physical_description": "Tall, gaunt, and impossibly thin. His skin is like bleached parchment.",
+        "attire": "Monolithic black robes that seem to absorb light. He carries no weapon, but his fingers are constantly stained with black 'Oblivion Ink'.",
+        "movement": "Does not walk; he glides slightly above the ground, leaving a trail of desaturated grey in his wake."
+      },
+      "speech": {
+        "style": "Soft-spoken, intellectual, and condescending. He speaks in 'we' rather than 'I', referring to his hive-mind of the Unwritten.",
+        "key_phrase": "Why cling to a corpse called the past?"
+      },
+      "narrative_details": {
+        "backstory": "A former student of Kaelen who grew to hate the suffering caused by ancient grudges. He believes total amnesia is the only path to peace.",
+        "conflict": "He doesn't want to kill Kaelen; he wants to convince Kaelen to help him erase the world.",
+        "climax_role": "Faces Kaelen in the Citadel of Erasure, acting as a mirror of Kaelen's own regrets."
+      }
+    },
+    {
+      "id": "elara_001",
+      "name": "Elara",
+      "role": "Primary Ally / Guide",
+      "gender": "Female",
+      "archetype": "The Historian / The Anchor",
+      "visuals": {
+        "physical_description": "Young, energetic, with messy auburn hair tied back. Ink stains on her cheeks from her research.",
+        "attire": "Practical explorer's gear. Leather satchels full of scrolls, a sturdy green tunic, and heavy walking boots. Carries a lantern that glows blue.",
+        "presence": "Always found near a campfire or a desk. She provides the 'Warmth' in a desaturated world."
+      },
+      "speech": {
+        "style": "Fast-paced, enthusiastic, and scholarly. Uses modern slang compared to Kaelen’s archaic tone. Acts as the translator for ancient texts.",
+        "key_phrase": "The books didn't do you justice!"
+      },
+      "narrative_details": {
+        "backstory": "Granddaughter of the last Keeper of Oakhaven. She spent her life searching for the 'Hollow' who was once a King.",
+        "connection": "She represents the 'Present'—the life Kaelen is fighting to protect.",
+        "progression_impact": "Updates the player's map. Sidequests involve finding 'Lost Volumes' to expand her library, which unlocks new lore entries."
+      }
+    },
+    {
+      "id": "vaxas_001",
+      "name": "General Vaxas",
+      "role": "Secondary Antagonist / Boss",
+      "gender": "Male",
+      "archetype": "The Corrupted Memory",
+      "visuals": {
+        "physical_description": "A massive, hulking suit of rusted iron armor. No body is inside—only a swirling red mist of 'Angry Memories'.",
+        "attire": "Traditional Aethelgardian military regalia, now torn and burned.",
+        "weapon": "A fractured Greatsword that leaks lava."
+      },
+      "speech": {
+        "style": "Booming, echoes as if from a distance. Sounds like a recording playing on loop. Obsessed with a war that ended 1,000 years ago.",
+        "key_phrase": "The line must hold! Where is our Archive?!"
+      },
+      "narrative_details": {
+        "backstory": "Guardian of the Shard of Courage. He was Kaelen’s greatest general who felt betrayed when Kaelen forgot him.",
+        "defeat_result": "Upon defeat, the red mist clears. A 'Peaceful Echo' of Vaxas appears to thank Kaelen, giving him the Shard and a combat upgrade."
+      }
+    },
+    {
+      "id": "the_smith_001",
+      "name": "Silas the Chronos-Smith",
+      "role": "Merchant / Upgrade NPC",
+      "gender": "Non-binary",
+      "archetype": "The Timeless Craftsman",
+      "visuals": {
+        "physical_description": "A being made of clockwork and stone. They have four arms used for simultaneous smithing.",
+        "attire": "A heavy leather blacksmith’s apron covered in glowing runes.",
+        "location": "A workshop that exists 'between moments' (accessible via special portals)."
+      },
+      "speech": {
+        "style": "Rhythmic and metallic. They speak in terms of 'fixing' things rather than 'healing' them.",
+        "key_phrase": "A dull memory cuts nothing. Let us sharpen it."
+      },
+      "narrative_details": {
+        "function": "Consumes 'Essence of Thought' to upgrade the Aegis Blade and armor.",
+        "backstory": "An artificial construct created by Kaelen eons ago to maintain the Archive’s physical equipment."
+      }
+    }
+  ]
+}

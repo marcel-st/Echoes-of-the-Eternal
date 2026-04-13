@@ -1,0 +1,109 @@
+{
+  "sidequest_npcs": [
+    {
+      "id": "npc_baker_001",
+      "name": "Bram of the Yeast",
+      "location": "Oakhaven",
+      "gender": "Male",
+      "visuals": {
+        "description": "A stout man with a flour-dusted apron and a perpetually confused expression. He holds a wooden spoon like a weapon.",
+        "quirk": "He forgets what he is baking every 30 seconds."
+      },
+      "speech": {
+        "style": "Frustrated and scatterbrained. He speaks in baking metaphors.",
+        "key_phrase": "The dough rises, but my mind stays flat."
+      },
+      "side_quest": {
+        "title": "The Bread of Life",
+        "description": "Find the 'Memory of Sourdough' in the Whispering Vales so Bram can remember his family recipe.",
+        "requirement": "Memory Fragment #04",
+        "reward": "Permanent Health Heart Piece",
+        "narrative_impact": "Once completed, Oakhaven smells like bread, and NPCs mention feeling 'full' for the first time in years."
+      }
+    },
+    {
+      "id": "npc_knight_002",
+      "name": "Sir Kestral (The Echo)",
+      "location": "Cinder Peaks - The Ashen Battlefield",
+      "gender": "Non-binary",
+      "visuals": {
+        "description": "A translucent blue spirit kneeling over a broken banner. They wear plate armor with a bird motif.",
+        "quirk": "They flicker in and out of existence based on the player's proximity."
+      },
+      "speech": {
+        "style": "Formal, military, and mournful. Sounds like a distant wind.",
+        "key_phrase": "The order was given... but by whom?"
+      },
+      "side_quest": {
+        "title": "Unfinished Duty",
+        "description": "Locate the three missing pieces of the 'Iron Legion Banner' scattered across the battlefield.",
+        "requirement": "Combat Dash ability",
+        "reward": "Skill: The Echo Parry (A timed block that slows time)",
+        "narrative_impact": "Kaelen remembers that he was the one who gave the order to retreat, causing Kestral's guilt to finally lift."
+      }
+    },
+    {
+      "id": "npc_mercant_003",
+      "name": "Milo the Scavenger",
+      "location": "Sinking Sands - The Stranded Galleon",
+      "gender": "Male",
+      "visuals": {
+        "description": "A small, nimble man wearing oversized goggles and a backpack overflowing with junk.",
+        "quirk": "He tries to trade 'Future Junk' for 'Past Memories'."
+      },
+      "speech": {
+        "style": "Fast-talking, nervous, and greedy. He treats every item like a holy relic.",
+        "key_phrase": "One man's amnesia is another man's profit!"
+      },
+      "side_quest": {
+        "title": "The Gilded Compass",
+        "description": "Repair Milo's Sand-Compass by finding 'Magnetic Ore' in the Iron Forge.",
+        "requirement": "Grappling Hook",
+        "reward": "Map Upgrade: Shows locations of hidden Memory Fragments",
+        "narrative_impact": "Milo becomes a permanent merchant in Oakhaven, selling rare materials for sword upgrades."
+      }
+    },
+    {
+      "id": "npc_spirit_004",
+      "name": "The Weeping Willow",
+      "location": "The Abyssal Shelf",
+      "gender": "Female",
+      "visuals": {
+        "description": "A dryad-like entity fused with a dead tree. Her hair is made of wilted glowing vines.",
+        "quirk": "She cries black ink that pollutes the local water."
+      },
+      "speech": {
+        "style": "Melodic but slow. She speaks in riddles and songs.",
+        "key_phrase": "The water remembers the salt; the tree remembers the axe."
+      },
+      "side_quest": {
+        "title": "Purification of Thought",
+        "description": "Use the 'Compassion Pulse' to clear the Ink-Gunk from her roots in three different sub-caves.",
+        "requirement": "Shard of Empathy",
+        "reward": "Upgrade: Extended MP Meter (Mnemurgy)",
+        "narrative_impact": "The swamp water turns from black to clear blue, revealing new underwater paths to explore."
+      }
+    },
+    {
+      "id": "npc_cat_005",
+      "name": "Null",
+      "location": "Sunken Library",
+      "gender": "None",
+      "visuals": {
+        "description": "A black cat with three tails. Its eyes are the same shifting void as Malakor’s robes.",
+        "quirk": "It can walk through locked doors and solid walls."
+      },
+      "speech": {
+        "style": "Telepathic whispers. Sarcastic and cryptic.",
+        "key_phrase": "Meow is a memory of a sound you once knew."
+      },
+      "side_quest": {
+        "title": "The Librarian's Debt",
+        "description": "Follow Null through the shifting corridors of the library to find the 'Forbidden Tome'.",
+        "requirement": "Stealth/Patience (Do not get caught by Library Guardians)",
+        "reward": "Secret Item: The Void Whistle (Teleports player back to the dungeon entrance)",
+        "narrative_impact": "Reveals that Null was Kaelen's pet 1,000 years ago, providing a rare moment of tenderness for the protagonist."
+      }
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "quest_master": {
+    "metadata": {
+      "total_main_chapters": 8,
+      "total_side_quests": 12,
+      "world_memory_max": 100
+    },
+    "main_quests": [
+      {
+        "id": "MQ_01_AWAKENING",
+        "title": "The First Spark",
+        "giver_id": "elara_001",
+        "location": "Oakhaven",
+        "requirements": "None",
+        "objectives": [
+          "Speak to Elara in the Oakhaven Archives",
+          "Navigate the Sunken Library",
+          "Defeat the Ink-Bound Librarian",
+          "Reclaim the Shard of Identity"
+        ],
+        "rewards": {
+          "item": "Dull Aegis Blade",
+          "memory_xp": 10,
+          "world_saturation": 15
+        },
+        "narrative_unlock": "Kaelen remembers his name and the ability to read ancient script.",
+        "next_quest": "MQ_02_EMPATHY"
+      },
+      {
+        "id": "MQ_02_EMPATHY",
+        "title": "Heart of the Woods",
+        "giver_id": "elara_001",
+        "location": "Whispering Vales",
+        "requirements": "Shard of Identity",
+        "objectives": [
+          "Locate the entrance to the Whispering Woods",
+          "Use the Compassion Pulse to open the bramble gate",
+          "Reach the center of the Great Willow",
+          "Defeat the Blighted Dryad"
+        ],
+        "rewards": {
+          "ability": "Compassion Pulse",
+          "memory_xp": 15,
+          "world_saturation": 25
+        },
+        "narrative_unlock": "Kaelen recalls the feeling of connection to nature and the faces of the people he once protected.",
+        "next_quest": "MQ_03_COURAGE"
+      },
+      {
+        "id": "MQ_03_COURAGE",
+        "title": "Forging the Will",
+        "giver_id": "system",
+        "location": "Cinder Peaks",
+        "requirements": "Compassion Pulse",
+        "objectives": [
+          "Cross the Ashen Battlefield",
+          "Infiltrate the Iron Forge",
+          "Defeat the memory of General Vaxas",
+          "Retrieve the Shard of Courage"
+        ],
+        "rewards": {
+          "ability": "Flame Dash",
+          "item": "Refined Aegis Blade",
+          "world_saturation": 40
+        },
+        "narrative_unlock": "Kaelen remembers the wars of old and accepts his role as a warrior, not just a watcher.",
+        "next_quest": "MQ_04_LOGIC"
+      },
+      {
+        "id": "MQ_08_FINAL",
+        "title": "The Edge of Thought",
+        "giver_id": "elara_001",
+        "location": "Citadel of Erasure",
+        "requirements": "All 7 Shards Collected",
+        "objectives": [
+          "Ascend the Sky-Staircase",
+          "Navigate the Hall of Infinite Regret",
+          "Defeat Malakor, the Unwritten",
+          "Rebuild the Aegis of Truth"
+        ],
+        "rewards": {
+          "item": "The Eternal Archive",
+          "unlock": "New Game Plus"
+        },
+        "narrative_unlock": "The choice: Full Immortality or Mortal Peace."
+      }
+    ],
+    "side_quests": [
+      {
+        "id": "SQ_BRAM_01",
+        "title": "The Bread of Life",
+        "giver_id": "npc_baker_001",
+        "location": "Oakhaven",
+        "requirements": "Access to Whispering Vales",
+        "objectives": [
+          "Find the Sourdough Starter in the Hidden Grotto",
+          "Return the starter to Bram in Oakhaven"
+        ],
+        "rewards": {
+          "item": "Heart Piece",
+          "essence": 100
+        },
+        "status_change": "Bram moves to the Central Plaza; Oakhaven's visual saturation increases."
+      },
+      {
+        "id": "SQ_MILO_01",
+        "title": "The Gilded Compass",
+        "giver_id": "npc_mercant_003",
+        "location": "Sinking Sands",
+        "requirements": "Grappling Hook (from MQ_05)",
+        "objectives": [
+          "Retrieve the Magnetic Ore from the depths of the Iron Forge",
+          "Deliver Ore to Milo's caravan"
+        ],
+        "rewards": {
+          "item": "World Map Update: Item Radar",
+          "essence": 250
+        },
+        "status_change": "Milo opens a permanent 'Rare Materials' shop in Oakhaven."
+      },
+      {
+        "id": "SQ_KESTRAL_01",
+        "title": "Unfinished Duty",
+        "giver_id": "npc_knight_002",
+        "location": "Cinder Peaks",
+        "requirements": "Flame Dash",
+        "objectives": [
+          "Collect the 3 parts of the Iron Legion Banner",
+          "Plant the banner at the Summit of Remembrance"
+        ],
+        "rewards": {
+          "ability": "Echo Parry",
+          "memory_xp": 20
+        },
+        "status_change": "Sir Kestral's ghost finds peace and fades, leaving behind a permanent Stat Upgrade."
+      }
+    ]
+  }
+}

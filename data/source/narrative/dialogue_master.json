@@ -1,0 +1,113 @@
+{
+  "dialogue_master": {
+    "system_settings": {
+      "version": "1.0",
+      "language": "en",
+      "parsing_logic": "conditional_branching"
+    },
+    "main_story": [
+      {
+        "id": "MS_ACT1_01",
+        "speaker": "elara_001",
+        "trigger_state": "game_start",
+        "lines": [
+          "Wait... your eyes. They aren't hollow anymore.",
+          "You’ve been wandering these woods for a lifetime, stranger. I thought you were just another shadow of the past.",
+          "Can you hear me? Do you remember your name?"
+        ],
+        "choices": [
+          { "text": "...Kaelen?", "next_id": "MS_ACT1_02", "reward": "set_name_kaelen" },
+          { "text": "(Stay silent)", "next_id": "MS_ACT1_03" }
+        ]
+      },
+      {
+        "id": "MS_ACT1_02",
+        "speaker": "elara_001",
+        "lines": [
+          "Kaelen. The name from the old tapestries... The Living Archive.",
+          "If you've truly returned, the world might finally start turning again. We need to find the Shard in the Sunken Library."
+        ],
+        "action": "unlock_map_marker_library"
+      },
+      {
+        "id": "MS_SHARD_RECOVERY_01",
+        "speaker": "kaelen_001",
+        "trigger_state": "collect_shard_identity",
+        "lines": [
+          "I remember... the ink. I remember the smell of parchment and the weight of a thousand secrets.",
+          "I was not just a watcher. I was the lock on the door of time."
+        ],
+        "vfx_trigger": "screen_flash_white"
+      },
+      {
+        "id": "MS_MALAKOR_TAUNT_01",
+        "speaker": "malakor_001",
+        "trigger_state": "exit_dungeon_1",
+        "lines": [
+          "A flicker in the dark. How quaint.",
+          "You struggle to remember a world that was better off forgotten, Kaelen.",
+          "Every memory you reclaim is a scar you choose to reopen. Why not stay hollow? It was... peaceful."
+        ]
+      }
+    ],
+    "side_quests": [
+      {
+        "id": "SQ_BRAM_01",
+        "speaker": "npc_baker_001",
+        "quest_id": "bread_of_life",
+        "state": "not_started",
+        "lines": [
+          "The oven is hot, but the recipe is... gone. Slipped through my head like sand.",
+          "They say a fragment of the Old Kitchen lies in the Whispering Vales. Could you look for it?"
+        ]
+      },
+      {
+        "id": "SQ_BRAM_02",
+        "speaker": "npc_baker_001",
+        "quest_id": "bread_of_life",
+        "state": "item_missing",
+        "lines": [
+          "No recipe, no bread. My stomach is as empty as my memory."
+        ]
+      },
+      {
+        "id": "SQ_BRAM_03",
+        "speaker": "npc_baker_001",
+        "quest_id": "bread_of_life",
+        "state": "complete",
+        "lines": [
+          "That's it! The Sourdough of the Ancients! The smell... it brings back the image of my mother's face.",
+          "Thank you, Traveler. Please, take this. It's a Heart of the Hearth."
+        ],
+        "action": "give_item_heart_piece"
+      }
+    ],
+    "merchant_dialogue": {
+      "silas_001": {
+        "greeting": [
+          "The gears turn. What requires mending?",
+          "History is a blade that needs constant sharpening."
+        ],
+        "insufficient_funds": "Your thoughts are too shallow for this trade. Bring more Essence.",
+        "upgrade_complete": "It is restored. May it strike with the weight of a century."
+      }
+    },
+    "world_flavor": [
+      {
+        "speaker": "npc_cat_005",
+        "condition": "location_library",
+        "lines": [
+          "Don't trip on the dust. It's all that's left of the Great Poets.",
+          "Meow. Or whatever sound you remember cats making."
+        ]
+      },
+      {
+        "speaker": "npc_knight_002",
+        "condition": "location_battlefield",
+        "lines": [
+          "Stand fast, soldier. The Archive is watching. We must not be forgotten."
+        ]
+      }
+    ]
+  }
+}

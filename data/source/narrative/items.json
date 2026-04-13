@@ -1,0 +1,98 @@
+{
+  "inventory_master": {
+    "weapons": [
+      {
+        "id": "wpn_aegis_blade_01",
+        "name": "Dull Aegis Blade",
+        "type": "Melee",
+        "description": "A rusted blade that feels strangely heavy, as if weighted by forgotten years.",
+        "mechanics": {
+          "damage": 10,
+          "reach": "Short",
+          "ability": "None"
+        },
+        "lore": "The original weapon of the Archive, now stripped of its history.",
+        "upgrade_id": "wpn_aegis_blade_02"
+      },
+      {
+        "id": "wpn_aegis_blade_02",
+        "name": "Refined Aegis Blade",
+        "type": "Melee",
+        "description": "The rust has flaked away, revealing shimmering silver filigree.",
+        "mechanics": {
+          "damage": 25,
+          "reach": "Medium",
+          "ability": "Memory Echo: Chance to deal double damage on third strike."
+        },
+        "progression": "Requires Shard of Courage and 500 Essence."
+      }
+    ],
+    "mnemurgy_tools": [
+      {
+        "id": "tool_lantern_01",
+        "name": "The Memory Lantern",
+        "type": "Utility",
+        "description": "A blue-flamed lantern that reveals things that aren't there anymore.",
+        "mechanics": {
+          "active": "Reveal hidden platforms and invisible 'Ink-Born' enemies within a small radius.",
+          "cost": "None"
+        },
+        "lore": "Elara's gift. It burns using the 'will to know'."
+      },
+      {
+        "id": "tool_pulse_01",
+        "name": "Compassion Pulse",
+        "type": "Artifact",
+        "description": "A resonant stone that emits a wave of empathetic energy.",
+        "mechanics": {
+          "active": "Heals wilted environmental hazards (brambles) and stuns 'Hollow' enemies.",
+          "mana_cost": 20
+        },
+        "progression": "Unlocked after retrieving the Shard of Empathy."
+      },
+      {
+        "id": "tool_hook_01",
+        "name": "The Tether of Regret",
+        "type": "Traversal",
+        "description": "A spectral chain that can latch onto '錨' (Anchor) points.",
+        "mechanics": {
+          "active": "Pulls Kaelen to distant hooks or pulls light enemies toward him.",
+          "mana_cost": 5
+        },
+        "lore": "A physical manifestation of the ties that bind the past to the present."
+      }
+    ],
+    "key_artifacts": [
+      {
+        "id": "art_shard_01",
+        "name": "Shard of Identity",
+        "type": "Quest_Item",
+        "description": "A prismatic fragment that hums with the sound of a thousand names.",
+        "impact": "Unlocks basic combat skills and the ability to interact with Oakhaven NPCs."
+      },
+      {
+        "id": "art_heart_piece",
+        "name": "Fragment of Vitality",
+        "type": "Collectable",
+        "description": "A small, pulsing ruby shard.",
+        "mechanics": "Collecting 4 increases Max Health by 1 Heart."
+      },
+      {
+        "id": "art_tome_void",
+        "name": "The Forbidden Tome",
+        "type": "Lore_Item",
+        "description": "A book whose pages are made of pure shadow.",
+        "impact": "Required to enter the Citadel of Erasure; reveals Malakor's true origin."
+      }
+    ],
+    "consumables": [
+      {
+        "id": "con_essence_vial",
+        "name": "Condensed Thought",
+        "type": "Mana_Restore",
+        "description": "A shimmering liquid that tastes like a childhood summer.",
+        "mechanics": "Restores 50 MP (Mnemurgy Points)."
+      }
+    ]
+  }
+}

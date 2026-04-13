@@ -1,6 +1,118 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scenes/actors/npcs/npc_base.gd" id="1_npc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_idle_down.png" id="2_npc_idle_down"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_down_a.png" id="3_npc_walk_down_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_down_b.png" id="4_npc_walk_down_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_idle_up.png" id="5_npc_idle_up"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_up_a.png" id="6_npc_walk_up_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_up_b.png" id="7_npc_walk_up_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_idle_side.png" id="8_npc_idle_side"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_side_a.png" id="9_npc_walk_side_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_side_b.png" id="10_npc_walk_side_b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_npc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_npc_idle_down")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_npc_idle_side")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_npc_idle_side")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_npc_idle_up")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_npc_walk_down_a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_npc_idle_down")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_npc_walk_down_b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_npc_idle_down")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 6.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_npc_walk_side_a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_npc_idle_side")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_npc_walk_side_b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_npc_idle_side")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 6.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_npc_walk_side_a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_npc_idle_side")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_npc_walk_side_b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_npc_idle_side")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 6.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_npc_walk_up_a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_npc_idle_up")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_npc_walk_up_b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_npc_idle_up")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 6.5
+}]
 
 [node name="NPCBase" type="Area2D"]
 script = ExtResource("1_npc")
@@ -8,9 +120,12 @@ script = ExtResource("1_npc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = CircleShape2D.new()
 
-[node name="Visual" type="Polygon2D" parent="."]
-color = Color(0.964706, 0.768627, 0.341176, 1)
-polygon = PackedVector2Array(-10, -12, 10, -12, 10, 12, -10, 12)
+[node name="Visual" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(2.4, 2.4)
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_npc")
+animation = &"idle_down"
 
 [node name="NameLabel" type="Label" parent="."]
 offset_left = -60.0

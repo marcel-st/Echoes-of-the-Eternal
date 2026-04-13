@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/dialogue_box.gd" id="1_a3xra"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/kenney_ui-pack-rpg-expansion/panel_blue.png" id="2_panel"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/kenney_ui-pack-rpg-expansion/panel_inset_blue.png" id="3_inset"]
 
 [node name="DialogueBox" type="Control"]
 anchors_preset = 12
@@ -21,6 +23,19 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
+
+[node name="PanelTexture" type="TextureRect" parent="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+texture_filter = 1
+texture_repeat = 1
+stretch_mode = 1
+texture = ExtResource("2_panel")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 anchors_preset = 15
@@ -43,6 +58,18 @@ offset_bottom = 0.0
 [node name="PortraitPanel" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer/HeaderContainer"]
 custom_minimum_size = Vector2(120, 64)
 color = Color(0.31, 0.46, 0.74, 1)
+
+[node name="PortraitPanelTexture" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+texture_filter = 1
+stretch_mode = 2
+texture = ExtResource("3_inset")
 
 [node name="PortraitLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel"]
 anchors_preset = 15

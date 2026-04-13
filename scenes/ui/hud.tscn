@@ -20,11 +20,14 @@ layout_mode = 2
 
 [node name="TopLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 text = "Echoes of the Eternal - Prototype"
+theme_override_colors/font_color = Color(0.913725, 0.960784, 1, 1)
 
 [node name="HintLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 text = "WASD / Left Stick to move. E / X to interact. J / A to attack."
+theme_override_colors/font_color = Color(0.792157, 0.890196, 0.941176, 1)
 
 [node name="PromptLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 text = "System prompt output appears here."
+theme_override_colors/font_color = Color(0.980392, 0.941176, 0.764706, 1)
 
 [node name="JournalPanel" parent="." instance=ExtResource("2_journal")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_5m1qv"]
 
@@ -6,10 +6,11 @@
 script = ExtResource("1_5m1qv")
 groups = ["player"]
 
-[node name="SpritePlaceholder" type="Polygon2D" parent="."]
+[node name="Visual" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
-color = Color(0.290196, 0.807843, 0.717647, 1)
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+scale = Vector2(2.5, 2.5)
+texture_filter = 1
+animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = CircleShape2D.new()

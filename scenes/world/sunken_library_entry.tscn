@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/sunken_library_entry.gd" id="1_lib"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_npc"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="4_tilemap"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_f.png" id="5_prop_f"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_d.png" id="6_prop_d"]
 
 [node name="SunkenLibraryEntry" type="Node2D"]
 script = ExtResource("1_lib")
@@ -11,6 +14,12 @@ script = ExtResource("1_lib")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.105882, 0.188235, 0.25098, 1)
+
+[node name="BackdropTexture" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(9.4, 5.8)
+texture = ExtResource("4_tilemap")
+self_modulate = Color(0.58, 0.7, 0.88, 0.35)
 
 [node name="SpawnStart" type="Marker2D" parent="."]
 position = Vector2(960, 960)
@@ -26,6 +35,18 @@ position = Vector2(960, 1040)
 
 [node name="WestGate" type="Marker2D" parent="."]
 position = Vector2(24, 540)
+
+[node name="LibraryPropA" type="Sprite2D" parent="."]
+position = Vector2(620, 430)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("5_prop_f")
+self_modulate = Color(0.86, 0.9, 1, 1)
+
+[node name="LibraryPropB" type="Sprite2D" parent="."]
+position = Vector2(1280, 620)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("6_prop_d")
+self_modulate = Color(0.75, 0.82, 1, 0.95)
 
 [node name="LoreCodex" parent="." instance=ExtResource("3_lore")]
 position = Vector2(760, 260)

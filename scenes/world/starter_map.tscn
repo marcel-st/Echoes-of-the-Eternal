@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d5e4g17f0xj4r"]
+[gd_scene load_steps=9 format=3 uid="uid://d5e4g17f0xj4r"]
 
 [ext_resource type="Script" path="res://scenes/world/starter_map.gd" id="1_3a0f2"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_q8c4y"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="3_bg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_f.png" id="4_prop"]
 
 [node name="StarterMap" type="Node2D"]
 script = ExtResource("1_3a0f2")
@@ -10,6 +12,21 @@ script = ExtResource("1_3a0f2")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.133333, 0.223529, 0.156863, 1)
+
+[node name="BackdropTexture" type="TextureRect" parent="."]
+texture_filter = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(10, 6)
+texture = ExtResource("3_bg")
+stretch_mode = 1
+self_modulate = Color(0.29, 0.36, 0.3, 0.3)
+
+[node name="WorldPropA" type="Sprite2D" parent="."]
+position = Vector2(520, 460)
+texture_filter = 1
+scale = Vector2(5.25, 5.25)
+texture = ExtResource("4_prop")
 
 [node name="SpawnStart" type="Marker2D" parent="."]
 position = Vector2(960, 540)
@@ -50,6 +67,7 @@ npc_id = &"elara_001"
 display_name = "Elara"
 default_dialogue_id = StringName("MS_ACT1_01")
 prompt_text = "Talk [E]"
+enable_wander = false
 dialogue_by_flag_true = {
 "elara_intro_complete": StringName("MS_ACT1_02")
 }
@@ -60,6 +78,10 @@ npc_id = &"npc_baker_001"
 display_name = "Bram"
 default_dialogue_id = StringName("SQ_BRAM_01")
 prompt_text = "Talk [E]"
+enable_wander = true
+wander_speed = 14.0
+wander_radius = 20.0
+wander_pause_seconds = 1.8
 
 [node name="KestralNPC" parent="." instance=ExtResource("2_q8c4y")]
 position = Vector2(1360, 480)
@@ -67,6 +89,7 @@ npc_id = &"npc_knight_002"
 display_name = "Sir Kestral"
 default_dialogue_id = StringName("WORLD_FLAVOR_002")
 prompt_text = "Listen [E]"
+enable_wander = false
 
 [node name="MiloNPC" parent="." instance=ExtResource("2_q8c4y")]
 position = Vector2(880, 420)
@@ -74,6 +97,7 @@ npc_id = &"npc_mercant_003"
 display_name = "Milo"
 default_dialogue_id = StringName("MERCHANT_SILAS_001_01")
 prompt_text = "Trade [E]"
+enable_wander = false
 
 [node name="NullNPC" parent="." instance=ExtResource("2_q8c4y")]
 position = Vector2(1480, 680)
@@ -81,3 +105,7 @@ npc_id = &"npc_cat_005"
 display_name = "Null"
 default_dialogue_id = StringName("WORLD_FLAVOR_001")
 prompt_text = "Listen [E]"
+enable_wander = true
+wander_speed = 12.0
+wander_radius = 16.0
+wander_pause_seconds = 1.6

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/oakhaven.gd" id="1_oak"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="2_lore"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="3_bg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_a.png" id="4_prop"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_b.png" id="5_prop"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_c.png" id="6_prop"]
 
 [node name="Oakhaven" type="Node2D"]
 script = ExtResource("1_oak")
@@ -10,6 +14,33 @@ script = ExtResource("1_oak")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.172549, 0.32549, 0.192157, 1)
+
+[node name="GroundTexture" type="TextureRect" parent="."]
+texture_filter = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("3_bg")
+expand_mode = 1
+stretch_mode = 1
+modulate = Color(1, 1, 1, 0.32)
+
+[node name="FoliageA" type="Sprite2D" parent="."]
+position = Vector2(420, 430)
+texture_filter = 0
+texture = ExtResource("4_prop")
+scale = Vector2(3, 3)
+
+[node name="FoliageB" type="Sprite2D" parent="."]
+position = Vector2(1380, 660)
+texture_filter = 0
+texture = ExtResource("5_prop")
+scale = Vector2(3, 3)
+
+[node name="FoliageC" type="Sprite2D" parent="."]
+position = Vector2(910, 300)
+texture_filter = 0
+texture = ExtResource("6_prop")
+scale = Vector2(3, 3)
 
 [node name="SpawnStart" type="Marker2D" parent="."]
 position = Vector2(960, 540)

@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/sinking_sands.gd" id="1_i2dp1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_0qqh8"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="4_sands_bg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_g.png" id="5_sands_prop"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_rpg-urban-pack/tilemap_packed.png" id="6_sands_overlay"]
 
 [node name="SinkingSands" type="Node2D"]
 script = ExtResource("1_i2dp1")
@@ -11,6 +14,24 @@ script = ExtResource("1_i2dp1")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.627451, 0.541176, 0.298039, 1)
+
+[node name="GroundTexture" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("4_sands_bg")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.86, 0.66, 0.28)
+
+[node name="UrbanOverlay" type="TextureRect" parent="."]
+offset_left = 820.0
+offset_top = 300.0
+offset_right = 1140.0
+offset_bottom = 620.0
+texture = ExtResource("6_sands_overlay")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.8, 0.58, 0.24)
 
 [node name="SpawnStart" type="Marker2D" parent="."]
 position = Vector2(960, 520)
@@ -30,12 +51,18 @@ position = Vector2(960, 32)
 [node name="WestGate" type="Marker2D" parent="."]
 position = Vector2(32, 540)
 
+[node name="SandRelic" type="Sprite2D" parent="."]
+position = Vector2(620, 420)
+scale = Vector2(3, 3)
+texture = ExtResource("5_sands_prop")
+
 [node name="MiloNPC" parent="." instance=ExtResource("2_0qqh8")]
 position = Vector2(1160, 560)
 npc_id = &"npc_mercant_003"
 display_name = "Milo"
 default_dialogue_id = StringName("SQ_MILO_01")
 prompt_text = "Talk [E]"
+enable_wander = false
 
 [node name="LorePlinthSands" parent="." instance=ExtResource("3_lore")]
 position = Vector2(740, 520)

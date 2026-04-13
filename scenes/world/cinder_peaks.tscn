@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/cinder_peaks.gd" id="1_cp1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_npc"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="4_tilemap"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_f.png" id="5_prop_f"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_g.png" id="6_prop_g"]
 
 [node name="CinderPeaks" type="Node2D"]
 script = ExtResource("1_cp1")
@@ -11,6 +14,13 @@ script = ExtResource("1_cp1")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.313726, 0.14902, 0.12549, 1)
+
+[node name="GroundTexture" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("4_tilemap")
+stretch_mode = 1
+self_modulate = Color(0.66, 0.43, 0.38, 0.35)
 
 [node name="SpawnStart" type="Marker2D" parent="."]
 position = Vector2(960, 540)
@@ -33,12 +43,27 @@ position = Vector2(24, 540)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GateWestToOakhaven"]
 shape = RectangleShape2D.new()
 
+[node name="EnvironmentProps" type="Node2D" parent="."]
+
+[node name="PropF" type="Sprite2D" parent="EnvironmentProps"]
+position = Vector2(540, 330)
+texture = ExtResource("5_prop_f")
+scale = Vector2(5.8, 5.8)
+self_modulate = Color(0.96, 0.82, 0.66, 1)
+
+[node name="PropG" type="Sprite2D" parent="EnvironmentProps"]
+position = Vector2(1380, 700)
+texture = ExtResource("6_prop_g")
+scale = Vector2(6.1, 6.1)
+self_modulate = Color(0.95, 0.78, 0.62, 1)
+
 [node name="KestralNPC" parent="." instance=ExtResource("2_npc")]
 position = Vector2(1080, 500)
 npc_id = &"npc_knight_002"
 display_name = "Sir Kestral"
 default_dialogue_id = StringName("WORLD_FLAVOR_002")
 prompt_text = "Speak [E]"
+enable_wander = false
 
 [node name="CinderLorePlinth" parent="." instance=ExtResource("3_lore")]
 position = Vector2(720, 420)

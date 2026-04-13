@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/sunken_library_entry.gd" id="1_lib"]
+[ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_npc"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
+
+[node name="SunkenLibraryEntry" type="Node2D"]
+script = ExtResource("1_lib")
+
+[node name="Ground" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.105882, 0.188235, 0.25098, 1)
+
+[node name="SpawnStart" type="Marker2D" parent="."]
+position = Vector2(960, 960)
+
+[node name="Spawn_from_oakhaven_north" type="Marker2D" parent="."]
+position = Vector2(960, 960)
+
+[node name="Spawn_from_vales_west" type="Marker2D" parent="."]
+position = Vector2(1800, 540)
+
+[node name="SouthGate" type="Marker2D" parent="."]
+position = Vector2(960, 1040)
+
+[node name="WestGate" type="Marker2D" parent="."]
+position = Vector2(24, 540)
+
+[node name="LoreCodex" parent="." instance=ExtResource("3_lore")]
+position = Vector2(760, 260)
+lore_entry_id = "world_lore_009"
+lore_title = "Abyssal Shelf"

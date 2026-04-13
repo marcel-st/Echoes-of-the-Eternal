@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/cinder_peaks.gd" id="1_cp1"]
+[ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_npc"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
+
+[node name="CinderPeaks" type="Node2D"]
+script = ExtResource("1_cp1")
+
+[node name="Ground" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.313726, 0.14902, 0.12549, 1)
+
+[node name="SpawnStart" type="Marker2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="Spawn_from_oakhaven_west" type="Marker2D" parent="."]
+position = Vector2(1840, 540)
+
+[node name="Spawn_from_sands_north" type="Marker2D" parent="."]
+position = Vector2(960, 120)
+
+[node name="WestGate" type="Marker2D" parent="."]
+position = Vector2(40, 540)
+
+[node name="SouthGate" type="Marker2D" parent="."]
+position = Vector2(960, 1040)
+
+[node name="GateWestToOakhaven" type="Area2D" parent="."]
+position = Vector2(24, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateWestToOakhaven"]
+shape = RectangleShape2D.new()
+
+[node name="KestralNPC" parent="." instance=ExtResource("2_npc")]
+position = Vector2(1080, 500)
+npc_id = &"npc_knight_002"
+display_name = "Sir Kestral"
+default_dialogue_id = StringName("WORLD_FLAVOR_002")
+prompt_text = "Speak [E]"
+
+[node name="CinderLorePlinth" parent="." instance=ExtResource("3_lore")]
+position = Vector2(720, 420)
+lore_entry_id = "world_lore_008"
+lore_title = "Cinder Peaks Memory"

@@ -24,7 +24,9 @@ SaveManager="*res://core/save/save_manager.gd"
 SceneRouter="*res://core/game/scene_router.gd"
 QuestManager="*res://gameplay/quests/quest_manager.gd"
 DialogueManager="*res://narrative/dialogue/dialogue_manager.gd"
+PortraitRegistry="*res://narrative/dialogue/portrait_registry.gd"
 WorldFlags="*res://narrative/flags/world_flags.gd"
+LoreManager="*res://world/lore_manager.gd"
 AudioManager="*res://audio/audio_manager.gd"
 
 [display]

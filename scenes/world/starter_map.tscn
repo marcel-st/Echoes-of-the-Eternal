@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d5e4g17f0xj4r"]
+[gd_scene load_steps=7 format=3 uid="uid://d5e4g17f0xj4r"]
 
 [ext_resource type="Script" path="res://scenes/world/starter_map.gd" id="1_3a0f2"]
+[ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_q8c4y"]
 
 [node name="StarterMap" type="Node2D"]
 script = ExtResource("1_3a0f2")
@@ -12,3 +13,71 @@ color = Color(0.133333, 0.223529, 0.156863, 1)
 
 [node name="SpawnStart" type="Marker2D" parent="."]
 position = Vector2(960, 540)
+
+[node name="NorthGate" type="Marker2D" parent="."]
+position = Vector2(960, 40)
+
+[node name="SouthGate" type="Marker2D" parent="."]
+position = Vector2(960, 1040)
+
+[node name="WestGate" type="Marker2D" parent="."]
+position = Vector2(40, 540)
+
+[node name="EastGate" type="Marker2D" parent="."]
+position = Vector2(1880, 540)
+
+[node name="TransitionNorth" type="Area2D" parent="."]
+position = Vector2(960, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionNorth"]
+shape = RectangleShape2D.new()
+
+[node name="TransitionWest" type="Area2D" parent="."]
+position = Vector2(20, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionWest"]
+shape = RectangleShape2D.new()
+
+[node name="TransitionEast" type="Area2D" parent="."]
+position = Vector2(1900, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionEast"]
+shape = RectangleShape2D.new()
+
+[node name="ElaraNPC" parent="." instance=ExtResource("2_q8c4y")]
+position = Vector2(1120, 560)
+npc_id = &"elara_001"
+display_name = "Elara"
+default_dialogue_id = StringName("MS_ACT1_01")
+prompt_text = "Talk [E]"
+dialogue_by_flag_true = {
+"elara_intro_complete": StringName("MS_ACT1_02")
+}
+
+[node name="BramNPC" parent="." instance=ExtResource("2_q8c4y")]
+position = Vector2(760, 640)
+npc_id = &"npc_baker_001"
+display_name = "Bram"
+default_dialogue_id = StringName("SQ_BRAM_01")
+prompt_text = "Talk [E]"
+
+[node name="KestralNPC" parent="." instance=ExtResource("2_q8c4y")]
+position = Vector2(1360, 480)
+npc_id = &"npc_knight_002"
+display_name = "Sir Kestral"
+default_dialogue_id = StringName("WORLD_FLAVOR_002")
+prompt_text = "Listen [E]"
+
+[node name="MiloNPC" parent="." instance=ExtResource("2_q8c4y")]
+position = Vector2(880, 420)
+npc_id = &"npc_mercant_003"
+display_name = "Milo"
+default_dialogue_id = StringName("MERCHANT_SILAS_001_01")
+prompt_text = "Trade [E]"
+
+[node name="NullNPC" parent="." instance=ExtResource("2_q8c4y")]
+position = Vector2(1480, 680)
+npc_id = &"npc_cat_005"
+display_name = "Null"
+default_dialogue_id = StringName("WORLD_FLAVOR_001")
+prompt_text = "Listen [E]"

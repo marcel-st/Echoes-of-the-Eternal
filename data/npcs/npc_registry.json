@@ -1,0 +1,108 @@
+{
+  "characters": {
+    "kaelen_001": {
+      "name": "Kaelen",
+      "role": "Protagonist",
+      "archetype": "The Living Archive / The Hollow",
+      "speech_style": "Evolutionary. Starts with ellipses (...) and single words. Ends with formal, archaic, and poetic prose.",
+      "key_phrase": "I remember... the weight of it.",
+      "backstory": "The literal vessel of human history. Shattered by Malakor to freeze time.",
+      "motivation": "To find if he is the monster Malakor claims he is, or the savior history needs."
+    },
+    "malakor_001": {
+      "name": "Malakor",
+      "role": "Main Antagonist",
+      "archetype": "The Nihilist / The Unwritten",
+      "speech_style": "Soft-spoken, intellectual, and condescending. He speaks in 'we' rather than 'I', referring to his hive-mind of the Unwritten.",
+      "key_phrase": "Why cling to a corpse called the past?",
+      "backstory": "A former student of Kaelen who grew to hate the suffering caused by ancient grudges. He believes total amnesia is the only path to peace.",
+      "motivation": ""
+    },
+    "elara_001": {
+      "name": "Elara",
+      "role": "Primary Ally / Guide",
+      "archetype": "The Historian / The Anchor",
+      "speech_style": "Fast-paced, enthusiastic, and scholarly. Uses modern slang compared to Kaelen’s archaic tone. Acts as the translator for ancient texts.",
+      "key_phrase": "The books didn't do you justice!",
+      "backstory": "Granddaughter of the last Keeper of Oakhaven. She spent her life searching for the 'Hollow' who was once a King.",
+      "motivation": ""
+    },
+    "vaxas_001": {
+      "name": "General Vaxas",
+      "role": "Secondary Antagonist / Boss",
+      "archetype": "The Corrupted Memory",
+      "speech_style": "Booming, echoes as if from a distance. Sounds like a recording playing on loop. Obsessed with a war that ended 1,000 years ago.",
+      "key_phrase": "The line must hold! Where is our Archive?!",
+      "backstory": "Guardian of the Shard of Courage. He was Kaelen’s greatest general who felt betrayed when Kaelen forgot him.",
+      "motivation": ""
+    },
+    "the_smith_001": {
+      "name": "Silas the Chronos-Smith",
+      "role": "Merchant / Upgrade NPC",
+      "archetype": "The Timeless Craftsman",
+      "speech_style": "Rhythmic and metallic. They speak in terms of 'fixing' things rather than 'healing' them.",
+      "key_phrase": "A dull memory cuts nothing. Let us sharpen it.",
+      "backstory": "An artificial construct created by Kaelen eons ago to maintain the Archive’s physical equipment.",
+      "motivation": ""
+    }
+  },
+  "npcs": {
+    "npc_baker_001": {
+      "name": "Bram of the Yeast",
+      "location": "Oakhaven",
+      "speech_style": "Frustrated and scatterbrained. He speaks in baking metaphors.",
+      "key_phrase": "The dough rises, but my mind stays flat.",
+      "side_quest_title": "The Bread of Life",
+      "side_quest_description": "Find the 'Memory of Sourdough' in the Whispering Vales so Bram can remember his family recipe.",
+      "side_quest_reward": "Permanent Health Heart Piece"
+    },
+    "npc_knight_002": {
+      "name": "Sir Kestral (The Echo)",
+      "location": "Cinder Peaks - The Ashen Battlefield",
+      "speech_style": "Formal, military, and mournful. Sounds like a distant wind.",
+      "key_phrase": "The order was given... but by whom?",
+      "side_quest_title": "Unfinished Duty",
+      "side_quest_description": "Locate the three missing pieces of the 'Iron Legion Banner' scattered across the battlefield.",
+      "side_quest_reward": "Skill: The Echo Parry (A timed block that slows time)"
+    },
+    "npc_mercant_003": {
+      "name": "Milo the Scavenger",
+      "location": "Sinking Sands - The Stranded Galleon",
+      "speech_style": "Fast-talking, nervous, and greedy. He treats every item like a holy relic.",
+      "key_phrase": "One man's amnesia is another man's profit!",
+      "side_quest_title": "The Gilded Compass",
+      "side_quest_description": "Repair Milo's Sand-Compass by finding 'Magnetic Ore' in the Iron Forge.",
+      "side_quest_reward": "Map Upgrade: Shows locations of hidden Memory Fragments"
+    },
+    "npc_spirit_004": {
+      "name": "The Weeping Willow",
+      "location": "The Abyssal Shelf",
+      "speech_style": "Melodic but slow. She speaks in riddles and songs.",
+      "key_phrase": "The water remembers the salt; the tree remembers the axe.",
+      "side_quest_title": "Purification of Thought",
+      "side_quest_description": "Use the 'Compassion Pulse' to clear the Ink-Gunk from her roots in three different sub-caves.",
+      "side_quest_reward": "Upgrade: Extended MP Meter (Mnemurgy)"
+    },
+    "npc_cat_005": {
+      "name": "Null",
+      "location": "Sunken Library",
+      "speech_style": "Telepathic whispers. Sarcastic and cryptic.",
+      "key_phrase": "Meow is a memory of a sound you once knew.",
+      "side_quest_title": "The Librarian's Debt",
+      "side_quest_description": "Follow Null through the shifting corridors of the library to find the 'Forbidden Tome'.",
+      "side_quest_reward": "Secret Item: The Void Whistle (Teleports player back to the dungeon entrance)"
+    }
+  },
+  "lookup": {
+    "kaelen_001": "Kaelen",
+    "malakor_001": "Malakor",
+    "elara_001": "Elara",
+    "vaxas_001": "General Vaxas",
+    "the_smith_001": "Silas the Chronos-Smith",
+    "npc_baker_001": "Bram of the Yeast",
+    "npc_knight_002": "Sir Kestral (The Echo)",
+    "npc_mercant_003": "Milo the Scavenger",
+    "npc_spirit_004": "The Weeping Willow",
+    "npc_cat_005": "Null"
+  }
+}

@@ -44,3 +44,9 @@ text = "Speaker"
 [node name="TextLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 autowrap_mode = 3
 text = "Dialogue text appears here."
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+visible = false
+
+[node name="HintLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+text = "Confirm: continue   Cancel: close"

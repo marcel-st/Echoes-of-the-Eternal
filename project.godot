@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Echoes of the Eternal"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*res://core/game/event_bus.gd"
+SettingsManager="*res://core/config/settings_manager.gd"
+InputProfiles="*res://core/config/input_profiles.gd"
+SaveManager="*res://core/save/save_manager.gd"
+SceneRouter="*res://core/game/scene_router.gd"
+QuestManager="*res://gameplay/quests/quest_manager.gd"
+DialogueManager="*res://narrative/dialogue/dialogue_manager.gd"
+WorldFlags="*res://narrative/flags/world_flags.gd"
+AudioManager="*res://audio/audio_manager.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/resizable=true
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+2d/snapping/use_gpu_pixel_snap=true

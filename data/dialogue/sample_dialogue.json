@@ -1,0 +1,48 @@
+{
+  "intro_old_shrine": {
+    "entries": [
+      {
+        "speaker": "Elder Rowan",
+        "text": "You finally arrived. The shrine has been restless all morning."
+      },
+      {
+        "speaker": "Elder Rowan",
+        "text": "Will you inspect the altar now?",
+        "choices": [
+          {
+            "text": "Yes, show me the way.",
+            "next": "altar_accept"
+          },
+          {
+            "text": "Not yet.",
+            "next": "altar_decline"
+          }
+        ]
+      }
+    ]
+  },
+  "altar_accept": {
+    "entries": [
+      {
+        "speaker": "Elder Rowan",
+        "text": "Good. Keep your guard up and trust your instincts."
+      }
+    ],
+    "outcomes": {
+      "set_flags": {
+        "shrine_intro_complete": true
+      },
+      "start_quests": [
+        "quest_rekindle_altar"
+      ]
+    }
+  },
+  "altar_decline": {
+    "entries": [
+      {
+        "speaker": "Elder Rowan",
+        "text": "Take your time. Return when your resolve is steady."
+      }
+    ]
+  }
+}

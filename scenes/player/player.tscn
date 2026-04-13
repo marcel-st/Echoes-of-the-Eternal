@@ -1,17 +1,16 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_5m1qv"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/player_body.png" id="2_ply"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_5m1qv")
 groups = ["player"]
 
-[node name="Visual" type="Sprite2D" parent="."]
+[node name="Visual" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 scale = Vector2(2.5, 2.5)
-texture = ExtResource("2_ply")
 texture_filter = 1
+animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = CircleShape2D.new()

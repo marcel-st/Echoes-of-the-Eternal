@@ -1,8 +1,9 @@
 extends Node
 
-const DEFAULT_MAP_SCENE: String = "res://scenes/world/starter_map.tscn"
+const DEFAULT_MAP_SCENE: String = "res://scenes/world/oakhaven.tscn"
 
 var _current_map: Node = null
+var _current_map_path: String = ""
 
 
 func _ready() -> void:
@@ -31,9 +32,22 @@ func change_map(map_scene_path: String, spawn_id: StringName = &"start", target_
 		return
 
 	_current_map = packed.instantiate()
+	_current_map_path = map_scene_path
 	parent.add_child(_current_map)
 	EventBus.map_changed.emit(map_scene_path)
 
 	var player: Node = get_tree().get_first_node_in_group("player")
 	if player != null and player.has_method("warp_to_spawn"):
 		player.call("warp_to_spawn", spawn_id, _current_map)
+
+
+func request_map_change(map_scene_path: String, spawn_id: StringName = &"start") -> void:
+	change_map(map_scene_path, spawn_id)
+
+
+func get_current_map() -> Node:
+	return _current_map
+
+
+func get_current_map_path() -> String:
+	return _current_map_path

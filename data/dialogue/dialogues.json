@@ -16,7 +16,7 @@
           {
             "text": "...Kaelen?",
             "next": "MS_ACT1_02",
-            "effect": "set_name_kaelen"
+            "effect": "set_flag:kaelen_named=true"
           },
           {
             "text": "(Stay silent)",
@@ -42,7 +42,14 @@
     ],
     "meta": {
       "action": "unlock_map_marker_library"
-    }
+    },
+    "outcomes": [
+      "set_flag:map_marker_library=true",
+      "set_flag:elara_intro_complete=true",
+      "start_quest:MQ_01_AWAKENING",
+      "set_quest_state:MQ_01_AWAKENING:active",
+      "prompt:Journal updated: The First Spark"
+    ]
   },
   "MS_SHARD_RECOVERY_01": {
     "entries": [
@@ -77,7 +84,10 @@
     ],
     "meta": {
       "trigger_state": "exit_dungeon_1"
-    }
+    },
+    "outcomes": [
+      "complete_objective:MQ_01_AWAKENING:objective_03:1"
+    ]
   },
   "SQ_BRAM_01": {
     "entries": [
@@ -91,9 +101,13 @@
       }
     ],
     "meta": {
-      "quest_id": "bread_of_life",
+      "quest_id": "SQ_BRAM_01",
       "state": "not_started"
-    }
+    },
+    "outcomes": [
+      "start_quest:SQ_BRAM_01",
+      "set_quest_state:SQ_BRAM_01:active"
+    ]
   },
   "SQ_BRAM_02": {
     "entries": [
@@ -103,7 +117,7 @@
       }
     ],
     "meta": {
-      "quest_id": "bread_of_life",
+      "quest_id": "SQ_BRAM_01",
       "state": "item_missing"
     }
   },
@@ -119,10 +133,47 @@
       }
     ],
     "meta": {
-      "quest_id": "bread_of_life",
+      "quest_id": "SQ_BRAM_01",
       "state": "complete",
       "action": "give_item_heart_piece"
-    }
+    },
+    "outcomes": [
+      "complete_quest:SQ_BRAM_01",
+      "give_item:art_heart_piece:1",
+      "prompt:Received Fragment of Vitality"
+    ]
+  },
+  "SQ_MILO_01": {
+    "entries": [
+      {
+        "speaker": "Milo the Scavenger",
+        "text": "The Gilded Compass: Retrieve the Magnetic Ore from the depths of the Iron Forge"
+      },
+      {
+        "speaker": "Milo the Scavenger",
+        "text": "I can use your help. Return when this is done."
+      }
+    ],
+    "outcomes": [
+      "start_quest:SQ_MILO_01",
+      "set_quest_state:SQ_MILO_01:active"
+    ]
+  },
+  "SQ_KESTRAL_01": {
+    "entries": [
+      {
+        "speaker": "Sir Kestral (The Echo)",
+        "text": "Unfinished Duty: Collect the 3 parts of the Iron Legion Banner"
+      },
+      {
+        "speaker": "Sir Kestral (The Echo)",
+        "text": "I can use your help. Return when this is done."
+      }
+    ],
+    "outcomes": [
+      "start_quest:SQ_KESTRAL_01",
+      "set_quest_state:SQ_KESTRAL_01:active"
+    ]
   },
   "WORLD_FLAVOR_001": {
     "entries": [
@@ -163,6 +214,186 @@
       {
         "speaker": "silas_001",
         "text": "History is a blade that needs constant sharpening."
+      }
+    ]
+  },
+  "MERCHANT_SILAS_001_INSUFFICIENT": {
+    "entries": [
+      {
+        "speaker": "silas_001",
+        "text": "Your thoughts are too shallow for this trade. Bring more Essence."
+      }
+    ]
+  },
+  "MERCHANT_SILAS_001_UPGRADE": {
+    "entries": [
+      {
+        "speaker": "silas_001",
+        "text": "It is restored. May it strike with the weight of a century."
+      }
+    ]
+  },
+  "CHAR_KAELEN_001_PROFILE": {
+    "entries": [
+      {
+        "speaker": "Kaelen",
+        "text": "The literal vessel of human history. Shattered by Malakor to freeze time."
+      },
+      {
+        "speaker": "Kaelen",
+        "text": "To find if he is the monster Malakor claims he is, or the savior history needs."
+      },
+      {
+        "speaker": "Kaelen",
+        "text": "I remember... the weight of it."
+      }
+    ]
+  },
+  "CHAR_MALAKOR_001_PROFILE": {
+    "entries": [
+      {
+        "speaker": "Malakor",
+        "text": "A former student of Kaelen who grew to hate the suffering caused by ancient grudges. He believes total amnesia is the only path to peace."
+      },
+      {
+        "speaker": "Malakor",
+        "text": "Why cling to a corpse called the past?"
+      }
+    ]
+  },
+  "CHAR_ELARA_001_PROFILE": {
+    "entries": [
+      {
+        "speaker": "Elara",
+        "text": "Granddaughter of the last Keeper of Oakhaven. She spent her life searching for the 'Hollow' who was once a King."
+      },
+      {
+        "speaker": "Elara",
+        "text": "The books didn't do you justice!"
+      }
+    ]
+  },
+  "CHAR_VAXAS_001_PROFILE": {
+    "entries": [
+      {
+        "speaker": "General Vaxas",
+        "text": "Guardian of the Shard of Courage. He was Kaelen’s greatest general who felt betrayed when Kaelen forgot him."
+      },
+      {
+        "speaker": "General Vaxas",
+        "text": "The line must hold! Where is our Archive?!"
+      }
+    ]
+  },
+  "CHAR_THE_SMITH_001_PROFILE": {
+    "entries": [
+      {
+        "speaker": "Silas the Chronos-Smith",
+        "text": "An artificial construct created by Kaelen eons ago to maintain the Archive’s physical equipment."
+      },
+      {
+        "speaker": "Silas the Chronos-Smith",
+        "text": "A dull memory cuts nothing. Let us sharpen it."
+      }
+    ]
+  },
+  "NPC_NPC_BAKER_001_INTRO": {
+    "entries": [
+      {
+        "speaker": "Bram of the Yeast",
+        "text": "The dough rises, but my mind stays flat."
+      },
+      {
+        "speaker": "Bram of the Yeast",
+        "text": "Find the 'Memory of Sourdough' in the Whispering Vales so Bram can remember his family recipe."
+      },
+      {
+        "speaker": "Bram of the Yeast",
+        "text": "Reward: Permanent Health Heart Piece"
+      }
+    ],
+    "outcomes": [
+      "start_quest:SQ_BRAM_01",
+      "set_quest_state:SQ_BRAM_01:active"
+    ]
+  },
+  "NPC_NPC_KNIGHT_002_INTRO": {
+    "entries": [
+      {
+        "speaker": "Sir Kestral (The Echo)",
+        "text": "The order was given... but by whom?"
+      },
+      {
+        "speaker": "Sir Kestral (The Echo)",
+        "text": "Locate the three missing pieces of the 'Iron Legion Banner' scattered across the battlefield."
+      },
+      {
+        "speaker": "Sir Kestral (The Echo)",
+        "text": "Reward: Skill: The Echo Parry (A timed block that slows time)"
+      }
+    ],
+    "outcomes": [
+      "start_quest:SQ_KESTRAL_01",
+      "set_quest_state:SQ_KESTRAL_01:active"
+    ]
+  },
+  "NPC_NPC_MERCANT_003_INTRO": {
+    "entries": [
+      {
+        "speaker": "Milo the Scavenger",
+        "text": "One man's amnesia is another man's profit!"
+      },
+      {
+        "speaker": "Milo the Scavenger",
+        "text": "Repair Milo's Sand-Compass by finding 'Magnetic Ore' in the Iron Forge."
+      },
+      {
+        "speaker": "Milo the Scavenger",
+        "text": "Reward: Map Upgrade: Shows locations of hidden Memory Fragments"
+      }
+    ],
+    "outcomes": [
+      "start_quest:SQ_MILO_01",
+      "set_quest_state:SQ_MILO_01:active"
+    ]
+  },
+  "NPC_NPC_SPIRIT_004_INTRO": {
+    "entries": [
+      {
+        "speaker": "The Weeping Willow",
+        "text": "The water remembers the salt; the tree remembers the axe."
+      },
+      {
+        "speaker": "The Weeping Willow",
+        "text": "Use the 'Compassion Pulse' to clear the Ink-Gunk from her roots in three different sub-caves."
+      },
+      {
+        "speaker": "The Weeping Willow",
+        "text": "Reward: Upgrade: Extended MP Meter (Mnemurgy)"
+      }
+    ]
+  },
+  "NPC_NPC_CAT_005_INTRO": {
+    "entries": [
+      {
+        "speaker": "Null",
+        "text": "Meow is a memory of a sound you once knew."
+      },
+      {
+        "speaker": "Null",
+        "text": "Follow Null through the shifting corridors of the library to find the 'Forbidden Tome'."
+      },
+      {
+        "speaker": "Null",
+        "text": "Reward: Secret Item: The Void Whistle (Teleports player back to the dungeon entrance)"
+      }
+    ]
+  },
+  "MS_ACT1_03": {
+    "entries": [
+      {
+        "speaker": "Narrator",
+        "text": "The memory frays here. Return when more of the story is restored."
       }
     ]
   }

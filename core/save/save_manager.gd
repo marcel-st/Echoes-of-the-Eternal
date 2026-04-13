@@ -39,6 +39,10 @@ func save_game(slot: int = 1, data: SaveData = null) -> bool:
 	var quest_state := QuestManager.export_state()
 	payload.active_quests = (quest_state.get("states", {}) as Dictionary).duplicate(true)
 	payload.quest_progress = (quest_state.get("progress", {}) as Dictionary).duplicate(true)
+	payload.map_scene_path = SceneRouter.get_current_map_path()
+	var player := get_tree().get_first_node_in_group("player")
+	if player is Node2D:
+		payload.player_position = (player as Node2D).global_position
 
 	var path := _save_path(slot)
 	var result := ResourceSaver.save(payload, path)

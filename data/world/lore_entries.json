@@ -1,0 +1,171 @@
+{
+  "entries": [
+    {
+      "id": "story_outline_001",
+      "source": "story_outline.md",
+      "title": "Echoes of the Eternal: Story Outline & Narrative Design",
+      "text": "**Game Style:** Top-down 2D Action RPG (Zelda-like) **Estimated Playtime:** 25+ Hours **Platform:** Windows & Linux (PC)"
+    },
+    {
+      "id": "story_outline_002",
+      "source": "story_outline.md",
+      "title": "1. The Core Premise",
+      "text": "The world of **Aethelgard** is a decaying landscape of \"hollow\" cities and silent ruins. The protagonist, **Kaelen**, is an immortal who once served as the world’s \"Living Archive.\" A millennium ago, his mind was shattered, and his memories were scattered as physical shards. Without his mind, Kaelen has spent 1,000 years as a mindless wanderer. The game begins as he \"awakens\" with his first spark of consciousness."
+    },
+    {
+      "id": "story_outline_003",
+      "source": "story_outline.md",
+      "title": "The Origin",
+      "text": "Kaelen was created by the Old Gods to be the observer of time. He was incapable of forgetting, making him the ultimate judge of history. He was known as the **Aegis of Truth**."
+    },
+    {
+      "id": "story_outline_004",
+      "source": "story_outline.md",
+      "title": "The Fall",
+      "text": "**Malakor**, a brilliant but nihilistic sorcerer, believed that for a new world to be born, the old one must be entirely forgotten. Since Kaelen was immortal, Malakor couldn't kill him. Instead, he performed the **Oblivion Pulse**, a ritual that ripped Kaelen’s consciousness into **Seven Prismatic Shards**. * **The Result:** Aethelgard fell into a \"Stagnant Age.\" History stopped being recorded, people lost their sense of purpose, and Malakor established the **Order of the Unwritten** to hunt down and destroy the Shards."
+    },
+    {
+      "id": "story_outline_005",
+      "source": "story_outline.md",
+      "title": "The Protagonist: Kaelen",
+      "text": "* **Starting State:** A silent hermit in rags. * **Evolution:** As he recovers shards, his appearance changes (his armor reforms) and his \"Voice\" returns (allowing for more complex dialogue options)."
+    },
+    {
+      "id": "story_outline_006",
+      "source": "story_outline.md",
+      "title": "The Antagonist: Malakor, The Unwritten",
+      "text": "* **Goal:** To find the final \"Shard of Choice\" and erase it, effectively deleting the concept of \"The Past\" from human consciousness. * **Presence:** He appears to Kaelen in \"Memory Rifts\" to taunt him with the painful parts of his past."
+    },
+    {
+      "id": "story_outline_007",
+      "source": "story_outline.md",
+      "title": "Key Allies",
+      "text": "* **Elara (The Historian):** A young woman from the village of Oakhaven who has studied the legends of the Aegis. She serves as your guide and \"quest giver.\" * **The Echoes:** Ghostly apparitions of people Kaelen knew 1,000 years ago. They appear in dungeons to provide clues and backstory."
+    },
+    {
+      "id": "story_outline_008",
+      "source": "story_outline.md",
+      "title": "Act I: The Awakening (Hours 1–6)",
+      "text": "* **Location:** The Southern Wilds. * **Objective:** Find the first three Shards to regain basic human functions. * **Dungeon 1: The Sunken Library.** (Shard of Identity). Unlocks the ability to use a sword and read ancient signs. * **Dungeon 2: The Whispering Woods.** (Shard of Empathy). Unlocks the \"Compassion Pulse\" (a tool to heal withered plants/paths). * **Dungeon 3: The Iron Forge.** (Shard of Courage). Unlocks the \"Dash\" ability. * **Act Climax:** Malakor burns Oakhaven. Kaelen realizes he cannot just hide; he must fight."
+    },
+    {
+      "id": "story_outline_009",
+      "source": "story_outline.md",
+      "title": "Act II: The Burden of History (Hours 7–18)",
+      "text": "* **Location:** The Great Central Highlands and Elemental Zones. * **Objective:** Collect the four Elemental Shards. * **The Twist:** Kaelen discovers that as the \"Living Archive,\" he once condemned a whole civilization to exile to preserve \"The Greater Good.\" He begins to doubt if he *wants* to remember everything. * **Dungeon 4: The Frozen Spire.** (Shard of Logic). Unlocks the Ice Rod. * **Dungeon 5: The Sun-Bleached Desert.** (Shard of Patience). Unlocks the Grappling Hook. * **Dungeon 6: The Shadow Cathedral.** (Shard of Sorrow). This is a heavy narrative dungeon where Kaelen faces his own past crimes. * **Dungeon 7: The Sky Reach.** (Shard of Joy). Unlocks the \"Cape of Flight\" (Zelda-style glider/float)."
+    },
+    {
+      "id": "story_outline_010",
+      "source": "story_outline.md",
+      "title": "Act III: The Convergence (Hours 19–25)",
+      "text": "* **Location:** The Citadel of Erasure (Floating above the world). * **Objective:** Confront Malakor and reclaim the \"Shard of Choice.\" * **Final Boss:** A multi-phase fight against Malakor. * *Phase 1:* Physical combat. * *Phase 2:* A mental battle where Malakor uses Kaelen's own recovered memories against him. * **The Ending:** Kaelen must choose: Reclaim immortality and the pain of the past, or become a mortal man with a clean slate, letting the world forge its own new history."
+    },
+    {
+      "id": "story_outline_011",
+      "source": "story_outline.md",
+      "title": "5. Sidequests & World Building",
+      "text": "To reach the 25-hour mark, the world must be dense: * **Memory Echoes (Collectibles):** 50 small \"Fragments\" hidden in the world. Each one provides a 15-second visual flashback and increases Max MP. * **The Town Reconstruction:** Use gold/materials gathered from dungeons to help Elara rebuild Oakhaven. This unlocks better shops and upgrades. * **Trial of the Ancestors:** A 50-floor combat arena for endgame players to unlock the \"Master Aegis Blade.\""
+    },
+    {
+      "id": "story_outline_012",
+      "source": "story_outline.md",
+      "title": "6. Upgrade Paths (The \"Memory\" System)",
+      "text": "Instead of traditional XP, players spend **Essence of Thought** (dropped by enemies) at \"Shrines of Reflection.\" 1.  **Combat Branch:** Increases sword damage and unlocks the \"Whirlwind\" and \"Counter-Parry.\" 2.  **Agility Branch:** Decreases stamina cost for dashing and adds a \"Double Dash.\" 3.  **Essence Branch:** Increases the power of elemental items (Ice Rod, Fire Rod, etc.)."
+    },
+    {
+      "id": "story_outline_013",
+      "source": "story_outline.md",
+      "title": "7. Narrative Design Tips for Cursor",
+      "text": "* **Environmental Storytelling:** Since it's a Zelda-like, use the map! A broken statue in Act I should be \"Remembered\" and fixed in Act II to reveal a secret. * **Dialogue Portraits:** Use different portraits for Kaelen as he regains his memory—starting with a hooded, shadowed face and ending with a clear, determined warrior."
+    },
+    {
+      "id": "main_story_001",
+      "source": "main_story.md",
+      "title": "Main Story",
+      "text": "1. The Narrative Foundation The Backstory: The Shattering of the Aegis The protagonist, Kaelen, was once the \"Living Archive\"—an immortal being whose mind served as the literal storage for the world’s history, laws, and magic. How he lost his memory: A millennia ago, a nihilistic sorcerer named Malakor realized he couldn't kill an immortal. Instead, he used a forbidden ritual called the Oblivion Pulse. Rather than killing Kaelen, it shattered his consciousness into seven Prismatic Shards and scattered them across the continent of Aethelgard. Without his memories, Kaelen became a \"Hollow\"—a powerful body with no soul, wandering the wilds as a hermit for centuries while the world fell into decay. The Antagonist: Malakor, the Unwritten Malakor isn't just a villain; he is a scholar of nothingness. He wants to erase history so he can rewrite the world in his image. He has spent the last thousand years hunting the Shards to destroy them permanently. 2. The Quest: Rebuilding the Mind (25+ Hours) To reach 25 hours of gameplay, we will use a Three-Act Structure common in classic RPGs: Act I: The Awakening (Hours 1–6) The Start: Kaelen wakes up in a Sunken Shrine. He meets Elara, a young historian who recognizes him from ancient tapestries. Goal: Find the first three Shards (The Shard of Identity, The Shard of Empathy, and The Shard of Courage). Key Moment: Upon finding the first Shard, Kaelen regains the ability to speak and use basic combat \"muscle memory.\" Act II: The Burden of Truth (Hours 7–18) The Twist: As Kaelen recovers more memories, he realizes he wasn't just a passive observer. He was a judge who had made harsh, perhaps \"evil\" decisions in the past. Dungeons: Four elemental temples (Forest, Fire, Ice, Shadow) where the remaining Shards are guarded by Malakor’s \"Memory Eaters.\" Allies: You recruit a \"party\" of ghosts—spirits of people Kaelen knew 1,000 years ago who only he can see. Act III: The Convergence (Hours 19–25) The Final Shard: Located in a floating fortress. The Climax: A final confrontation with Malakor at the \"Edge of Thought.\" Kaelen must choose whether to reclaim his full (and painful) past or forge a new identity, sacrificing immortality to save the present. 3. Gameplay Mechanics & Upgrades The \"Memory Link\" System Upgrades: Instead of just \"leveling up,\" you unlock Combat Echoes. Remembering a duel from 500 years ago unlocks a spin attack; remembering a storm unlocks a lightning dash. Sidequests: \"Lost Trinkets\" found in the world trigger \"Flashback Mini-Dungeons.\" Completing these rewards you with Permanent Health Fragments. Exploration The Overworld: A dense, Zelda-style map that changes as you gain memories. (e.g., \"Remembering\" how to read an ancient language reveals hidden paths)."
+    },
+    {
+      "id": "world_lore_001",
+      "source": "world_lore.md",
+      "title": "The Lore of Aethelgard: The World of Echoes",
+      "text": "This document serves as the historical and cultural foundation for the world of **Aethelgard**. Use these details to flavor NPC dialogue, item descriptions, and environmental design."
+    },
+    {
+      "id": "world_lore_002",
+      "source": "world_lore.md",
+      "title": "1. The Primordial Era: The Weaver and the Archive",
+      "text": "In the beginning, there was no \"Time,\" only \"The Loom.\" The Old Gods wove the world into existence, but they realized that without memory, the world would loop in an endless, meaningless present. To solve this, they created **Kaelen, the Aegis of Truth**. He was not a god, but a vessel. Every leaf that fell, every war that was fought, and every word whispered in love was recorded within his mind. As long as Kaelen remembered, the world had a past, and therefore, a future."
+    },
+    {
+      "id": "world_lore_003",
+      "source": "world_lore.md",
+      "title": "2. The Era of Remembrance (The Golden Age)",
+      "text": "For ten thousand years, Aethelgard flourished. Kaelen sat upon the **Throne of Glass** in the center of the world. Kings and queens would travel to him to settle disputes, for Kaelen could recall the exact terms of a treaty signed five centuries prior. Magic was fueled by \"Recall\"—the ability to pull the energy of past events into the present."
+    },
+    {
+      "id": "world_lore_004",
+      "source": "world_lore.md",
+      "title": "3. The Great Betrayal: The Rise of Malakor",
+      "text": "**Malakor** was once Kaelen’s chief disciple. He grew obsessed with the idea of \"The Blank Slate.\" He believed that the weight of history—the grudges of old wars and the scars of ancient sins—prevented humanity from truly evolving. He theorized that if the \"Living Archive\" were destroyed, humanity would be free from the \"tyranny of the past.\" On the night of the **Astral Alignment**, he initiated the **Oblivion Pulse**. Instead of erasing the world, the Pulse shattered Kaelen. Because Kaelen was the glue holding history together, the world \"stagnated.\" Since that day: * **The Sky-Bleach:** The stars have dimmed, appearing as grey smudges. * **The Hallow-Struck:** Creatures and people began losing their purpose, turning into mindless shadows (the game's common enemies). * **The Stagnant Age:** For 1,000 years, no new inventions have been made, and no new stories have been told."
+    },
+    {
+      "id": "world_lore_005",
+      "source": "world_lore.md",
+      "title": "4. The Geography of Aethelgard",
+      "text": "The world is divided into five major \"Memory Domains,\" each reflecting a part of the human experience that Kaelen has lost."
+    },
+    {
+      "id": "world_lore_006",
+      "source": "world_lore.md",
+      "title": "I. The Whispering Vales (Identity & Origins)",
+      "text": "* **Theme:** Lush forests and ruins of small villages. * **Capital:** **Oakhaven.** The only town where people still try to keep records. * **The Lore:** This is where Kaelen first \"woke up.\" The trees here literally whisper names of people long forgotten."
+    },
+    {
+      "id": "world_lore_007",
+      "source": "world_lore.md",
+      "title": "II. The Sinking Sands (Patience & Logic)",
+      "text": "* **Theme:** A desert where time moves differently. * **Key Landmark:** **The Hourglass Ziggurat.** * **The Lore:** This region was once a vast ocean. When Kaelen lost the Shard of Logic, the water vanished instantly, leaving ships stranded atop sand dunes."
+    },
+    {
+      "id": "world_lore_008",
+      "source": "world_lore.md",
+      "title": "III. The Cinder Peaks (Courage & Conflict)",
+      "text": "* **Theme:** Volcanic mountains and ancient battlefields. * **Key Landmark:** **The Iron Forge of Vulcanos.** * **The Lore:** The site of the world’s final great war. The soldiers here didn't die; they were frozen in time as statues of ash when the Pulse hit."
+    },
+    {
+      "id": "world_lore_009",
+      "source": "world_lore.md",
+      "title": "IV. The Abyssal Shelf (Sorrow & Secrets)",
+      "text": "* **Theme:** A bioluminescent swamp and underwater caverns. * **Key Landmark:** **The Sunken Library.** * **The Lore:** This is where the world’s \"bad memories\" were kept. It is a place of heavy mist and ghosts who demand to be heard."
+    },
+    {
+      "id": "world_lore_010",
+      "source": "world_lore.md",
+      "title": "V. The Citadel of Erasure (The Void)",
+      "text": "* **Theme:** A floating fortress of white marble and glass. * **The Lore:** Malakor’s seat of power. It exists outside of \"Remembered Space,\" making it invisible to anyone who hasn't recovered at least six Shards."
+    },
+    {
+      "id": "world_lore_011",
+      "source": "world_lore.md",
+      "title": "5. The Mechanics of Magic: \"Mnemurgy\"",
+      "text": "In Aethelgard, magic is not drawn from mana, but from **Mnemonic Essence**. * **The Glow:** When Kaelen uses an ability (like a fire spell), he isn't creating fire; he is \"Remembering\" the heat of the Great Sun. * **The Cost:** If Kaelen uses too much power, his vision blurs—a \"Memory Fog\"—simulating the feeling of forgetting where he is."
+    },
+    {
+      "id": "world_lore_012",
+      "source": "world_lore.md",
+      "title": "6. The Order of the Unwritten (The Antagonists)",
+      "text": "Malakor’s army consists of: 1.  **The Erasers:** Elite knights in faceless silver armor. They carry \"Void Blades\" that drain the player's XP/Essence. 2.  **The Ink-Born:** Monstrous creatures made of black ichor, representing the \"blots\" on history. 3.  **The False Narrators:** Bosses who guard the Shards. They try to convince Kaelen that his memories are lies, attempting to make the player doubt their quest."
+    },
+    {
+      "id": "world_lore_013",
+      "source": "world_lore.md",
+      "title": "7. Current World State",
+      "text": "The world is \"fragile.\" Areas that Kaelen hasn't \"Remembered\" yet should appear desaturated or slightly blurry (a great visual effect for your Pygame implementation). As you collect Shards, the world regains its color and music becomes more complex."
+    }
+  ],
+  "sources": [
+    "story_outline.md",
+    "main_story.md",
+    "world_lore.md"
+  ]
+}

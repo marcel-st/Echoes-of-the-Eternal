@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/whispering_vales.gd" id="1_wv1"]
+[ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_wv2"]
+
+[node name="WhisperingVales" type="Node2D"]
+script = ExtResource("1_wv1")
+
+[node name="Ground" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.137255, 0.301961, 0.176471, 1)
+
+[node name="SpawnStart" type="Marker2D" parent="."]
+position = Vector2(960, 980)
+
+[node name="Spawn_from_oakhaven_south" type="Marker2D" parent="."]
+position = Vector2(960, 980)
+
+[node name="Spawn_from_library_west" type="Marker2D" parent="."]
+position = Vector2(1720, 540)
+
+[node name="ToOakhavenGate" type="Area2D" parent="."]
+position = Vector2(960, 1040)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToOakhavenGate"]
+shape = RectangleShape2D.new()
+
+[node name="ToLibraryGate" type="Area2D" parent="."]
+position = Vector2(1860, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToLibraryGate"]
+shape = RectangleShape2D.new()
+
+[node name="WillowSpiritNPC" parent="." instance=ExtResource("2_wv2")]
+position = Vector2(1280, 520)
+npc_id = &"npc_spirit_004"
+display_name = "Weeping Willow"
+default_dialogue_id = StringName("WORLD_FLAVOR_001")
+prompt_text = "Commune [E]"

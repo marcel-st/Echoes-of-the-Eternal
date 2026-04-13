@@ -26,6 +26,24 @@ position = Vector2(40, 540)
 [node name="EastGate" type="Marker2D" parent="."]
 position = Vector2(1880, 540)
 
+[node name="TransitionNorth" type="Area2D" parent="."]
+position = Vector2(960, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionNorth"]
+shape = RectangleShape2D.new()
+
+[node name="TransitionWest" type="Area2D" parent="."]
+position = Vector2(20, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionWest"]
+shape = RectangleShape2D.new()
+
+[node name="TransitionEast" type="Area2D" parent="."]
+position = Vector2(1900, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionEast"]
+shape = RectangleShape2D.new()
+
 [node name="ElaraNPC" parent="." instance=ExtResource("2_q8c4y")]
 position = Vector2(1120, 560)
 npc_id = &"elara_001"

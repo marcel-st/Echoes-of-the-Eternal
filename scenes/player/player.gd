@@ -21,7 +21,11 @@ func warp_to_spawn(_spawn_id: StringName, map_root: Node) -> void:
 	if map_root == null:
 		return
 
-	var spawn_point := map_root.get_node_or_null("SpawnStart")
+	var spawn_label := String(_spawn_id).strip_edges()
+	var spawn_path := "Spawn_%s" % spawn_label
+	var spawn_point := map_root.get_node_or_null(spawn_path)
+	if spawn_point == null:
+		spawn_point = map_root.get_node_or_null("SpawnStart")
 	if spawn_point is Node2D:
 		global_position = (spawn_point as Node2D).global_position
 

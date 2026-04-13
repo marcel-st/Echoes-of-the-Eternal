@@ -8,4 +8,5 @@ class_name SaveData
 @export var playtime_seconds: int = 0
 @export var world_flags: Dictionary = {}
 @export var active_quests: Dictionary = {}
+@export var quest_progress: Dictionary = {}
 @export var completed_quests: PackedStringArray = []

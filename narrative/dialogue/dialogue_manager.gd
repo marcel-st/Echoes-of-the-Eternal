@@ -99,6 +99,10 @@ func get_active_context() -> Dictionary:
 	return _active_context.duplicate(true)
 
 
+func is_dialogue_active() -> bool:
+	return not _active_dialogue_id.is_empty()
+
+
 func _evaluate_condition_token(token: String) -> bool:
 	var cleaned := token.strip_edges()
 	if cleaned.is_empty():

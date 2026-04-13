@@ -1,6 +1,6 @@
 extends Node
 
-const DIALOGUE_PATH := "res://data/dialogue/sample_dialogue.json"
+const DIALOGUE_PATH := "res://data/dialogue/dialogues.json"
 
 var _dialogues: Dictionary = {}
 var _is_loaded := false

@@ -1,0 +1,169 @@
+{
+  "MS_ACT1_01": {
+    "entries": [
+      {
+        "speaker": "Elara",
+        "text": "Wait... your eyes. They aren't hollow anymore."
+      },
+      {
+        "speaker": "Elara",
+        "text": "You’ve been wandering these woods for a lifetime, stranger. I thought you were just another shadow of the past."
+      },
+      {
+        "speaker": "Elara",
+        "text": "Can you hear me? Do you remember your name?",
+        "choices": [
+          {
+            "text": "...Kaelen?",
+            "next": "MS_ACT1_02",
+            "effect": "set_name_kaelen"
+          },
+          {
+            "text": "(Stay silent)",
+            "next": "MS_ACT1_03"
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "trigger_state": "game_start"
+    }
+  },
+  "MS_ACT1_02": {
+    "entries": [
+      {
+        "speaker": "Elara",
+        "text": "Kaelen. The name from the old tapestries... The Living Archive."
+      },
+      {
+        "speaker": "Elara",
+        "text": "If you've truly returned, the world might finally start turning again. We need to find the Shard in the Sunken Library."
+      }
+    ],
+    "meta": {
+      "action": "unlock_map_marker_library"
+    }
+  },
+  "MS_SHARD_RECOVERY_01": {
+    "entries": [
+      {
+        "speaker": "Kaelen",
+        "text": "I remember... the ink. I remember the smell of parchment and the weight of a thousand secrets."
+      },
+      {
+        "speaker": "Kaelen",
+        "text": "I was not just a watcher. I was the lock on the door of time."
+      }
+    ],
+    "meta": {
+      "trigger_state": "collect_shard_identity",
+      "vfx_trigger": "screen_flash_white"
+    }
+  },
+  "MS_MALAKOR_TAUNT_01": {
+    "entries": [
+      {
+        "speaker": "Malakor",
+        "text": "A flicker in the dark. How quaint."
+      },
+      {
+        "speaker": "Malakor",
+        "text": "You struggle to remember a world that was better off forgotten, Kaelen."
+      },
+      {
+        "speaker": "Malakor",
+        "text": "Every memory you reclaim is a scar you choose to reopen. Why not stay hollow? It was... peaceful."
+      }
+    ],
+    "meta": {
+      "trigger_state": "exit_dungeon_1"
+    }
+  },
+  "SQ_BRAM_01": {
+    "entries": [
+      {
+        "speaker": "Bram of the Yeast",
+        "text": "The oven is hot, but the recipe is... gone. Slipped through my head like sand."
+      },
+      {
+        "speaker": "Bram of the Yeast",
+        "text": "They say a fragment of the Old Kitchen lies in the Whispering Vales. Could you look for it?"
+      }
+    ],
+    "meta": {
+      "quest_id": "bread_of_life",
+      "state": "not_started"
+    }
+  },
+  "SQ_BRAM_02": {
+    "entries": [
+      {
+        "speaker": "Bram of the Yeast",
+        "text": "No recipe, no bread. My stomach is as empty as my memory."
+      }
+    ],
+    "meta": {
+      "quest_id": "bread_of_life",
+      "state": "item_missing"
+    }
+  },
+  "SQ_BRAM_03": {
+    "entries": [
+      {
+        "speaker": "Bram of the Yeast",
+        "text": "That's it! The Sourdough of the Ancients! The smell... it brings back the image of my mother's face."
+      },
+      {
+        "speaker": "Bram of the Yeast",
+        "text": "Thank you, Traveler. Please, take this. It's a Heart of the Hearth."
+      }
+    ],
+    "meta": {
+      "quest_id": "bread_of_life",
+      "state": "complete",
+      "action": "give_item_heart_piece"
+    }
+  },
+  "WORLD_FLAVOR_001": {
+    "entries": [
+      {
+        "speaker": "Null",
+        "text": "Don't trip on the dust. It's all that's left of the Great Poets."
+      },
+      {
+        "speaker": "Null",
+        "text": "Meow. Or whatever sound you remember cats making."
+      }
+    ],
+    "meta": {
+      "condition": "location_library"
+    }
+  },
+  "WORLD_FLAVOR_002": {
+    "entries": [
+      {
+        "speaker": "Sir Kestral (The Echo)",
+        "text": "Stand fast, soldier. The Archive is watching. We must not be forgotten."
+      }
+    ],
+    "meta": {
+      "condition": "location_battlefield"
+    }
+  },
+  "MERCHANT_SILAS_001_01": {
+    "entries": [
+      {
+        "speaker": "silas_001",
+        "text": "The gears turn. What requires mending?"
+      }
+    ]
+  },
+  "MERCHANT_SILAS_001_02": {
+    "entries": [
+      {
+        "speaker": "silas_001",
+        "text": "History is a blade that needs constant sharpening."
+      }
+    ]
+  }
+}

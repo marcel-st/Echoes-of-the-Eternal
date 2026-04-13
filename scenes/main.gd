@@ -9,6 +9,7 @@ func _ready() -> void:
 		EventBus.request_ui_prompt.connect(_on_ui_prompt)
 
 	SceneRouter.load_initial_map(world_root)
+	QuestManager.reload_quests()
 	EventBus.request_ui_prompt.emit("World loaded. Explore the map. Press E to trigger dialogue.")
 
 

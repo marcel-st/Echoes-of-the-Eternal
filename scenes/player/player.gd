@@ -12,7 +12,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = direction * move_speed
 	move_and_slide()
 	if Input.is_action_just_pressed("interact"):
-		DialogueManager.request_dialogue(&"intro_old_shrine")
+		DialogueManager.request_dialogue(&"MS_ACT1_01")
 
 
 func warp_to_spawn(_spawn_id: StringName, map_root: Node) -> void:

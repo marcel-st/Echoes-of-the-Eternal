@@ -1,6 +1,6 @@
 extends Node
 
-const QUESTS_PATH := "res://data/quests/sample_quest.json"
+const QUESTS_PATH := "res://data/quests/quests.json"
 
 var quest_definitions: Dictionary = {}
 var quest_states: Dictionary = {}

@@ -10,12 +10,12 @@ Create this folder structure and drop your source material there:
 res://data/source/narrative/
   story_outline.md
   world_lore.md
-  chapter_01.md
-  chapter_02.md
   characters.json
   dialogue_master.json
-  quests_master.json
-  items_master.json
+  npcs.json
+  quest_master.json
+  items.json
+  main_story.md
 ```
 
 You can also use `.txt` if you prefer.

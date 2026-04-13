@@ -1,0 +1,118 @@
+{
+  "wpn_aegis_blade_01": {
+    "name": "Dull Aegis Blade",
+    "type": "weapon",
+    "subtype": "Melee",
+    "description": "A rusted blade that feels strangely heavy, as if weighted by forgotten years.",
+    "lore": "The original weapon of the Archive, now stripped of its history.",
+    "mechanics": {
+      "damage": 10,
+      "reach": "Short",
+      "ability": "None"
+    },
+    "progression": "",
+    "impact": "",
+    "upgrade_id": "wpn_aegis_blade_02"
+  },
+  "wpn_aegis_blade_02": {
+    "name": "Refined Aegis Blade",
+    "type": "weapon",
+    "subtype": "Melee",
+    "description": "The rust has flaked away, revealing shimmering silver filigree.",
+    "lore": "",
+    "mechanics": {
+      "damage": 25,
+      "reach": "Medium",
+      "ability": "Memory Echo: Chance to deal double damage on third strike."
+    },
+    "progression": "Requires Shard of Courage and 500 Essence.",
+    "impact": "",
+    "upgrade_id": ""
+  },
+  "tool_lantern_01": {
+    "name": "The Memory Lantern",
+    "type": "tool",
+    "subtype": "Utility",
+    "description": "A blue-flamed lantern that reveals things that aren't there anymore.",
+    "lore": "Elara's gift. It burns using the 'will to know'.",
+    "mechanics": {
+      "active": "Reveal hidden platforms and invisible 'Ink-Born' enemies within a small radius.",
+      "cost": "None"
+    },
+    "progression": "",
+    "impact": "",
+    "upgrade_id": ""
+  },
+  "tool_pulse_01": {
+    "name": "Compassion Pulse",
+    "type": "tool",
+    "subtype": "Artifact",
+    "description": "A resonant stone that emits a wave of empathetic energy.",
+    "lore": "",
+    "mechanics": {
+      "active": "Heals wilted environmental hazards (brambles) and stuns 'Hollow' enemies.",
+      "mana_cost": 20
+    },
+    "progression": "Unlocked after retrieving the Shard of Empathy.",
+    "impact": "",
+    "upgrade_id": ""
+  },
+  "tool_hook_01": {
+    "name": "The Tether of Regret",
+    "type": "tool",
+    "subtype": "Traversal",
+    "description": "A spectral chain that can latch onto '錨' (Anchor) points.",
+    "lore": "A physical manifestation of the ties that bind the past to the present.",
+    "mechanics": {
+      "active": "Pulls Kaelen to distant hooks or pulls light enemies toward him.",
+      "mana_cost": 5
+    },
+    "progression": "",
+    "impact": "",
+    "upgrade_id": ""
+  },
+  "art_shard_01": {
+    "name": "Shard of Identity",
+    "type": "artifact",
+    "subtype": "Quest_Item",
+    "description": "A prismatic fragment that hums with the sound of a thousand names.",
+    "lore": "",
+    "mechanics": {},
+    "progression": "",
+    "impact": "Unlocks basic combat skills and the ability to interact with Oakhaven NPCs.",
+    "upgrade_id": ""
+  },
+  "art_heart_piece": {
+    "name": "Fragment of Vitality",
+    "type": "artifact",
+    "subtype": "Collectable",
+    "description": "A small, pulsing ruby shard.",
+    "lore": "",
+    "mechanics": "Collecting 4 increases Max Health by 1 Heart.",
+    "progression": "",
+    "impact": "",
+    "upgrade_id": ""
+  },
+  "art_tome_void": {
+    "name": "The Forbidden Tome",
+    "type": "artifact",
+    "subtype": "Lore_Item",
+    "description": "A book whose pages are made of pure shadow.",
+    "lore": "",
+    "mechanics": {},
+    "progression": "",
+    "impact": "Required to enter the Citadel of Erasure; reveals Malakor's true origin.",
+    "upgrade_id": ""
+  },
+  "con_essence_vial": {
+    "name": "Condensed Thought",
+    "type": "consumable",
+    "subtype": "Mana_Restore",
+    "description": "A shimmering liquid that tastes like a childhood summer.",
+    "lore": "",
+    "mechanics": "Restores 50 MP (Mnemurgy Points).",
+    "progression": "",
+    "impact": "",
+    "upgrade_id": ""
+  }
+}

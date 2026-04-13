@@ -54,6 +54,7 @@ func interact(_actor: Node = null) -> void:
 		return
 	if _cooldown_timer > 0.0:
 		return
+	AudioManager.play_world_sfx("interact")
 	var dialogue_id := _resolve_dialogue_id()
 	if dialogue_id.is_empty():
 		EventBus.request_ui_prompt.emit("%s has nothing to say right now." % display_name)

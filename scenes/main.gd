@@ -4,6 +4,10 @@ extends Node2D
 @onready var world_root: Node = $WorldRoot
 var _suppress_autosave := false
 var _transition_prompt := ""
+var _autosave_pending := false
+var _autosave_timer := 0.0
+
+const AUTOSAVE_DEBOUNCE_SECONDS := 0.45
 
 
 func _ready() -> void:
@@ -19,11 +23,14 @@ func _ready() -> void:
 		EventBus.map_changed.connect(_on_map_changed)
 
 	_load_runtime_state()
+	AudioManager.play_music_track("overworld")
+	AudioManager.play_ambience("creak")
 	EventBus.request_ui_prompt.emit("World loaded. Explore regions and speak with townsfolk.")
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	_process_map_transition_request()
+	_process_autosave_timer(delta)
 
 
 func _on_ui_prompt(_text: String) -> void:
@@ -32,6 +39,7 @@ func _on_ui_prompt(_text: String) -> void:
 
 
 func _exit_tree() -> void:
+	_flush_pending_autosave()
 	_save_runtime_state()
 
 
@@ -55,19 +63,21 @@ func _save_runtime_state() -> void:
 
 
 func _on_runtime_state_changed(_flag_key: String, _value: Variant) -> void:
-	_save_runtime_state()
+	_request_autosave()
 
 
 func _on_quest_state_changed(_quest_id: String, _new_state: String) -> void:
-	_save_runtime_state()
+	_request_autosave()
 
 
 func _on_quest_updated(_quest_id: StringName, _objective_id: StringName, _progress: int) -> void:
-	_save_runtime_state()
+	_request_autosave()
 
 
 func _on_map_changed(_map_scene_path: String) -> void:
 	_transition_prompt = ""
+	AudioManager.play_world_sfx("map_transition")
+	AudioManager.play_music_track("overworld")
 	_save_runtime_state()
 
 
@@ -115,3 +125,27 @@ func _scene_label(scene_path: String) -> String:
 	var file_name := scene_path.get_file()
 	file_name = file_name.trim_suffix(".tscn")
 	return file_name.replace("_", " ").capitalize()
+
+
+func _request_autosave() -> void:
+	if _suppress_autosave:
+		return
+	_autosave_pending = true
+	_autosave_timer = AUTOSAVE_DEBOUNCE_SECONDS
+
+
+func _process_autosave_timer(delta: float) -> void:
+	if not _autosave_pending:
+		return
+	_autosave_timer -= delta
+	if _autosave_timer > 0.0:
+		return
+	_autosave_pending = false
+	_save_runtime_state()
+
+
+func _flush_pending_autosave() -> void:
+	if not _autosave_pending:
+		return
+	_autosave_pending = false
+	_save_runtime_state()

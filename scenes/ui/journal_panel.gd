@@ -27,8 +27,10 @@ func toggle_panel() -> void:
 	visible = _is_open
 	if _is_open:
 		_refresh_content()
+		AudioManager.play_ui("open")
 		EventBus.request_ui_prompt.emit("Journal open. Press Esc/Start to close.")
 	else:
+		AudioManager.play_ui("close")
 		EventBus.request_ui_prompt.emit("Journal closed.")
 
 

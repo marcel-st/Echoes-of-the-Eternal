@@ -5,6 +5,8 @@ const SETTINGS_PATH := "user://settings.cfg"
 var master_volume_db := 0.0
 var music_volume_db := -2.0
 var sfx_volume_db := -4.0
+var ui_volume_db := -2.0
+var ambience_volume_db := -5.0
 var fullscreen := false
 
 
@@ -28,12 +30,30 @@ func set_audio_levels(master_db: float, music_db: float, sfx_db: float) -> void:
 	save_settings()
 
 
+func set_extended_audio_levels(
+	master_db: float,
+	music_db: float,
+	sfx_db: float,
+	ui_db: float,
+	ambience_db: float
+) -> void:
+	master_volume_db = master_db
+	music_volume_db = music_db
+	sfx_volume_db = sfx_db
+	ui_volume_db = ui_db
+	ambience_volume_db = ambience_db
+	_apply_audio_settings()
+	save_settings()
+
+
 func save_settings() -> void:
 	var config := ConfigFile.new()
 	config.set_value("video", "fullscreen", fullscreen)
 	config.set_value("audio", "master_db", master_volume_db)
 	config.set_value("audio", "music_db", music_volume_db)
 	config.set_value("audio", "sfx_db", sfx_volume_db)
+	config.set_value("audio", "ui_db", ui_volume_db)
+	config.set_value("audio", "ambience_db", ambience_volume_db)
 	config.save(SETTINGS_PATH)
 
 
@@ -46,6 +66,8 @@ func load_settings() -> void:
 	master_volume_db = float(config.get_value("audio", "master_db", master_volume_db))
 	music_volume_db = float(config.get_value("audio", "music_db", music_volume_db))
 	sfx_volume_db = float(config.get_value("audio", "sfx_db", sfx_volume_db))
+	ui_volume_db = float(config.get_value("audio", "ui_db", ui_volume_db))
+	ambience_volume_db = float(config.get_value("audio", "ambience_db", ambience_volume_db))
 
 
 func _apply_video_settings() -> void:
@@ -59,6 +81,8 @@ func _apply_audio_settings() -> void:
 	_set_bus_volume("Master", master_volume_db)
 	_set_bus_volume("Music", music_volume_db)
 	_set_bus_volume("SFX", sfx_volume_db)
+	_set_bus_volume("UI", ui_volume_db)
+	_set_bus_volume("Ambience", ambience_volume_db)
 
 
 func _set_bus_volume(bus_name: String, volume_db: float) -> void:

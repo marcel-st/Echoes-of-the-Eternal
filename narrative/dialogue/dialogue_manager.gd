@@ -160,6 +160,23 @@ func _apply_effect_token(token: String, context: Dictionary) -> StringName:
 			QuestManager.set_quest_state(quest_id, quest_state)
 		return &""
 
+	if cleaned.begins_with("complete_objective:"):
+		var payload := cleaned.trim_prefix("complete_objective:")
+		var objective_parts := payload.split(":")
+		if objective_parts.size() >= 2:
+			var quest_id := StringName(objective_parts[0].strip_edges())
+			var objective_id := StringName(objective_parts[1].strip_edges())
+			var amount := 1
+			if objective_parts.size() >= 3:
+				amount = maxi(1, int(objective_parts[2].strip_edges()))
+			QuestManager.complete_objective(quest_id, objective_id, amount)
+		return &""
+
+	if cleaned.begins_with("complete_quest:"):
+		var quest_id := StringName(cleaned.trim_prefix("complete_quest:").strip_edges())
+		QuestManager.complete_quest(quest_id)
+		return &""
+
 	if cleaned.begins_with("give_item:"):
 		var payload := cleaned.trim_prefix("give_item:")
 		var item_parts := payload.split(":")

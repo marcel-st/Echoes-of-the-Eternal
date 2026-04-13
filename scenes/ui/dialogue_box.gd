@@ -1,9 +1,11 @@
 extends Control
 
-@onready var speaker_label: Label = $Panel/MarginContainer/VBoxContainer/SpeakerLabel
+@onready var speaker_label: Label = $Panel/MarginContainer/VBoxContainer/HeaderContainer/SpeakerLabel
 @onready var line_label: Label = $Panel/MarginContainer/VBoxContainer/TextLabel
 @onready var choices_container: VBoxContainer = $Panel/MarginContainer/VBoxContainer/ChoicesContainer
 @onready var hint_label: Label = $Panel/MarginContainer/VBoxContainer/HintLabel
+@onready var portrait_panel: ColorRect = $Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel
+@onready var portrait_label: Label = $Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel/PortraitLabel
 
 var _active_dialogue_id: StringName = &""
 var _entries: Array = []
@@ -77,6 +79,8 @@ func _on_dialogue_closed(_dialogue_id: StringName) -> void:
 	_context.clear()
 	speaker_label.text = ""
 	line_label.text = ""
+	portrait_label.text = "?"
+	portrait_panel.color = Color(0.31, 0.46, 0.74, 1.0)
 	_clear_choices()
 	visible = false
 
@@ -115,7 +119,9 @@ func _advance_to_next_entry() -> void:
 			continue
 
 		_current_entry = entry
-		speaker_label.text = String(entry.get("speaker", "Unknown"))
+		var speaker_raw := String(entry.get("speaker", "Unknown"))
+		speaker_label.text = PortraitRegistry.resolve_display_name(speaker_raw)
+		_update_portrait(speaker_raw)
 		line_label.text = String(entry.get("text", ""))
 		_set_hint("Confirm: continue   Cancel: close")
 		return
@@ -199,6 +205,28 @@ func _clear_choices() -> void:
 
 func _set_hint(text: String) -> void:
 	hint_label.text = text
+
+
+func _update_portrait(speaker_token: String) -> void:
+	var color := PortraitRegistry.resolve_portrait_color(speaker_token)
+	portrait_panel.color = color
+	var portrait_name := PortraitRegistry.resolve_display_name(speaker_token)
+	portrait_label.text = _portrait_initials(portrait_name)
+
+
+func _portrait_initials(name: String) -> String:
+	var words := name.strip_edges().split(" ")
+	var initials := ""
+	for token in words:
+		var cleaned := token.strip_edges()
+		if cleaned.is_empty():
+			continue
+		initials += cleaned.substr(0, 1).to_upper()
+		if initials.length() >= 2:
+			break
+	if initials.is_empty():
+		return "?"
+	return initials
 
 
 func _apply_effects_from_value(effects: Variant) -> bool:

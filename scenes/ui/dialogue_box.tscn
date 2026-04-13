@@ -38,7 +38,23 @@ anchor_bottom = 1.0
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="SpeakerLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="HeaderContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+
+[node name="PortraitPanel" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer/HeaderContainer"]
+custom_minimum_size = Vector2(120, 64)
+color = Color(0.31, 0.46, 0.74, 1)
+
+[node name="PortraitLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "ELARA"
+
+[node name="SpeakerLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HeaderContainer"]
+size_flags_horizontal = 3
+vertical_alignment = 1
 text = "Speaker"
 
 [node name="TextLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]

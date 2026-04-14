@@ -2,6 +2,16 @@
 
 2D RPG starter scaffold inspired by classic top-down adventures, prepared for a modern PC target (Windows/Linux/Steam Deck) with keyboard + gamepad support.
 
+## Documentation
+
+| Guide | Description |
+|-------|-------------|
+| [Developer guide](docs/DEVELOPER_GUIDE.md) | Architecture, autoloads, narrative pipeline, saves, audio, extension checklist. |
+| [Player guide](docs/PLAYER_GUIDE.md) | Controls, alpha gameplay loop, saves, how to give feedback. |
+| [Build instructions](docs/BUILD.md) | Engine version, narrative import, Linux export, troubleshooting. |
+
+Additional references: [Narrative pipeline](docs/NARRATIVE_PIPELINE.md), [Art direction](docs/ART_DIRECTION.md), [Alpha release plan](docs/ALPHA_RELEASE_PLAN.md).
+
 ## Current status
 
 This repository now contains a **Godot 4 starter architecture** with:

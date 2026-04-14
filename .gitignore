@@ -1,5 +1,7 @@
 .godot/
 .import/
 *.import
-export_presets.cfg
 .DS_Store
+
+# Local export output (upload as release assets, do not commit binaries)
+builds/

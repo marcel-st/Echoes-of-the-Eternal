@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/cinder_peaks.gd" id="1_cp1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_npc"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="4_tilemap"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_f.png" id="5_prop_f"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_g.png" id="6_prop_g"]
+
+[sub_resource type="RectangleShape2D" id="Rect_cp_gate"]
+size = Vector2(72, 720)
 
 [node name="CinderPeaks" type="Node2D"]
 script = ExtResource("1_cp1")
@@ -41,7 +44,7 @@ position = Vector2(960, 1040)
 position = Vector2(24, 540)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GateWestToOakhaven"]
-shape = RectangleShape2D.new()
+shape = SubResource("Rect_cp_gate")
 
 [node name="EnvironmentProps" type="Node2D" parent="."]
 
@@ -61,7 +64,7 @@ self_modulate = Color(0.95, 0.78, 0.62, 1)
 position = Vector2(1080, 500)
 npc_id = &"npc_knight_002"
 display_name = "Sir Kestral"
-default_dialogue_id = StringName("WORLD_FLAVOR_002")
+default_dialogue_id = &"WORLD_FLAVOR_002"
 prompt_text = "Speak [E]"
 enable_wander = false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://scenes/actors/npcs/npc_base.gd" id="1_npc"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_idle_down.png" id="2_npc_idle_down"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_idle_side.png" id="8_npc_idle_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_side_a.png" id="9_npc_walk_side_a"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_side_b.png" id="10_npc_walk_side_b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_npc_collision"]
+radius = 48.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_npc"]
 animations = [{
@@ -118,7 +121,7 @@ animations = [{
 script = ExtResource("1_npc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = CircleShape2D.new()
+shape = SubResource("CircleShape2D_npc_collision")
 
 [node name="Visual" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)

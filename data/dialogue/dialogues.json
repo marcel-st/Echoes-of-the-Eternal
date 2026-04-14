@@ -89,6 +89,143 @@
       "complete_objective:MQ_01_AWAKENING:objective_03:1"
     ]
   },
+  "MS_GLASS_FORUM_01": {
+    "entries": [
+      {
+        "speaker": "Mira Thenn",
+        "text": "Welcome to the Forum of Glass, where every claim is reflected and none are hidden."
+      },
+      {
+        "speaker": "Mira Thenn",
+        "text": "Conservators demand full truth. Quietists demand selective mercy. The Order demands silence."
+      },
+      {
+        "speaker": "Mira Thenn",
+        "text": "Kaelen, if you seek alliance, you will answer for the judgments of your former self."
+      }
+    ],
+    "meta": {
+      "trigger_state": "mq_09_start"
+    }
+  },
+  "MS_GLASS_FORUM_02": {
+    "entries": [
+      {
+        "speaker": "Elara",
+        "text": "I found the names in the tablet margins. My family's exile route is there, in your seal script."
+      },
+      {
+        "speaker": "Elara",
+        "text": "I know you were not whole then or now... but this wound is mine to carry too."
+      },
+      {
+        "speaker": "Elara",
+        "text": "Tell me the truth in front of everyone. No more protected versions."
+      }
+    ],
+    "meta": {
+      "trigger_state": "mq_09_mid"
+    }
+  },
+  "MS_GLASS_TRIBUNAL_VERDICT": {
+    "entries": [
+      {
+        "speaker": "Kaelen",
+        "text": "I remember the verdict. I remember signing it with certainty and calling it balance."
+      },
+      {
+        "speaker": "Kaelen",
+        "text": "I will not ask forgiveness as payment. I offer record, repair, and the burden of being witnessed."
+      },
+      {
+        "speaker": "Kaelen",
+        "text": "Let the world judge the man I was and the one I choose to become."
+      }
+    ],
+    "meta": {
+      "trigger_state": "mq_09_complete",
+      "action": "unlock_map_marker_highlands"
+    },
+    "outcomes": [
+      "prompt:Action triggered: unlock_map_marker_highlands"
+    ]
+  },
+  "MS_CALDRIN_CONFESSION": {
+    "entries": [
+      {
+        "speaker": "Ser Caldrin",
+        "text": "I fed routes to the Quietists. Not to damn you, Kaelen, but to prevent another throne of memory."
+      },
+      {
+        "speaker": "Ser Caldrin",
+        "text": "I thought silence would save lives. It only delayed this reckoning."
+      },
+      {
+        "speaker": "Ser Caldrin",
+        "text": "If the coalition needs a traitor's head, I will kneel. If it needs my sword, I will stand."
+      }
+    ],
+    "meta": {
+      "trigger_state": "mq_10_mid"
+    }
+  },
+  "MS_ELARA_RECONCILIATION": {
+    "entries": [
+      {
+        "speaker": "Elara",
+        "text": "I don't love the legend. I love the person who kept telling the truth when it hurt."
+      },
+      {
+        "speaker": "Elara",
+        "text": "We carry the past together, or not at all."
+      },
+      {
+        "speaker": "Elara",
+        "text": "When this is over, we rebuild more than walls. We rebuild meaning."
+      }
+    ],
+    "meta": {
+      "trigger_state": "mq_10_complete"
+    }
+  },
+  "MS_FINAL_SACRIFICE": {
+    "entries": [
+      {
+        "speaker": "Kaelen",
+        "text": "The Archive cannot be a prison any longer, and you will not pay this price for me, Elara."
+      },
+      {
+        "speaker": "Kaelen",
+        "text": "I release the endless memory. I release the endless life. Let history belong to the living."
+      },
+      {
+        "speaker": "Kaelen",
+        "text": "If I forget the titles, keep my name. If I forget the wars, keep my promise."
+      }
+    ],
+    "meta": {
+      "trigger_state": "mq_11_final_ritual"
+    }
+  },
+  "MS_EPILOGUE_LIBRARY": {
+    "entries": [
+      {
+        "speaker": "Elara",
+        "text": "The lanterns are lit. The shelves are still uneven. It's perfect."
+      },
+      {
+        "speaker": "Elara",
+        "text": "You remember enough to laugh at my notes and argue with my catalog system."
+      },
+      {
+        "speaker": "Elara",
+        "text": "That's all I ever wanted: a future where memory serves life."
+      }
+    ],
+    "meta": {
+      "trigger_state": "ending_canon"
+    }
+  },
   "SQ_BRAM_01": {
     "entries": [
       {
@@ -141,6 +278,65 @@
       "complete_quest:SQ_BRAM_01",
       "give_item:art_heart_piece:1",
       "prompt:Received Fragment of Vitality"
+    ]
+  },
+  "SQ_CALDRIN_01": {
+    "entries": [
+      {
+        "speaker": "Ser Caldrin",
+        "text": "I need sealed witness scrolls from the old barracks before the tribunal convenes."
+      },
+      {
+        "speaker": "Ser Caldrin",
+        "text": "Bring them to me, and I will give testimony no faction can ignore."
+      }
+    ],
+    "meta": {
+      "quest_id": "SQ_CALDRIN_01",
+      "state": "not_started"
+    },
+    "outcomes": [
+      "start_quest:SQ_CALDRIN_01",
+      "set_quest_state:SQ_CALDRIN_01:active"
+    ]
+  },
+  "SQ_CALDRIN_02": {
+    "entries": [
+      {
+        "speaker": "Ser Caldrin",
+        "text": "These names deserved better than redaction. So did you."
+      },
+      {
+        "speaker": "Ser Caldrin",
+        "text": "Take this. The old command sigil still opens routes through Ember Crown."
+      }
+    ],
+    "meta": {
+      "quest_id": "SQ_CALDRIN_01",
+      "state": "complete"
+    },
+    "outcomes": [
+      "complete_quest:SQ_CALDRIN_01"
+    ]
+  },
+  "SQ_MIRA_01": {
+    "entries": [
+      {
+        "speaker": "Mira Thenn",
+        "text": "Bring me three grievances from opposing houses, each stamped and witnessed."
+      },
+      {
+        "speaker": "Mira Thenn",
+        "text": "If you can hold contradictions without drawing steel, we may avoid a civil collapse."
+      }
+    ],
+    "meta": {
+      "quest_id": "SQ_MIRA_01",
+      "state": "not_started"
+    },
+    "outcomes": [
+      "start_quest:SQ_MIRA_01",
+      "set_quest_state:SQ_MIRA_01:active"
     ]
   },
   "SQ_MILO_01": {
@@ -297,6 +493,54 @@
       }
     ]
   },
+  "CHAR_SER_CALDRIN_001_PROFILE": {
+    "entries": [
+      {
+        "speaker": "Ser Caldrin",
+        "text": "Former Order commander who defected after witnessing memory purges."
+      },
+      {
+        "speaker": "Ser Caldrin",
+        "text": "Peace built on silence is still peace... is it not?"
+      }
+    ]
+  },
+  "CHAR_MIRA_THENN_001_PROFILE": {
+    "entries": [
+      {
+        "speaker": "Mira Thenn",
+        "text": "Lost family to a revenge war ignited by resurrected historical grievances."
+      },
+      {
+        "speaker": "Mira Thenn",
+        "text": "Forgetting is not cowardice; sometimes it is mercy."
+      }
+    ]
+  },
+  "CHAR_NYX_001_PROFILE": {
+    "entries": [
+      {
+        "speaker": "Nyx, the Mirror-Seer",
+        "text": "An entity born from unresolved paradox in the Living Archive."
+      },
+      {
+        "speaker": "Nyx, the Mirror-Seer",
+        "text": "The truest memory is the one you still carry after regret."
+      }
+    ]
+  },
+  "CHAR_LORD_VEYR_001_PROFILE": {
+    "entries": [
+      {
+        "speaker": "Lord Veyr",
+        "text": "Rose through the Order after losing his city to memory-driven civil war."
+      },
+      {
+        "speaker": "Lord Veyr",
+        "text": "Meaning is a wound. Malakor gave us anesthesia."
+      }
+    ]
+  },
   "NPC_NPC_BAKER_001_INTRO": {
     "entries": [
       {
@@ -386,6 +630,54 @@
       {
         "speaker": "Null",
         "text": "Reward: Secret Item: The Void Whistle (Teleports player back to the dungeon entrance)"
+      }
+    ]
+  },
+  "NPC_NPC_DIPLOMAT_006_INTRO": {
+    "entries": [
+      {
+        "speaker": "Mira Thenn",
+        "text": "Mercy requires memory, but not every memory must become a weapon."
+      },
+      {
+        "speaker": "Mira Thenn",
+        "text": "Collect three sworn grievances from rival houses to prove negotiation is still possible."
+      },
+      {
+        "speaker": "Mira Thenn",
+        "text": "Reward: Coalition Favor + Quietist Passage Seal"
+      }
+    ]
+  },
+  "NPC_NPC_KNIGHT_007_INTRO": {
+    "entries": [
+      {
+        "speaker": "Ser Caldrin",
+        "text": "Truth is a blade; I have lived on both edges."
+      },
+      {
+        "speaker": "Ser Caldrin",
+        "text": "Recover sealed witness scrolls proving who redirected shard routes during the Quiet Purges."
+      },
+      {
+        "speaker": "Ser Caldrin",
+        "text": "Reward: Ember Command Sigil (opens highland military gates)"
+      }
+    ]
+  },
+  "NPC_NPC_SEER_008_INTRO": {
+    "entries": [
+      {
+        "speaker": "Nyx, the Mirror-Seer",
+        "text": "What survives regret becomes identity."
+      },
+      {
+        "speaker": "Nyx, the Mirror-Seer",
+        "text": "Witness three memory rifts and accept a painful truth in each without rejecting the vision."
+      },
+      {
+        "speaker": "Nyx, the Mirror-Seer",
+        "text": "Reward: Passive: Steady Heart (reduced fear/slow effects in memory zones)"
       }
     ]
   },

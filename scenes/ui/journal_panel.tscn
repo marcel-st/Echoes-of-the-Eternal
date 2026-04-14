@@ -1,8 +1,26 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/journal_panel.gd" id="1_journal"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ui/kenney_ui-pack-rpg-expansion/panel_blue.png" id="2_journal_panel"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ui/kenney_ui-pack-rpg-expansion/panel_inset_blue.png" id="3_journal_inset"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_journal_outer"]
+texture = ExtResource("2_journal_panel")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 0
+axis_stretch_vertical = 0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_journal_inset"]
+texture = ExtResource("3_journal_inset")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 0
+axis_stretch_vertical = 0
 
 [node name="JournalPanel" type="PanelContainer"]
 visible = false
@@ -63,24 +81,6 @@ offset_left = 14.0
 offset_top = 12.0
 offset_right = -14.0
 offset_bottom = -12.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_journal_outer"]
-texture = ExtResource("2_journal_panel")
-texture_margin_left = 12.0
-texture_margin_top = 12.0
-texture_margin_right = 12.0
-texture_margin_bottom = 12.0
-axis_stretch_horizontal = 0
-axis_stretch_vertical = 0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_journal_inset"]
-texture = ExtResource("3_journal_inset")
-texture_margin_left = 12.0
-texture_margin_top = 12.0
-texture_margin_right = 12.0
-texture_margin_bottom = 12.0
-axis_stretch_horizontal = 0
-axis_stretch_vertical = 0
 
 [node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 text = "Quest Journal"

@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/whispering_vales.gd" id="1_wv1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_wv2"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="4_ground"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_b.png" id="5_prop_b"]
+
+[sub_resource type="RectangleShape2D" id="Rect_wv_h"]
+size = Vector2(720, 72)
+
+[sub_resource type="RectangleShape2D" id="Rect_wv_v"]
+size = Vector2(72, 720)
 
 [node name="WhisperingVales" type="Node2D"]
 script = ExtResource("1_wv1")
@@ -35,19 +41,19 @@ position = Vector2(1720, 540)
 position = Vector2(960, 1040)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToOakhavenGate"]
-shape = RectangleShape2D.new()
+shape = SubResource("Rect_wv_h")
 
 [node name="ToLibraryGate" type="Area2D" parent="."]
 position = Vector2(1860, 540)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToLibraryGate"]
-shape = RectangleShape2D.new()
+shape = SubResource("Rect_wv_v")
 
 [node name="WillowSpiritNPC" parent="." instance=ExtResource("2_wv2")]
 position = Vector2(1280, 520)
 npc_id = &"npc_spirit_004"
 display_name = "Weeping Willow"
-default_dialogue_id = StringName("WORLD_FLAVOR_001")
+default_dialogue_id = &"WORLD_FLAVOR_001"
 prompt_text = "Commune [E]"
 enable_wander = false
 

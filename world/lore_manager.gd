@@ -33,18 +33,18 @@ func reload_lore() -> void:
 		push_warning("Unable to parse lore_entries.json: %s" % parser.get_error_message())
 		return
 
-	var payload := parser.data
+	var payload: Variant = parser.data
 	if typeof(payload) != TYPE_DICTIONARY:
 		return
 
-	var entries_variant := (payload as Dictionary).get("entries", [])
+	var entries_variant: Variant = (payload as Dictionary).get("entries", [])
 	if typeof(entries_variant) != TYPE_ARRAY:
 		return
 
 	for entry_variant in entries_variant as Array:
 		if typeof(entry_variant) != TYPE_DICTIONARY:
 			continue
-		var entry := entry_variant as Dictionary
+		var entry: Dictionary = entry_variant as Dictionary
 		var entry_id := String(entry.get("id", "")).strip_edges()
 		if entry_id.is_empty():
 			continue
@@ -60,7 +60,10 @@ func mark_entry_discovered(lore_entry_id: String) -> void:
 		return
 	if not has_lore(StringName(entry_id)):
 		return
+	if _discovered_ids.get(entry_id, false):
+		return
 	_discovered_ids[entry_id] = true
+	EventBus.lore_discovered.emit(entry_id)
 
 
 func is_entry_discovered(lore_entry_id: String) -> bool:
@@ -78,7 +81,7 @@ func get_or_create_dialogue_for_lore(lore_entry_id: String) -> String:
 		return String(_generated_dialogues[entry_id])
 
 	var dialogue_id := "LORE_%s" % entry_id.to_upper()
-	var entry := _entries[entry_id] as Dictionary
+	var entry: Dictionary = _entries[entry_id] as Dictionary
 	var title := String(entry.get("title", "Lore"))
 	var text := String(entry.get("text", ""))
 	_generated_dialogues[entry_id] = dialogue_id

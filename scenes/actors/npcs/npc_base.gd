@@ -54,7 +54,7 @@ func interact(_actor: Node = null) -> void:
 		return
 	if _cooldown_timer > 0.0:
 		return
-	AudioManager.play_world_sfx("interact")
+	EventBus.sfx_requested.emit(&"interact", -8.0)
 	var dialogue_id := _resolve_dialogue_id()
 	if dialogue_id.is_empty():
 		EventBus.request_ui_prompt.emit("%s has nothing to say right now." % display_name)
@@ -100,7 +100,7 @@ func _resolve_dialogue_id() -> StringName:
 			return StringName(dialogue_by_flag_true[flag_name])
 
 	for quest_id in dialogue_by_quest_state.keys():
-		var expected_state_map_variant := dialogue_by_quest_state[quest_id]
+		var expected_state_map_variant: Variant = dialogue_by_quest_state[quest_id]
 		if typeof(expected_state_map_variant) != TYPE_DICTIONARY:
 			continue
 		var expected_state_map := expected_state_map_variant as Dictionary

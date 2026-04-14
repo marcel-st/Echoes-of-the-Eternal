@@ -1,8 +1,8 @@
 {
   "quest_master": {
     "metadata": {
-      "total_main_chapters": 8,
-      "total_side_quests": 12,
+      "total_main_chapters": 11,
+      "total_side_quests": 5,
       "world_memory_max": 100
     },
     "main_quests": [
@@ -61,10 +61,11 @@
         "rewards": {
           "ability": "Flame Dash",
           "item": "Refined Aegis Blade",
-          "world_saturation": 40
+          "memory_xp": 22,
+          "world_saturation": 35
         },
         "narrative_unlock": "Kaelen remembers the wars of old and accepts his role as a warrior, not just a watcher.",
-        "next_quest": "MQ_04_LOGIC"
+        "next_quest": "MQ_09_GLASS_TRIBUNAL"
       },
       {
         "id": "MQ_08_FINAL",
@@ -83,6 +84,63 @@
           "unlock": "New Game Plus"
         },
         "narrative_unlock": "The choice: Full Immortality or Mortal Peace."
+      },
+      {
+        "id": "MQ_09_GLASS_TRIBUNAL",
+        "title": "The Glass Tribunal",
+        "giver_id": "mira_thenn_001",
+        "location": "Vales of Glass",
+        "requirements": "MQ_03_COURAGE complete",
+        "objectives": [
+          "Convene the three faction delegations in the Glass Forum",
+          "Recover testimony tablets from the sealed archive wings",
+          "Present the full record and choose transparency at tribunal"
+        ],
+        "rewards": {
+          "memory_xp": 30,
+          "world_saturation": 50,
+          "unlock": "Coalition diplomacy table"
+        },
+        "narrative_unlock": "Elara learns her bloodline was harmed by Kaelen's old verdict, testing romance and trust.",
+        "next_quest": "MQ_10_COALITION_OATH"
+      },
+      {
+        "id": "MQ_10_COALITION_OATH",
+        "title": "Oath of the Fractured",
+        "giver_id": "ser_caldrin_001",
+        "location": "Vales of Glass -> Ember Crown Highlands",
+        "requirements": "MQ_09_GLASS_TRIBUNAL complete",
+        "objectives": [
+          "Secure strategic concessions from Conservators, Quietists, and local houses",
+          "Expose Ser Caldrin's secret intel channel before the war council",
+          "Resolve the confession and formalize the Ember Crown coalition route"
+        ],
+        "rewards": {
+          "memory_xp": 40,
+          "world_saturation": 65,
+          "unlock": "Coalition assault support"
+        },
+        "narrative_unlock": "Kaelen's voice matures into accountable leadership; Elara chooses to stand beside him again.",
+        "next_quest": "MQ_11_MORTAL_DAWN"
+      },
+      {
+        "id": "MQ_11_MORTAL_DAWN",
+        "title": "Mortal Dawn",
+        "giver_id": "elara_001",
+        "location": "Citadel of Erasure",
+        "requirements": "MQ_10_COALITION_OATH complete",
+        "objectives": [
+          "Defeat Lord Veyr and claim the Ember Sigil",
+          "Traverse the Hall of Infinite Regret and reach the Oblivion Engine",
+          "Confront Malakor and bind paradox collapse by surrendering immortality and total archive memory"
+        ],
+        "rewards": {
+          "item": "Aegis Remnant",
+          "memory_xp": 50,
+          "world_saturation": 80,
+          "unlock": "Canon ending: Rebuilt Oakhaven Library"
+        },
+        "narrative_unlock": "Kaelen becomes mortal, keeps core identity and love, and begins a hopeful future with Elara."
       }
     ],
     "side_quests": [
@@ -133,6 +191,39 @@
           "memory_xp": 20
         },
         "status_change": "Sir Kestral's ghost finds peace and fades, leaving behind a permanent Stat Upgrade."
+      },
+      {
+        "id": "SQ_CALDRIN_01",
+        "title": "Ashes Under Oath",
+        "giver_id": "ser_caldrin_001",
+        "location": "Vales of Glass",
+        "requirements": "MQ_09_GLASS_TRIBUNAL active",
+        "objectives": [
+          "Recover sealed witness scroll from the Barracks Vault",
+          "Recover route orders from the Archive Transit Hall",
+          "Present both records to Ser Caldrin before council"
+        ],
+        "rewards": {
+          "item": "Ember Command Sigil",
+          "memory_xp": 24
+        },
+        "status_change": "Caldrin confesses in open council and coalition trust increases."
+      },
+      {
+        "id": "SQ_MIRA_01",
+        "title": "The Third Ledger",
+        "giver_id": "mira_thenn_001",
+        "location": "Vales of Glass",
+        "requirements": "MQ_09_GLASS_TRIBUNAL active",
+        "objectives": [
+          "Collect signed grievances from Houses Ardent, Keld, and Sable",
+          "Deliver complete ledger to Mira Thenn"
+        ],
+        "rewards": {
+          "item": "Quietist Passage Seal",
+          "essence": 180
+        },
+        "status_change": "Forum patrol hostility decreases and diplomacy routes open."
       }
     ]
   }

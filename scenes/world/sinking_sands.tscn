@@ -60,7 +60,7 @@ texture = ExtResource("5_sands_prop")
 position = Vector2(1160, 560)
 npc_id = &"npc_mercant_003"
 display_name = "Milo"
-default_dialogue_id = StringName("SQ_MILO_01")
+default_dialogue_id = &"SQ_MILO_01"
 prompt_text = "Talk [E]"
 enable_wander = false
 

@@ -43,6 +43,7 @@ func save_game(slot: int = 1, data: SaveData = null) -> bool:
 	var player := get_tree().get_first_node_in_group("player")
 	if player is Node2D:
 		payload.player_position = (player as Node2D).global_position
+	payload.lore_discovered = LoreManager.export_discovered_entries()
 
 	var path := _save_path(slot)
 	var result := ResourceSaver.save(payload, path)
@@ -66,6 +67,7 @@ func apply_loaded_data(data: SaveData) -> void:
 			"progress": data.quest_progress,
 		}
 	)
+	LoreManager.import_discovered_entries(data.lore_discovered)
 
 
 func _save_path(slot: int) -> String:

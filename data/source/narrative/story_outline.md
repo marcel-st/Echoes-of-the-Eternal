@@ -1,7 +1,7 @@
 import os
 
 # Define the markdown content for the story outline
-story_outline = """# Echoes of the Eternal: Story Outline & Narrative Design
+story_outline = """# Echoes of the Eternal: Story Outline & Narrative Design (Canon Expansion)
 
 **Game Style:** Top-down 2D Action RPG (Zelda-like)  
 **Estimated Playtime:** 25+ Hours  
@@ -41,40 +41,49 @@ Kaelen was created by the Old Gods to be the observer of time. He was incapable 
 
 ---
 
-## 4. Act Structure & Gameplay Flow
+## 4. Act Structure & Gameplay Flow (Three Regions, One Canon Ending)
 
-### Act I: The Awakening (Hours 1–6)
-* **Location:** The Southern Wilds.
-* **Objective:** Find the first three Shards to regain basic human functions.
-* **Dungeon 1: The Sunken Library.** (Shard of Identity). Unlocks the ability to use a sword and read ancient signs.
-* **Dungeon 2: The Whispering Woods.** (Shard of Empathy). Unlocks the "Compassion Pulse" (a tool to heal withered plants/paths).
-* **Dungeon 3: The Iron Forge.** (Shard of Courage). Unlocks the "Dash" ability.
-* **Act Climax:** Malakor burns Oakhaven. Kaelen realizes he cannot just hide; he must fight.
+### Region I: Oakhaven & The Withered March (Act I, Hours 1–8)
+* **Theme:** Memory as burden.
+* **Narrative Goal:** Establish Kaelen and Elara's bond while rebuilding Kaelen's first voice tier.
+* **Main Beats:**
+  * Kaelen awakens and meets Elara in Oakhaven.
+  * An archive relic is stolen by Order raiders.
+  * Sunken Library trial restores Kaelen's identity shard.
+  * Kaelen sees a memory suggesting he once judged a nameless people.
+* **Emotional Beat:** Elara and Kaelen begin a central romance arc rooted in trust and shared purpose.
 
-### Act II: The Burden of History (Hours 7–18)
-* **Location:** The Great Central Highlands and Elemental Zones.
-* **Objective:** Collect the four Elemental Shards.
-* **The Twist:** Kaelen discovers that as the "Living Archive," he once condemned a whole civilization to exile to preserve "The Greater Good." He begins to doubt if he *wants* to remember everything.
-* **Dungeon 4: The Frozen Spire.** (Shard of Logic). Unlocks the Ice Rod.
-* **Dungeon 5: The Sun-Bleached Desert.** (Shard of Patience). Unlocks the Grappling Hook.
-* **Dungeon 6: The Shadow Cathedral.** (Shard of Sorrow). This is a heavy narrative dungeon where Kaelen faces his own past crimes.
-* **Dungeon 7: The Sky Reach.** (Shard of Joy). Unlocks the "Cape of Flight" (Zelda-style glider/float).
+### Region II: Vales of Glass (Act II, Hours 9–17)
+* **Theme:** Memory as power.
+* **Narrative Goal:** Introduce political conflict while keeping stakes personal.
+* **Factions:**
+  * **Conservators:** Preserve every truth.
+  * **Quietists:** Selective forgetting prevents endless blood feuds.
+  * **Order cells:** Weaponize oblivion under Malakor.
+* **Main Beats:**
+  * Kaelen's voice tier deepens (fully voiced reflection and accountability).
+  * A trusted ally reveals betrayal motivated by fear of another Archive tyrant.
+  * Tribunal reveals Kaelen's old ruling harmed people tied to Elara's lineage.
+  * Kaelen chooses full transparency over convenience.
+* **Emotional Beat:** Romance fractures, then grows toward mature trust.
 
-### Act III: The Convergence (Hours 19–25)
-* **Location:** The Citadel of Erasure (Floating above the world).
-* **Objective:** Confront Malakor and reclaim the "Shard of Choice."
-* **Final Boss:** A multi-phase fight against Malakor. 
-    * *Phase 1:* Physical combat.
-    * *Phase 2:* A mental battle where Malakor uses Kaelen's own recovered memories against him.
-* **The Ending:** Kaelen must choose: Reclaim immortality and the pain of the past, or become a mortal man with a clean slate, letting the world forge its own new history.
+### Region III: Ember Crown Highlands (Act III, Hours 18–25)
+* **Theme:** Memory as responsibility.
+* **Narrative Goal:** Deliver a hopeful canon ending with meaningful sacrifice.
+* **Main Beats:**
+  * Fractured factions form a coalition for one final assault.
+  * Citadel of Erasure forces Kaelen to face the consequences of remembered history.
+  * Final ritual reveals that a living anchor must absorb paradox collapse.
+* **Canon Sacrifice:** Kaelen gives up immortality and total archival memory so Aethelgard can heal.
+* **Ending Tone (Hopeful):** Elara lives. Kaelen lives as mortal. They rebuild Oakhaven's library together with incomplete but honest memory.
 
 ---
 
-## 5. Sidequests & World Building
-To reach the 25-hour mark, the world must be dense:
-* **Memory Echoes (Collectibles):** 50 small "Fragments" hidden in the world. Each one provides a 15-second visual flashback and increases Max MP.
-* **The Town Reconstruction:** Use gold/materials gathered from dungeons to help Elara rebuild Oakhaven. This unlocks better shops and upgrades.
-* **Trial of the Ancestors:** A 50-floor combat arena for endgame players to unlock the "Master Aegis Blade."
+## 5. Character-Driven Side Content
+* **Memory Echoes (Collectibles):** 50 fragments that unlock voiced Kaelen reflections by voice tier.
+* **Town Reconstruction:** Multi-stage rebuilding of Oakhaven's library quarter with Elara at the narrative center.
+* **Companion Arcs:** Redemption path for Ser Caldrin, truth diplomacy path with Mira Thenn.
+* **Faction Resolutions:** Optional moral quests that influence trust, supplies, and coalition strength without changing canon ending.
 
 ---
 

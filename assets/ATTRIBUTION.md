@@ -107,3 +107,39 @@ For every third-party asset pack, add:
 - Attribution required: no
 - Attribution text:
   - "RPG Audio by Kenney (CC0 1.0 Universal)."
+
+### Kenney UI Pack (base)
+- Author: Kenney
+- Source: https://kenney.nl/assets/ui-pack
+- License: CC0 1.0 Universal
+- Imported files:
+  - `assets/sprites/ui/kenney_ui-pack/blue_default/*.png`
+  - `assets/sprites/ui/kenney_ui-pack/license.txt`
+- Attribution required: no
+- Attribution text:
+  - "UI Pack by Kenney (CC0 1.0 Universal)."
+
+### Kenney Input Prompts Pixel
+- Author: Kenney
+- Source: https://kenney.nl/assets/input-prompts-pixel
+- License: CC0 1.0 Universal
+- Imported files:
+  - `assets/sprites/ui/kenney_input-prompts-pixel/glyph_*.png`
+  - `assets/sprites/ui/kenney_input-prompts-pixel/Preview.png`
+  - `assets/sprites/ui/kenney_input-prompts-pixel/Tilesheet.txt`
+  - `assets/sprites/ui/kenney_input-prompts-pixel/license.txt`
+- Attribution required: no
+- Attribution text:
+  - "Input Prompts Pixel by Kenney (CC0 1.0 Universal)."
+
+### Kenney Music Jingles (additional regional themes)
+- Author: Kenney
+- Source: https://kenney.nl/assets/music-jingles
+- License: CC0 1.0 Universal
+- Imported files:
+  - `assets/audio/music/kenney_music-jingles/theme_cinder.ogg` (from Steel jingles)
+  - `assets/audio/music/kenney_music-jingles/theme_veldt.ogg` (from Pizzicato jingles)
+  - `assets/audio/music/kenney_music-jingles/theme_dunes.ogg` (from Sax jingles)
+- Attribution required: no
+- Attribution text:
+  - "Music Jingles by Kenney (CC0 1.0 Universal)."

@@ -48,6 +48,77 @@
           "You struggle to remember a world that was better off forgotten, Kaelen.",
           "Every memory you reclaim is a scar you choose to reopen. Why not stay hollow? It was... peaceful."
         ]
+      },
+      {
+        "id": "MS_GLASS_FORUM_01",
+        "speaker": "mira_thenn_001",
+        "trigger_state": "mq_09_start",
+        "lines": [
+          "Welcome to the Forum of Glass, where every claim is reflected and none are hidden.",
+          "Conservators demand full truth. Quietists demand selective mercy. The Order demands silence.",
+          "Kaelen, if you seek alliance, you will answer for the judgments of your former self."
+        ]
+      },
+      {
+        "id": "MS_GLASS_FORUM_02",
+        "speaker": "elara_001",
+        "trigger_state": "mq_09_mid",
+        "lines": [
+          "I found the names in the tablet margins. My family's exile route is there, in your seal script.",
+          "I know you were not whole then or now... but this wound is mine to carry too.",
+          "Tell me the truth in front of everyone. No more protected versions."
+        ]
+      },
+      {
+        "id": "MS_GLASS_TRIBUNAL_VERDICT",
+        "speaker": "kaelen_001",
+        "trigger_state": "mq_09_complete",
+        "lines": [
+          "I remember the verdict. I remember signing it with certainty and calling it balance.",
+          "I will not ask forgiveness as payment. I offer record, repair, and the burden of being witnessed.",
+          "Let the world judge the man I was and the one I choose to become."
+        ],
+        "action": "unlock_map_marker_highlands"
+      },
+      {
+        "id": "MS_CALDRIN_CONFESSION",
+        "speaker": "ser_caldrin_001",
+        "trigger_state": "mq_10_mid",
+        "lines": [
+          "I fed routes to the Quietists. Not to damn you, Kaelen, but to prevent another throne of memory.",
+          "I thought silence would save lives. It only delayed this reckoning.",
+          "If the coalition needs a traitor's head, I will kneel. If it needs my sword, I will stand."
+        ]
+      },
+      {
+        "id": "MS_ELARA_RECONCILIATION",
+        "speaker": "elara_001",
+        "trigger_state": "mq_10_complete",
+        "lines": [
+          "I don't love the legend. I love the person who kept telling the truth when it hurt.",
+          "We carry the past together, or not at all.",
+          "When this is over, we rebuild more than walls. We rebuild meaning."
+        ]
+      },
+      {
+        "id": "MS_FINAL_SACRIFICE",
+        "speaker": "kaelen_001",
+        "trigger_state": "mq_11_final_ritual",
+        "lines": [
+          "The Archive cannot be a prison any longer, and you will not pay this price for me, Elara.",
+          "I release the endless memory. I release the endless life. Let history belong to the living.",
+          "If I forget the titles, keep my name. If I forget the wars, keep my promise."
+        ]
+      },
+      {
+        "id": "MS_EPILOGUE_LIBRARY",
+        "speaker": "elara_001",
+        "trigger_state": "ending_canon",
+        "lines": [
+          "The lanterns are lit. The shelves are still uneven. It's perfect.",
+          "You remember enough to laugh at my notes and argue with my catalog system.",
+          "That's all I ever wanted: a future where memory serves life."
+        ]
       }
     ],
     "side_quests": [
@@ -80,6 +151,36 @@
           "Thank you, Traveler. Please, take this. It's a Heart of the Hearth."
         ],
         "action": "give_item_heart_piece"
+      },
+      {
+        "id": "SQ_CALDRIN_01",
+        "speaker": "ser_caldrin_001",
+        "quest_id": "SQ_CALDRIN_01",
+        "state": "not_started",
+        "lines": [
+          "I need sealed witness scrolls from the old barracks before the tribunal convenes.",
+          "Bring them to me, and I will give testimony no faction can ignore."
+        ]
+      },
+      {
+        "id": "SQ_CALDRIN_02",
+        "speaker": "ser_caldrin_001",
+        "quest_id": "SQ_CALDRIN_01",
+        "state": "complete",
+        "lines": [
+          "These names deserved better than redaction. So did you.",
+          "Take this. The old command sigil still opens routes through Ember Crown."
+        ]
+      },
+      {
+        "id": "SQ_MIRA_01",
+        "speaker": "mira_thenn_001",
+        "quest_id": "SQ_MIRA_01",
+        "state": "not_started",
+        "lines": [
+          "Bring me three grievances from opposing houses, each stamped and witnessed.",
+          "If you can hold contradictions without drawing steel, we may avoid a civil collapse."
+        ]
       }
     ],
     "merchant_dialogue": {

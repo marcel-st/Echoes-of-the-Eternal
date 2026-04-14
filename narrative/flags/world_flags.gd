@@ -1,5 +1,4 @@
 extends Node
-class_name WorldFlags
 
 var _flags: Dictionary = {}
 

@@ -104,6 +104,90 @@
         "function": "Consumes 'Essence of Thought' to upgrade the Aegis Blade and armor.",
         "backstory": "An artificial construct created by Kaelen eons ago to maintain the Archive’s physical equipment."
       }
+    },
+    {
+      "id": "ser_caldrin_001",
+      "name": "Ser Caldrin",
+      "role": "Ally / Betrayer / Redemption Arc",
+      "gender": "Male",
+      "archetype": "The Penitent Knight",
+      "visuals": {
+        "physical_description": "A scarred veteran in weathered oath-plate marked with broken seals.",
+        "attire": "Travel-worn knight tabard over chainmail, ceremonial blade kept sheathed unless cornered.",
+        "presence": "Protective and disciplined, but visibly shaken during memory tribunal scenes."
+      },
+      "speech": {
+        "style": "Measured and formal; avoids direct lies, favors evasive half-truths.",
+        "key_phrase": "Peace built on silence is still peace... is it not?"
+      },
+      "narrative_details": {
+        "backstory": "Former Order commander who defected after witnessing memory purges.",
+        "conflict": "Secretly fed route intelligence to Quietists to prevent another Archive tyrant.",
+        "arc": "Can confess publicly and aid the coalition, or vanish in shame."
+      }
+    },
+    {
+      "id": "mira_thenn_001",
+      "name": "Mira Thenn",
+      "role": "Faction Diplomat",
+      "gender": "Female",
+      "archetype": "The Quietist Pragmatist",
+      "visuals": {
+        "physical_description": "Refined stateswoman with silver-thread robes and ritual burn scars on one arm.",
+        "attire": "Quietist envoy mantle with mirrored veil for tribunal ceremonies.",
+        "presence": "Always calm, always observed by scribes and bodyguards."
+      },
+      "speech": {
+        "style": "Precise and diplomatic, emotionally restrained but never cold.",
+        "key_phrase": "Forgetting is not cowardice; sometimes it is mercy."
+      },
+      "narrative_details": {
+        "backstory": "Lost family to a revenge war ignited by resurrected historical grievances.",
+        "conflict": "Believes selective forgetting is humane governance, not tyranny.",
+        "arc": "Can become a strategic ally if Kaelen proves accountability."
+      }
+    },
+    {
+      "id": "nyx_001",
+      "name": "Nyx, the Mirror-Seer",
+      "role": "Oracle / Moral Catalyst",
+      "gender": "Unknown",
+      "archetype": "The Ambiguous Prophet",
+      "visuals": {
+        "physical_description": "A prismatic figure with a face that shifts between remembered strangers.",
+        "attire": "No fixed clothing; body forms from reflective shards and moonlit smoke.",
+        "presence": "Appears near memory fractures and vanishes after hard truths."
+      },
+      "speech": {
+        "style": "Poetic and unsettling, offers answers in conditional statements.",
+        "key_phrase": "The truest memory is the one you still carry after regret."
+      },
+      "narrative_details": {
+        "backstory": "An entity born from unresolved paradox in the Living Archive.",
+        "conflict": "Claims neutrality while steering outcomes toward balance.",
+        "arc": "Tests Kaelen's willingness to accept incomplete absolution."
+      }
+    },
+    {
+      "id": "lord_veyr_001",
+      "name": "Lord Veyr",
+      "role": "Regional Antagonist Commander",
+      "gender": "Male",
+      "archetype": "The Loyal Doubter",
+      "visuals": {
+        "physical_description": "Noble warlord in obsidian lacquer armor etched with erased names.",
+        "attire": "Order regalia with an ink-black half-cloak and ritual sigil gauntlet.",
+        "presence": "Commands with austere confidence; hesitation appears only in private scenes."
+      },
+      "speech": {
+        "style": "Authoritative and philosophical, laced with buried grief.",
+        "key_phrase": "Meaning is a wound. Malakor gave us anesthesia."
+      },
+      "narrative_details": {
+        "backstory": "Rose through the Order after losing his city to memory-driven civil war.",
+        "conflict": "Doubts full erasure but fears life without a unifying doctrine.",
+        "arc": "Serves as final regional gate before the Citadel assault."
+      }
     }
   ]
 }

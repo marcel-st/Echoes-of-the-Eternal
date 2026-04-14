@@ -34,18 +34,25 @@ This shortlist maps free/open packs to the current game scenes and systems.
   - Dialogue and journal panel visual treatment
   - UI accent and fill textures
 
-## Candidate next packs (not imported yet)
-
 ### 4) UI Pack (base)
 - Creator: Kenney
 - Source: https://kenney.nl/assets/ui-pack
+- Direct archive used:
+  - https://kenney.nl/media/pages/assets/ui-pack/af874291da-1718203990/kenney_ui-pack.zip
 - License: CC0 1.0 Universal
-- Planned usage:
-  - Additional widgets/icons for inventory/map/menus
+- Mapped usage:
+  - Extra icons and button frames under `assets/sprites/ui/kenney_ui-pack/blue_default/`
 
 ### 5) Input Prompts Pixel 16
 - Creator: Kenney
-- Source: https://kenney.nl/assets (search: Input Prompts Pixel)
+- Source: https://kenney.nl/assets/input-prompts-pixel
+- Direct archive used:
+  - https://kenney.nl/media/pages/assets/input-prompts-pixel/4d8e1d0368-1774771309/kenney_input-prompts-pixel.zip
 - License: CC0 1.0 Universal
-- Planned usage:
-  - In-UI keyboard/gamepad glyphs for interaction hints
+- Mapped usage:
+  - HUD keyboard/gamepad hint glyphs (`assets/sprites/ui/kenney_input-prompts-pixel/glyph_*.png`, plus `Preview.png` / `Tilesheet.txt`)
+
+## Candidate next packs (not imported yet)
+
+- Additional Kenney UI color variants (Green/Yellow) if menus need stronger color coding.
+- Larger UI scale variants (`Double` subfolders in UI Pack) for accessibility.

@@ -84,6 +84,28 @@
  - Attribution text:
   - "RPG Audio by Kenney (CC0)."
 
+### 7) Kenney UI Pack (base)
+ - Creator: Kenney
+- Source: https://kenney.nl/assets/ui-pack
+ - License: CC0 1.0 Universal
+ - Files used:
+  - `assets/sprites/ui/kenney_ui-pack/blue_default/**`
+  - `assets/sprites/ui/kenney_ui-pack/license.txt`
+ - Attribution text:
+  - "UI Pack by Kenney (CC0)."
+
+### 8) Kenney Input Prompts Pixel
+ - Creator: Kenney
+- Source: https://kenney.nl/assets/input-prompts-pixel
+ - License: CC0 1.0 Universal
+ - Files used:
+  - `assets/sprites/ui/kenney_input-prompts-pixel/glyph_*.png`
+  - `assets/sprites/ui/kenney_input-prompts-pixel/Preview.png`
+  - `assets/sprites/ui/kenney_input-prompts-pixel/Tilesheet.txt`
+  - `assets/sprites/ui/kenney_input-prompts-pixel/license.txt`
+ - Attribution text:
+  - "Input Prompts Pixel by Kenney (CC0)."
+
 ---
 
 ## Review checklist

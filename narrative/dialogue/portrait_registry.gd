@@ -25,14 +25,14 @@ func reload_registry() -> void:
 		push_warning("Unable to open NPC registry file.")
 		return
 
-	var parsed := JSON.parse_string(file.get_as_text())
+	var parsed: Variant = JSON.parse_string(file.get_as_text())
 	file.close()
 	if typeof(parsed) != TYPE_DICTIONARY:
 		push_warning("NPC registry data is invalid.")
 		return
 
 	var root := parsed as Dictionary
-	var lookup_variant := root.get("lookup", {})
+	var lookup_variant: Variant = root.get("lookup", {})
 	if typeof(lookup_variant) == TYPE_DICTIONARY:
 		_lookup = (lookup_variant as Dictionary).duplicate(true)
 
@@ -92,12 +92,12 @@ func _build_portrait_palette(root: Dictionary) -> void:
 	]
 
 	var ordered_ids: Array = []
-	var characters_variant := root.get("characters", {})
+	var characters_variant: Variant = root.get("characters", {})
 	if typeof(characters_variant) == TYPE_DICTIONARY:
 		for char_id in (characters_variant as Dictionary).keys():
 			ordered_ids.append(String(char_id))
 
-	var npcs_variant := root.get("npcs", {})
+	var npcs_variant: Variant = root.get("npcs", {})
 	if typeof(npcs_variant) == TYPE_DICTIONARY:
 		for npc_id in (npcs_variant as Dictionary).keys():
 			ordered_ids.append(String(npc_id))

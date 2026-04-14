@@ -104,6 +104,69 @@
         "reward": "Secret Item: The Void Whistle (Teleports player back to the dungeon entrance)",
         "narrative_impact": "Reveals that Null was Kaelen's pet 1,000 years ago, providing a rare moment of tenderness for the protagonist."
       }
+    },
+    {
+      "id": "npc_diplomat_006",
+      "name": "Mira Thenn",
+      "location": "Vales of Glass - Forum of Accord",
+      "gender": "Female",
+      "visuals": {
+        "description": "A poised diplomat in silver-thread robes with mirrored veil pins and ceremonial ink seals.",
+        "quirk": "She rewrites speaking notes in perfect symmetry before each hearing."
+      },
+      "speech": {
+        "style": "Measured and legalistic, but unexpectedly compassionate in private.",
+        "key_phrase": "Mercy requires memory, but not every memory must become a weapon."
+      },
+      "side_quest": {
+        "title": "The Third Ledger",
+        "description": "Collect three sworn grievances from rival houses to prove negotiation is still possible.",
+        "requirement": "Access to Vales of Glass",
+        "reward": "Coalition Favor + Quietist Passage Seal",
+        "narrative_impact": "Unlocks calmer city-state behavior and reduces faction hostility in council scenes."
+      }
+    },
+    {
+      "id": "npc_knight_007",
+      "name": "Ser Caldrin",
+      "location": "Vales of Glass - Barracks Cloister",
+      "gender": "Male",
+      "visuals": {
+        "description": "A war-scarred knight with broken oath sigils and a sheathed ceremonial longsword.",
+        "quirk": "Pauses before every answer as if weighing testimony in a courtroom."
+      },
+      "speech": {
+        "style": "Formal and burdened, using confession language even in ordinary conversation.",
+        "key_phrase": "Truth is a blade; I have lived on both edges."
+      },
+      "side_quest": {
+        "title": "Ashes Under Oath",
+        "description": "Recover sealed witness scrolls proving who redirected shard routes during the Quiet Purges.",
+        "requirement": "MQ_09_GLASS_TRIBUNAL active",
+        "reward": "Ember Command Sigil (opens highland military gates)",
+        "narrative_impact": "Caldrin confesses publicly, strengthening coalition trust and Elara's faith in Kaelen's path."
+      }
+    },
+    {
+      "id": "npc_seer_008",
+      "name": "Nyx, the Mirror-Seer",
+      "location": "Ember Crown - Reflection Rifts",
+      "gender": "Unknown",
+      "visuals": {
+        "description": "A prismatic figure made of fragmented reflections, constantly reshaping into remembered faces.",
+        "quirk": "Speaks while facing away, yet always seems to make eye contact."
+      },
+      "speech": {
+        "style": "Cryptic and lyrical, offers hard truths disguised as parables.",
+        "key_phrase": "What survives regret becomes identity."
+      },
+      "side_quest": {
+        "title": "Mirror of the Unforgotten",
+        "description": "Witness three memory rifts and accept a painful truth in each without rejecting the vision.",
+        "requirement": "MQ_10_COALITION_OATH complete",
+        "reward": "Passive: Steady Heart (reduced fear/slow effects in memory zones)",
+        "narrative_impact": "Deepens Kaelen's voiced introspection and unlocks final pre-citadel dialogue with Elara."
+      }
     }
   ]
 }

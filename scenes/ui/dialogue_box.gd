@@ -57,7 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_dialogue_requested(dialogue_id: StringName, context: Dictionary) -> void:
 	var dialogue := DialogueManager.get_dialogue(dialogue_id)
-	var entries_variant := dialogue.get("entries", [])
+	var entries_variant: Variant = dialogue.get("entries", [])
 	if typeof(entries_variant) != TYPE_ARRAY or (entries_variant as Array).is_empty():
 		return
 
@@ -104,7 +104,7 @@ func _advance_dialogue() -> void:
 	if _apply_effects_from_value(_current_entry.get("outcomes", null)):
 		return
 
-	var choices_variant := _current_entry.get("choices", [])
+	var choices_variant: Variant = _current_entry.get("choices", [])
 	if typeof(choices_variant) == TYPE_ARRAY and not (choices_variant as Array).is_empty():
 		_enter_choice_mode(choices_variant as Array)
 		return
@@ -120,7 +120,7 @@ func _advance_to_next_entry() -> void:
 			_entry_index += 1
 			continue
 
-		var entry := entry_variant as Dictionary
+		var entry: Dictionary = entry_variant as Dictionary
 		if entry.has("conditions") and not DialogueManager.are_conditions_met(entry["conditions"]):
 			_entry_index += 1
 			continue
@@ -141,7 +141,7 @@ func _enter_choice_mode(raw_choices: Array) -> void:
 	for choice_variant in raw_choices:
 		if typeof(choice_variant) != TYPE_DICTIONARY:
 			continue
-		var choice := choice_variant as Dictionary
+		var choice: Dictionary = choice_variant as Dictionary
 		if choice.has("conditions") and not DialogueManager.are_conditions_met(choice["conditions"]):
 			continue
 		_active_choices.append(choice)
@@ -163,7 +163,7 @@ func _confirm_choice() -> void:
 		_advance_to_next_entry()
 		return
 
-	var selected := _active_choices[_choice_index] as Dictionary
+	var selected: Dictionary = _active_choices[_choice_index] as Dictionary
 	_choice_mode = false
 	_clear_choices()
 	choices_container.visible = false
@@ -195,7 +195,7 @@ func _render_choices() -> void:
 	_clear_choices()
 	choices_container.visible = true
 	for index in _active_choices.size():
-		var choice := _active_choices[index] as Dictionary
+		var choice: Dictionary = _active_choices[index] as Dictionary
 		var row := Label.new()
 		row.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		var prefix := "   "
@@ -258,7 +258,7 @@ func _resolve_dialogue_end() -> void:
 		if _apply_effects_from_value(dialogue.get("outcomes", null)):
 			return
 
-		var meta_variant := dialogue.get("meta", {})
+		var meta_variant: Variant = dialogue.get("meta", {})
 		if typeof(meta_variant) == TYPE_DICTIONARY:
 			var meta := meta_variant as Dictionary
 			if meta.has("action"):

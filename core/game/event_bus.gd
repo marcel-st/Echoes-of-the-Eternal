@@ -20,4 +20,7 @@ signal quests_reloaded
 signal item_received(item_id: StringName, amount: int)
 signal world_flag_changed(flag_key: String, value: Variant)
 signal request_ui_prompt(text: String)
+signal lore_discovered(entry_id: String)
+## World / one-shot SFX by id (see AudioManager WORLD_SOUNDS). Pass volume_db (e.g. -8.0).
+signal sfx_requested(sfx_id: StringName, volume_db: float)
 signal player_died

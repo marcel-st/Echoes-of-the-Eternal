@@ -8,6 +8,9 @@ const AMBIENCE_BUS := "Ambience"
 const TRACKS := {
 	"overworld": "res://assets/audio/music/kenney_music-jingles/theme_overworld.ogg",
 	"mystic": "res://assets/audio/music/kenney_music-jingles/theme_mystic.ogg",
+	"cinder": "res://assets/audio/music/kenney_music-jingles/theme_cinder.ogg",
+	"veldt": "res://assets/audio/music/kenney_music-jingles/theme_veldt.ogg",
+	"dunes": "res://assets/audio/music/kenney_music-jingles/theme_dunes.ogg",
 }
 
 const UI_SOUNDS := {
@@ -156,7 +159,8 @@ func stop_ambience() -> void:
 
 
 func prime_default_audio() -> void:
-	_resolve_audio("overworld", TRACKS, _track_cache)
+	for track_id in TRACKS.keys():
+		_resolve_audio(track_id, TRACKS, _track_cache)
 	_resolve_audio("select", UI_SOUNDS, _ui_cache)
 	_resolve_audio("footstep", WORLD_SOUNDS, _world_cache)
 	_resolve_audio("creak", AMBIENCE_SOUNDS, _ambience_cache)

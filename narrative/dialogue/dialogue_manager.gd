@@ -31,8 +31,11 @@ func reload_dialogues() -> void:
 		push_warning("Unable to parse dialogues.json: %s" % parser.get_error_message())
 		return
 
-	var data := parser.data
-	_dialogues = data if data is Dictionary else {}
+	var data: Variant = parser.data
+	if data is Dictionary:
+		_dialogues = data as Dictionary
+	else:
+		_dialogues = {}
 	_is_loaded = true
 
 
@@ -124,7 +127,7 @@ func _evaluate_condition_token(token: String) -> bool:
 			expected_value = true
 		elif expected_value_raw == "false":
 			expected_value = false
-		var actual := WorldFlags.get_flag(StringName(key), false)
+		var actual: Variant = WorldFlags.get_flag(StringName(key), false)
 		return actual == expected_value
 
 	if cleaned.begins_with("quest_state:"):

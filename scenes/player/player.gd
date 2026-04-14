@@ -82,7 +82,7 @@ func _physics_process(_delta: float) -> void:
 		_footstep_timer = 0.0
 	if Input.is_action_just_pressed("attack"):
 		_play_action_animation("attack")
-		AudioManager.play_world_sfx("swing")
+		EventBus.sfx_requested.emit(&"swing", -8.0)
 	if Input.is_action_just_pressed("interact"):
 		_play_action_animation("interact")
 		AudioManager.play_ui_sound("confirm")
@@ -177,7 +177,7 @@ func _process_footsteps(delta: float, is_moving: bool) -> void:
 	_footstep_timer -= delta
 	if _footstep_timer > 0.0:
 		return
-	AudioManager.play_world_sfx("footstep")
+	EventBus.sfx_requested.emit(&"footstep", -8.0)
 	_footstep_timer = footstep_interval_seconds
 
 
@@ -198,7 +198,7 @@ func _build_visual_frames() -> void:
 			frames.set_animation_speed(animation_name, 14.0)
 		else:
 			frames.set_animation_speed(animation_name, 2.0)
-		var frame_paths_variant := PLAYER_ANIM_FRAMES.get(animation_name, [])
+		var frame_paths_variant: Variant = PLAYER_ANIM_FRAMES.get(animation_name, [])
 		if typeof(frame_paths_variant) != TYPE_ARRAY:
 			continue
 		for frame_path_variant in frame_paths_variant as Array:

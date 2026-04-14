@@ -32,7 +32,7 @@ func reload_quests(path: String = QUESTS_PATH) -> void:
 		return
 
 	var root := parsed as Dictionary
-	var quests_variant := root.get("quests", [])
+	var quests_variant: Variant = root.get("quests", [])
 	if typeof(quests_variant) != TYPE_ARRAY:
 		return
 
@@ -45,7 +45,7 @@ func reload_quests(path: String = QUESTS_PATH) -> void:
 			continue
 		quest_definitions[quest_id] = quest
 		quest_states[quest_id] = String(quest.get("state", "locked"))
-		var objectives_variant := quest.get("objectives", [])
+		var objectives_variant: Variant = quest.get("objectives", [])
 		var progress_by_objective: Dictionary = {}
 		if typeof(objectives_variant) == TYPE_ARRAY:
 			for objective_variant in objectives_variant:
@@ -68,7 +68,7 @@ func get_quest_state(quest_id: StringName) -> String:
 
 
 func get_objective_progress(quest_id: StringName, objective_id: StringName) -> int:
-	var progress_by_objective := quest_progress.get(quest_id, {})
+	var progress_by_objective: Variant = quest_progress.get(quest_id, {})
 	if typeof(progress_by_objective) != TYPE_DICTIONARY:
 		return 0
 	return int((progress_by_objective as Dictionary).get(objective_id, 0))
@@ -86,7 +86,7 @@ func get_active_quests() -> Array:
 		if quest.is_empty():
 			continue
 		var objectives_output: Array = []
-		var objectives_variant := quest.get("objectives", [])
+		var objectives_variant: Variant = quest.get("objectives", [])
 		if typeof(objectives_variant) == TYPE_ARRAY:
 			for objective_variant in objectives_variant as Array:
 				if typeof(objective_variant) != TYPE_DICTIONARY:
@@ -188,7 +188,7 @@ func import_state(payload: Dictionary) -> void:
 
 func _is_quest_objectives_complete(quest_id: StringName) -> bool:
 	var quest := get_quest(quest_id)
-	var objectives_variant := quest.get("objectives", [])
+	var objectives_variant: Variant = quest.get("objectives", [])
 	if typeof(objectives_variant) != TYPE_ARRAY:
 		return false
 

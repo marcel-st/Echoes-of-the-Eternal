@@ -10,3 +10,5 @@ class_name SaveData
 @export var active_quests: Dictionary = {}
 @export var quest_progress: Dictionary = {}
 @export var completed_quests: PackedStringArray = []
+## lore_entry_id -> true when read/discovered (see LoreManager)
+@export var lore_discovered: Dictionary = {}

@@ -1,6 +1,9 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_5m1qv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_player_body"]
+radius = 12.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_5m1qv")
@@ -10,8 +13,7 @@ groups = ["player"]
 position = Vector2(0, -8)
 scale = Vector2(2.5, 2.5)
 texture_filter = 1
-animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = CircleShape2D.new()
+shape = SubResource("CircleShape2D_player_body")
 

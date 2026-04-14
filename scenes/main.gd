@@ -9,6 +9,18 @@ var _autosave_timer := 0.0
 
 const AUTOSAVE_DEBOUNCE_SECONDS := 0.45
 
+## Map scene path -> music track id (AudioManager TRACKS). Unlisted maps use "overworld".
+const MAP_MUSIC := {
+	"res://scenes/world/oakhaven.tscn": "overworld",
+	"res://scenes/world/starter_map.tscn": "overworld",
+	"res://scenes/world/whispering_vales.tscn": "veldt",
+	"res://scenes/world/cinder_peaks.tscn": "cinder",
+	"res://scenes/world/sinking_sands.tscn": "dunes",
+	"res://scenes/world/sunken_library_entry.tscn": "mystic",
+}
+
+var _last_music_track_id := ""
+
 
 func _ready() -> void:
 	if not EventBus.request_ui_prompt.is_connected(_on_ui_prompt):
@@ -21,9 +33,11 @@ func _ready() -> void:
 		EventBus.quest_updated.connect(_on_quest_updated)
 	if not EventBus.map_changed.is_connected(_on_map_changed):
 		EventBus.map_changed.connect(_on_map_changed)
+	if not EventBus.lore_discovered.is_connected(_on_lore_discovered):
+		EventBus.lore_discovered.connect(_on_lore_discovered)
 
 	_load_runtime_state()
-	AudioManager.play_music_track("overworld")
+	_play_music_for_current_map()
 	AudioManager.play_ambience("creak")
 	EventBus.request_ui_prompt.emit("World loaded. Explore regions and speak with townsfolk.")
 
@@ -74,10 +88,14 @@ func _on_quest_updated(_quest_id: StringName, _objective_id: StringName, _progre
 	_request_autosave()
 
 
+func _on_lore_discovered(_entry_id: String) -> void:
+	_request_autosave()
+
+
 func _on_map_changed(_map_scene_path: String) -> void:
 	_transition_prompt = ""
 	AudioManager.play_world_sfx("map_transition")
-	AudioManager.play_music_track("overworld")
+	_play_music_for_current_map()
 	_save_runtime_state()
 
 
@@ -93,7 +111,7 @@ func _process_map_transition_request() -> void:
 		return
 
 	var player_position := (player as Node2D).global_position
-	var transition := map.call("resolve_transition", player_position)
+	var transition: Variant = map.call("resolve_transition", player_position)
 	if typeof(transition) != TYPE_DICTIONARY:
 		return
 
@@ -149,3 +167,15 @@ func _flush_pending_autosave() -> void:
 		return
 	_autosave_pending = false
 	_save_runtime_state()
+
+
+func _play_music_for_current_map() -> void:
+	var path := SceneRouter.get_current_map_path()
+	var track_id: String = String(MAP_MUSIC.get(path, "overworld"))
+	if track_id == _last_music_track_id:
+		return
+	if _last_music_track_id.is_empty():
+		AudioManager.play_music_track(track_id)
+	else:
+		AudioManager.fade_music_to_track(track_id, 1.2)
+	_last_music_track_id = track_id

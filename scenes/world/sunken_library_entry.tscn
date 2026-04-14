@@ -1,25 +1,32 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/sunken_library_entry.gd" id="1_lib"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_npc"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="4_tilemap"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_f.png" id="5_prop_f"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_d.png" id="6_prop_d"]
+
+[sub_resource type="Gradient" id="Gradient_cave"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(0.025, 0.03, 0.04, 1, 0.06, 0.075, 0.1, 1, 0.09, 0.11, 0.14, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTex_cave"]
+gradient = SubResource("Gradient_cave")
+width = 4
+height = 256
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
 
 [node name="SunkenLibraryEntry" type="Node2D"]
 script = ExtResource("1_lib")
 
-[node name="Ground" type="ColorRect" parent="."]
+[node name="Ground" type="TextureRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
-color = Color(0.105882, 0.188235, 0.25098, 1)
-
-[node name="BackdropTexture" type="Sprite2D" parent="."]
-position = Vector2(960, 540)
-scale = Vector2(9.4, 5.8)
-texture = ExtResource("4_tilemap")
-self_modulate = Color(0.58, 0.7, 0.88, 0.35)
+mouse_filter = 2
+texture_filter = 0
+stretch_mode = 0
+texture = SubResource("GradientTex_cave")
 
 [node name="SpawnStart" type="Marker2D" parent="."]
 position = Vector2(960, 960)

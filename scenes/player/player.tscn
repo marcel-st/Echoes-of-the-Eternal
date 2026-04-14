@@ -14,6 +14,14 @@ position = Vector2(0, -8)
 scale = Vector2(2.5, 2.5)
 texture_filter = 1
 
+[node name="SwordPivot" type="Node2D" parent="."]
+visible = false
+z_index = 2
+
+[node name="SwordSprite" type="Sprite2D" parent="SwordPivot"]
+texture_filter = 1
+centered = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_player_body")
 

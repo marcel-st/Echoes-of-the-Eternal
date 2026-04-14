@@ -39,6 +39,9 @@ func change_map(map_scene_path: String, spawn_id: StringName = &"start", target_
 	var player: Node = get_tree().get_first_node_in_group("player")
 	if player != null and player.has_method("warp_to_spawn"):
 		player.call("warp_to_spawn", spawn_id, _current_map)
+	# Map nodes (e.g. full-screen ColorRect) must draw under the player; add_child puts the map last.
+	if player != null and player.get_parent() == parent:
+		parent.move_child(player, parent.get_child_count() - 1)
 
 
 func request_map_change(map_scene_path: String, spawn_id: StringName = &"start") -> void:

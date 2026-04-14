@@ -3,52 +3,28 @@ extends CharacterBody2D
 @export var move_speed: float = 140.0
 @export var footstep_interval_seconds: float = 0.24
 
-const PLAYER_ANIM_FRAMES := {
-	"idle_down": ["res://assets/sprites/world/kenney_tiny-dungeon/player_idle_down.png"],
-	"idle_up": ["res://assets/sprites/world/kenney_tiny-dungeon/player_idle_up.png"],
-	"idle_side": ["res://assets/sprites/world/kenney_tiny-dungeon/player_idle_side.png"],
-	"walk_down": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_walk_down_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_idle_down.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_walk_down_b.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_idle_down.png",
-	],
-	"walk_up": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_walk_up_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_idle_up.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_walk_up_b.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_idle_up.png",
-	],
-	"walk_side": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_walk_side_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_idle_side.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_walk_side_b.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_idle_side.png",
-	],
-	"interact_down": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_down_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_down_b.png",
-	],
-	"interact_up": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_up_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_up_b.png",
-	],
-	"interact_side": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_side_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_action_side_b.png",
-	],
-	"attack_down": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_down_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_down_b.png",
-	],
-	"attack_up": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_up_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_up_b.png",
-	],
-	"attack_side": [
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_side_a.png",
-		"res://assets/sprites/world/kenney_tiny-dungeon/player_attack_side_b.png",
-	],
+## Kenney Tiny Dungeon `tilemap_packed.png`: 16×16 cells, 12 columns (no spacing).
+## Loose `player_*.png` names are not in the official pack; wrong slices show as chests/tracks.
+const PLAYER_ATLAS_PATH := "res://assets/sprites/world/kenney_tiny-dungeon/tilemap_packed.png"
+const PLAYER_ATLAS_CELL := 16
+const PLAYER_ATLAS_COLS := 12
+
+## Hero tile on `tilemap_packed.png` (16×16 grid, 12 cols). 86 ≈ front villager / overalls (no knight helmet).
+## Tile 103 = sword icon — drawn on `SwordSprite` and tweened during attack (body stays on 86).
+const PLAYER_HERO_CELL := 86
+const PLAYER_ATTACK_SWING_CELL := 103
+
+const PLAYER_ATLAS_FRAMES := {
+	"idle_down": [PLAYER_HERO_CELL],
+	"idle_up": [PLAYER_HERO_CELL],
+	"idle_side": [PLAYER_HERO_CELL],
+	"walk_down": [PLAYER_HERO_CELL, PLAYER_HERO_CELL, PLAYER_HERO_CELL, PLAYER_HERO_CELL],
+	"walk_up": [PLAYER_HERO_CELL, PLAYER_HERO_CELL, PLAYER_HERO_CELL, PLAYER_HERO_CELL],
+	"walk_side": [PLAYER_HERO_CELL, PLAYER_HERO_CELL, PLAYER_HERO_CELL, PLAYER_HERO_CELL],
+	# Same art each frame: timing only so `animation_finished` runs (no visor swap).
+	"interact_down": [PLAYER_HERO_CELL, PLAYER_HERO_CELL],
+	"interact_up": [PLAYER_HERO_CELL, PLAYER_HERO_CELL],
+	"interact_side": [PLAYER_HERO_CELL, PLAYER_HERO_CELL],
 }
 
 var _interaction_target: Node = null
@@ -57,8 +33,11 @@ var _facing_sign := 1
 var _action_lock := false
 var _action_animation := ""
 var _footstep_timer := 0.0
+var _attack_sword_tween: Tween
 
 @onready var visual: AnimatedSprite2D = $Visual
+@onready var sword_pivot: Node2D = $SwordPivot
+@onready var sword_sprite: Sprite2D = $SwordPivot/SwordSprite
 
 
 func _ready() -> void:
@@ -151,6 +130,8 @@ func _play_action_animation(action_prefix: String) -> void:
 	_action_animation = animation_name
 	visual.flip_h = _facing == "side" and _facing_sign < 0
 	visual.play(animation_name)
+	if action_prefix == "attack":
+		_play_attack_sword_swing()
 
 
 func _on_visual_animation_finished() -> void:
@@ -185,8 +166,21 @@ func _build_visual_frames() -> void:
 	if visual == null:
 		return
 
+	var atlas: Texture2D = null
+	var atlas_loaded := load(PLAYER_ATLAS_PATH)
+	if atlas_loaded is Texture2D:
+		atlas = atlas_loaded as Texture2D
+	else:
+		var abs_path := ProjectSettings.globalize_path(PLAYER_ATLAS_PATH)
+		var img := Image.load_from_file(abs_path)
+		if img != null:
+			atlas = ImageTexture.create_from_image(img)
+	if atlas == null:
+		push_error("Player atlas missing or invalid: %s" % PLAYER_ATLAS_PATH)
+		return
+
 	var frames := SpriteFrames.new()
-	for animation_name_variant in PLAYER_ANIM_FRAMES.keys():
+	for animation_name_variant in PLAYER_ATLAS_FRAMES.keys():
 		var animation_name := String(animation_name_variant)
 		frames.add_animation(animation_name)
 		var is_walk := animation_name.begins_with("walk")
@@ -195,16 +189,109 @@ func _build_visual_frames() -> void:
 		if is_walk:
 			frames.set_animation_speed(animation_name, 8.0)
 		elif is_action:
-			frames.set_animation_speed(animation_name, 14.0)
+			frames.set_animation_speed(animation_name, 10.0)
 		else:
 			frames.set_animation_speed(animation_name, 2.0)
-		var frame_paths_variant: Variant = PLAYER_ANIM_FRAMES.get(animation_name, [])
-		if typeof(frame_paths_variant) != TYPE_ARRAY:
+		var cells_variant: Variant = PLAYER_ATLAS_FRAMES.get(animation_name, [])
+		if typeof(cells_variant) != TYPE_ARRAY:
 			continue
-		for frame_path_variant in frame_paths_variant as Array:
-			var frame_path := String(frame_path_variant)
-			var loaded := load(frame_path)
-			if loaded is Texture2D:
-				frames.add_frame(animation_name, loaded as Texture2D)
+		for cell_variant in cells_variant as Array:
+			var cell_idx := int(cell_variant)
+			_add_atlas_frame_to_sprite_frames(frames, animation_name, atlas, cell_idx)
+
+	for facing in [&"down", &"up", &"side"]:
+		var attack_name := "attack_%s" % String(facing)
+		frames.add_animation(attack_name)
+		frames.set_animation_loop(attack_name, false)
+		frames.set_animation_speed(attack_name, 1.0)
+		# Body only; sword is `SwordSprite` + tween in `_play_attack_sword_swing`.
+		_add_atlas_frame_to_sprite_frames(frames, attack_name, atlas, PLAYER_HERO_CELL, 0.1)
+		_add_atlas_frame_to_sprite_frames(frames, attack_name, atlas, PLAYER_HERO_CELL, 0.16)
+		_add_atlas_frame_to_sprite_frames(frames, attack_name, atlas, PLAYER_HERO_CELL, 0.1)
 
 	visual.sprite_frames = frames
+	_setup_attack_sword_texture(atlas)
+
+
+func _setup_attack_sword_texture(atlas: Texture2D) -> void:
+	if sword_sprite == null:
+		return
+	var col := PLAYER_ATTACK_SWING_CELL % PLAYER_ATLAS_COLS
+	var row: int = PLAYER_ATTACK_SWING_CELL / PLAYER_ATLAS_COLS
+	var region := Rect2i(col * PLAYER_ATLAS_CELL, row * PLAYER_ATLAS_CELL, PLAYER_ATLAS_CELL, PLAYER_ATLAS_CELL)
+	var slice := AtlasTexture.new()
+	slice.atlas = atlas
+	slice.region = region
+	slice.filter_clip = true
+	sword_sprite.texture = slice
+	sword_pivot.visible = false
+
+
+func _attack_facing_dir() -> Vector2:
+	match _facing:
+		"up":
+			return Vector2.UP
+		"side":
+			return Vector2.RIGHT * float(_facing_sign)
+		_:
+			return Vector2.DOWN
+
+
+func _play_attack_sword_swing() -> void:
+	if sword_pivot == null or sword_sprite == null:
+		return
+	if _attack_sword_tween != null:
+		_attack_sword_tween.kill()
+	var dir := _attack_facing_dir().normalized()
+	# Orbit in front of the sprite (same space as Player; Visual is offset + scaled).
+	const ORBIT := 20.0
+	sword_pivot.position = visual.position + dir * ORBIT
+	sword_pivot.scale = visual.scale
+	# Atlas sword points “up” in its cell; align pivot so swing reads in facing plane.
+	sword_pivot.rotation = dir.angle() + PI * 0.5
+	sword_pivot.visible = true
+	var start_r: float
+	var mid_r: float
+	var end_r: float
+	match _facing:
+		"up":
+			start_r = 1.05
+			mid_r = -1.0
+			end_r = 0.35
+		"side":
+			start_r = -0.35
+			mid_r = 1.25
+			end_r = -0.2
+		_:
+			start_r = -0.95
+			mid_r = 1.05
+			end_r = -0.35
+	sword_sprite.rotation = start_r
+	_attack_sword_tween = create_tween()
+	_attack_sword_tween.set_trans(Tween.TRANS_QUAD)
+	_attack_sword_tween.set_ease(Tween.EASE_OUT)
+	_attack_sword_tween.tween_property(sword_sprite, "rotation", mid_r, 0.11)
+	_attack_sword_tween.set_ease(Tween.EASE_IN_OUT)
+	_attack_sword_tween.tween_property(sword_sprite, "rotation", end_r, 0.13)
+	_attack_sword_tween.tween_callback(
+		func() -> void:
+			if sword_pivot != null:
+				sword_pivot.visible = false
+	)
+
+
+func _add_atlas_frame_to_sprite_frames(
+	frames: SpriteFrames,
+	animation_name: String,
+	atlas: Texture2D,
+	cell_idx: int,
+	frame_duration: float = 1.0,
+) -> void:
+	var col := cell_idx % PLAYER_ATLAS_COLS
+	var row: int = cell_idx / PLAYER_ATLAS_COLS
+	var region := Rect2i(col * PLAYER_ATLAS_CELL, row * PLAYER_ATLAS_CELL, PLAYER_ATLAS_CELL, PLAYER_ATLAS_CELL)
+	var slice := AtlasTexture.new()
+	slice.atlas = atlas
+	slice.region = region
+	slice.filter_clip = true
+	frames.add_frame(animation_name, slice, frame_duration)

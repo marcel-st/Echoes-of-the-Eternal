@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/whispering_vales.gd" id="1_wv1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_wv2"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="4_ground"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_b.png" id="5_prop_b"]
 
 [sub_resource type="RectangleShape2D" id="Rect_wv_h"]
@@ -19,14 +18,6 @@ script = ExtResource("1_wv1")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.137255, 0.301961, 0.176471, 1)
-
-[node name="GroundTexture" type="TextureRect" parent="."]
-texture_filter = 0
-modulate = Color(0.66, 0.88, 0.73, 0.34)
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("4_ground")
-stretch_mode = 1
 
 [node name="SpawnStart" type="Marker2D" parent="."]
 position = Vector2(960, 980)

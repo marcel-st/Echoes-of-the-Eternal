@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bik0f2nvgv5b0"]
+[gd_scene load_steps=5 format=3 uid="uid://bik0f2nvgv5b0"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_5vepm"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="3_fu7au"]
 [ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="4_fhh3k"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="5_player"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5vepm")
@@ -16,6 +17,8 @@ offset_bottom = 54.0
 text = "Booting Echoes of the Eternal..."
 
 [node name="WorldRoot" type="Node2D" parent="."]
+
+[node name="Player" parent="WorldRoot" instance=ExtResource("5_player")]
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
 

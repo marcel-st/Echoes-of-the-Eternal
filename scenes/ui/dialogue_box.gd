@@ -1,7 +1,7 @@
 extends Control
 
 @onready var speaker_label: Label = $Panel/MarginContainer/VBoxContainer/HeaderContainer/SpeakerLabel
-@onready var line_label: Label = $Panel/MarginContainer/VBoxContainer/TextLabel
+@onready var line_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/TextLabel
 @onready var choices_container: VBoxContainer = $Panel/MarginContainer/VBoxContainer/ChoicesContainer
 @onready var hint_label: Label = $Panel/MarginContainer/VBoxContainer/HintLabel
 @onready var portrait_panel: ColorRect = $Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel
@@ -15,8 +15,11 @@ var _active_choices: Array = []
 var _choice_index := 0
 var _choice_mode := false
 var _context: Dictionary = {}
+var _bold_rx: RegEx
 
 func _ready() -> void:
+	_bold_rx = RegEx.new()
+	_bold_rx.compile("\\*\\*([^*]+?)\\*\\*")
 	visible = false
 	EventBus.dialogue_requested.connect(_on_dialogue_requested)
 	EventBus.dialogue_closed.connect(_on_dialogue_closed)
@@ -129,7 +132,7 @@ func _advance_to_next_entry() -> void:
 		var speaker_raw := String(entry.get("speaker", "Unknown"))
 		speaker_label.text = PortraitRegistry.resolve_display_name(speaker_raw)
 		_update_portrait(speaker_raw)
-		line_label.text = String(entry.get("text", ""))
+		line_label.text = _format_body_for_richtext(String(entry.get("text", "")))
 		_set_hint("Confirm: continue   Cancel: close")
 		return
 
@@ -212,6 +215,22 @@ func _clear_choices() -> void:
 
 func _set_hint(text: String) -> void:
 	hint_label.text = text
+
+
+func _format_body_for_richtext(raw: String) -> String:
+	var t := raw.strip_edges()
+	if t.is_empty():
+		return ""
+	# Lore JSON uses " * " between labeled sections; break into readable paragraphs.
+	t = t.replace(" * ", "\n\n")
+	t = _bold_rx.sub(t, "[b]$1[/b]", true)
+	var lines := t.split("\n")
+	for i in lines.size():
+		var p := lines[i].strip_edges()
+		while p.begins_with("*"):
+			p = p.substr(1).strip_edges()
+		lines[i] = p
+	return "\n".join(lines)
 
 
 func _update_portrait(speaker_token: String) -> void:

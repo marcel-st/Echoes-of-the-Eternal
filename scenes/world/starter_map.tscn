@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://d5e4g17f0xj4r"]
+[gd_scene load_steps=5 format=3 uid="uid://d5e4g17f0xj4r"]
 
 [ext_resource type="Script" path="res://scenes/world/starter_map.gd" id="1_3a0f2"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_q8c4y"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/tilemap.png" id="3_bg"]
 [ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_f.png" id="4_prop"]
 
 [sub_resource type="RectangleShape2D" id="Rect_transition_h"]
@@ -18,15 +17,6 @@ script = ExtResource("1_3a0f2")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.133333, 0.223529, 0.156863, 1)
-
-[node name="BackdropTexture" type="TextureRect" parent="."]
-texture_filter = 1
-offset_right = 1920.0
-offset_bottom = 1080.0
-scale = Vector2(10, 6)
-texture = ExtResource("3_bg")
-stretch_mode = 1
-self_modulate = Color(0.29, 0.36, 0.3, 0.3)
 
 [node name="WorldPropA" type="Sprite2D" parent="."]
 position = Vector2(520, 460)

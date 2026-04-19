@@ -6,33 +6,33 @@ const UI_BUS := "UI"
 const AMBIENCE_BUS := "Ambience"
 
 const TRACKS := {
-	"overworld": "res://assets/audio/music/kenney_music-jingles/theme_overworld.ogg",
-	"mystic": "res://assets/audio/music/kenney_music-jingles/theme_mystic.ogg",
-	"cinder": "res://assets/audio/music/kenney_music-jingles/theme_cinder.ogg",
-	"veldt": "res://assets/audio/music/kenney_music-jingles/theme_veldt.ogg",
-	"dunes": "res://assets/audio/music/kenney_music-jingles/theme_dunes.ogg",
+	"overworld": KenneyPackPaths.MUSIC_OVERWORLD,
+	"mystic": KenneyPackPaths.MUSIC_MYSTIC,
+	"cinder": KenneyPackPaths.MUSIC_CINDER,
+	"veldt": KenneyPackPaths.MUSIC_VELDT,
+	"dunes": KenneyPackPaths.MUSIC_DUNES,
 }
 
 const UI_SOUNDS := {
-	"select": "res://assets/audio/sfx/ui/kenney_interface-sounds/ui_select.ogg",
-	"confirm": "res://assets/audio/sfx/ui/kenney_interface-sounds/ui_confirm.ogg",
-	"back": "res://assets/audio/sfx/ui/kenney_interface-sounds/ui_back.ogg",
-	"error": "res://assets/audio/sfx/ui/kenney_interface-sounds/ui_error.ogg",
-	"open": "res://assets/audio/sfx/ui/kenney_interface-sounds/ui_open.ogg",
-	"close": "res://assets/audio/sfx/ui/kenney_interface-sounds/ui_close.ogg",
+	"select": KenneyPackPaths.UI_SELECT,
+	"confirm": KenneyPackPaths.UI_CONFIRM,
+	"back": KenneyPackPaths.UI_BACK,
+	"error": KenneyPackPaths.UI_ERROR,
+	"open": KenneyPackPaths.UI_OPEN,
+	"close": KenneyPackPaths.UI_CLOSE,
 }
 
 const WORLD_SOUNDS := {
-	"footstep": "res://assets/audio/sfx/world/kenney_rpg-audio/footstep.ogg",
-	"interact": "res://assets/audio/sfx/world/kenney_rpg-audio/interact.ogg",
-	"swing": "res://assets/audio/sfx/world/kenney_rpg-audio/swing.ogg",
-	"map_transition": "res://assets/audio/sfx/world/kenney_rpg-audio/map_transition.ogg",
-	"attack_swing": "res://assets/audio/sfx/world/kenney_rpg-audio/swing.ogg",
-	"world_interact": "res://assets/audio/sfx/world/kenney_rpg-audio/interact.ogg",
+	"footstep": KenneyPackPaths.WORLD_FOOTSTEP,
+	"interact": KenneyPackPaths.WORLD_INTERACT,
+	"swing": KenneyPackPaths.WORLD_SWING,
+	"map_transition": KenneyPackPaths.WORLD_MAP_TRANSITION,
+	"attack_swing": KenneyPackPaths.WORLD_SWING,
+	"world_interact": KenneyPackPaths.WORLD_INTERACT,
 }
 
 const AMBIENCE_SOUNDS := {
-	"creak": "res://assets/audio/ambience/kenney_rpg-audio/ambience_creak.ogg",
+	"creak": KenneyPackPaths.AMBIENCE_CREAK,
 }
 
 var _current_music_stream: AudioStream

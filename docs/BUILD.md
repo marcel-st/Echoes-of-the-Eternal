@@ -4,7 +4,7 @@ This document covers **local development runs**, **narrative data regeneration**
 
 ## Engine version
 
-- **Godot 4.2+** matching `project.godot` (`config/features=4.2`).
+- **Godot 4.6** matching `project.godot` (`config/features` lists `4.6`).
 - Install **export templates** for the **exact** engine version you use (Editor → Manage Export Templates, or download from Godot’s site).
 
 Mismatch between editor and templates is the most common cause of failed exports.
@@ -36,6 +36,16 @@ Outputs include (among others):
 - `data/npcs/npc_registry.json`
 
 Commit these when you want the repo to reflect the new narrative state, or regenerate in CI before export.
+
+## First-time asset import (CLI)
+
+If Godot reports missing textures or fonts on a fresh clone, run a one-shot import from the repo root (binary name may be `godot` or `godot4` on your OS):
+
+```bash
+godot --headless --import --path .
+```
+
+This generates `.godot/imported/` metadata. Source assets under `assets/` are tracked; companion `*.import` files may be gitignored — the editor or the command above recreates them as needed.
 
 ## Run from the Godot editor
 

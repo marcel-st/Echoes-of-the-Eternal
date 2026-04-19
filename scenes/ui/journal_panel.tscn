@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/journal_panel.gd" id="1_journal"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/kenney_ui-pack-rpg-expansion/panel_blue.png" id="2_journal_panel"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/kenney_ui-pack-rpg-expansion/panel_inset_blue.png" id="3_journal_inset"]
+[ext_resource type="Texture2D" path="res://kenney_pack/UI assets/UI Adventure Pack/PNG/panel_blue.png" id="2_journal_panel"]
+[ext_resource type="Texture2D" path="res://kenney_pack/UI assets/UI Adventure Pack/PNG/panelInset_blue.png" id="3_journal_inset"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_journal_outer"]
 texture = ExtResource("2_journal_panel")

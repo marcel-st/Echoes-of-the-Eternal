@@ -6,7 +6,7 @@
 
 ### From source (Godot)
 
-1. Install **Godot 4.2+**.
+1. Install **Godot 4.6** (match the project’s `config/features`).
 2. Open this repository folder as a project.
 3. Press **F5** (Run Project).
 
@@ -32,7 +32,7 @@ Exact bindings may follow your OS layout; see in-game HUD hints when available.
 
 ## What to do in the alpha
 
-- **Talk to NPCs** when a prompt appears near them (interact key).
+- **Talk to NPCs** when a prompt appears near them (interact key). While the **dialogue box** is open, **movement is paused**; press **E** or **Space** (confirm) to skip the typewriter or advance the line, **Esc / cancel** to close when allowed.
 - **Open the journal** with Esc / Start to see **active quests** and **discovered lore** titles.
 - **Explore map exits** — when you stand in a travel zone, the HUD shows a confirm prompt; press **Interact** (or the same binding shown) to change regions.
 - **Inspect lore plinths** for world text (counts toward your journal’s lore list when discovered).

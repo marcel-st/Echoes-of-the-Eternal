@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://diy5kbry0q5sr"]
+
+[ext_resource type="Script" uid="uid://qj0cy0jf4ase" path="res://scenes/world/overworld.gd" id="1_ow"]
+[ext_resource type="TileSet" path="res://assets/tilesets/generic_overworld_terrain.tres" id="2_ts"]
+[ext_resource type="TileSet" path="res://assets/tilesets/kenney_custom_atlas.tres" id="3_ca"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="4_lp"]
+[ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="5_npc"]
+[ext_resource type="PackedScene" path="res://scenes/objects/VillageHouse.tscn" id="6_house"]
+
+[node name="Overworld" type="Node2D" unique_id=361233187]
+z_index = 0
+y_sort_enabled = true
+script = ExtResource("1_ow")
+
+[node name="TileMaps" type="Node2D" parent="." unique_id=1918094549]
+texture_filter = 0
+
+[node name="Ground" type="TileMapLayer" parent="TileMaps" unique_id=298697400]
+z_index = -2
+texture_filter = 0
+tile_map_data = PackedByteArray()
+tile_set = ExtResource("3_ca")
+collision_enabled = false
+
+[node name="GroundDetails" type="TileMapLayer" parent="TileMaps" unique_id=1069302927]
+z_index = -1
+texture_filter = 0
+tile_set = ExtResource("2_ts")
+collision_enabled = false
+
+[node name="Obstacles" type="TileMapLayer" parent="TileMaps" unique_id=523045904]
+z_index = 0
+texture_filter = 0
+y_sort_enabled = true
+tile_set = ExtResource("3_ca")
+
+[node name="Entities" type="Node2D" parent="." unique_id=396046701]
+z_index = 0
+y_sort_enabled = true
+
+[node name="VillageHouse" parent="Entities" unique_id=55372746 instance=ExtResource("6_house")]
+position = Vector2(1008, 518)
+
+[node name="LorePlinth" parent="Entities" unique_id=2037657007 instance=ExtResource("4_lp")]
+position = Vector2(928, 544)
+lore_entry_id = "world_lore_006"
+prompt_text = "Read Chronicle [E]"
+
+[node name="HeraldNPC" parent="Entities" unique_id=1373699354 instance=ExtResource("5_npc")]
+position = Vector2(992, 544)
+npc_id = &"npc_oak_herald"
+display_name = "Herald Corwin"
+default_dialogue_id = &"NPC_HERALD_CORWIN_FIRST"
+prompt_text = "Talk [E]"
+dialogue_by_flag_true = {
+"npc_corwin_met": &"NPC_HERALD_CORWIN_REPEAT"
+}
+
+[node name="SpawnStart" type="Marker2D" parent="." unique_id=509035706]
+position = Vector2(960, 544)
+
+[node name="Spawn_from_starter" type="Marker2D" parent="." unique_id=202355718]
+position = Vector2(960, 544)
+
+[node name="Spawn_from_whispering_north" type="Marker2D" parent="." unique_id=918817906]
+position = Vector2(960, 940)
+
+[node name="Spawn_from_sunken_library" type="Marker2D" parent="." unique_id=1997309314]
+position = Vector2(960, 920)
+
+[node name="Spawn_from_cinder_west" type="Marker2D" parent="." unique_id=968512780]
+position = Vector2(1680, 540)
+
+[node name="Spawn_from_sands_west" type="Marker2D" parent="." unique_id=673667861]
+position = Vector2(300, 540)
+
+[node name="NorthGate" type="Marker2D" parent="." unique_id=1667599521]
+position = Vector2(960, 40)
+
+[node name="SouthGate" type="Marker2D" parent="." unique_id=870013626]
+position = Vector2(960, 1040)
+
+[node name="WestGate" type="Marker2D" parent="." unique_id=586906210]
+position = Vector2(40, 540)
+
+[node name="EastGate" type="Marker2D" parent="." unique_id=2021870780]
+position = Vector2(1880, 540)

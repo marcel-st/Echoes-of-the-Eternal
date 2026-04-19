@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/world/whispering_vales.gd" id="1_wv1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_wv2"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_b.png" id="5_prop_b"]
+[ext_resource type="Texture2D" path="res://kenney_pack/2D assets/Tiny Dungeon/Tiles/tile_0038.png" id="5_prop_b"]
 
 [sub_resource type="RectangleShape2D" id="Rect_wv_h"]
 size = Vector2(720, 72)

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scenes/world/sunken_library_entry.gd" id="1_lib"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_npc"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_f.png" id="5_prop_f"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_d.png" id="6_prop_d"]
+[ext_resource type="Texture2D" path="res://kenney_pack/2D assets/Tiny Dungeon/Tiles/tile_0051.png" id="5_prop_f"]
+[ext_resource type="Texture2D" path="res://kenney_pack/2D assets/Tiny Dungeon/Tiles/tile_0044.png" id="6_prop_d"]
 
 [sub_resource type="Gradient" id="Gradient_cave"]
 offsets = PackedFloat32Array(0, 0.55, 1)

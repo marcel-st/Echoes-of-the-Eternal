@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 const _InputPromptIcons := preload("res://core/ui/input_prompt_icons.gd")
 

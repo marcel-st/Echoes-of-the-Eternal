@@ -2,8 +2,9 @@ extends Node
 
 const SAVE_DIR := "user://saves"
 const SAVE_SLOT_TEMPLATE := "slot_%d.save"
+const SaveDataScript = preload("res://core/save/save_data.gd")
 
-var _cache: SaveData
+var _cache: Resource = null
 
 
 func _ready() -> void:
@@ -14,26 +15,26 @@ func has_save(slot: int = 1) -> bool:
 	return FileAccess.file_exists(_save_path(slot))
 
 
-func load_game(slot: int = 1) -> SaveData:
+func load_game(slot: int = 1) -> Resource:
 	var path := _save_path(slot)
 	if not FileAccess.file_exists(path):
-		_cache = SaveData.new()
+		_cache = SaveDataScript.new()
 		return _cache
 
 	var loaded := ResourceLoader.load(path)
-	if loaded is SaveData:
+	if loaded != null and loaded is SaveDataScript:
 		_cache = loaded
 		return _cache
 
 	push_warning("Unable to parse save file. Creating new save data.")
-	_cache = SaveData.new()
+	_cache = SaveDataScript.new()
 	return _cache
 
 
-func save_game(slot: int = 1, data: SaveData = null) -> bool:
+func save_game(slot: int = 1, data: Resource = null) -> bool:
 	var payload := data if data != null else _cache
 	if payload == null:
-		payload = SaveData.new()
+		payload = SaveDataScript.new()
 
 	payload.world_flags = WorldFlags.export_flags()
 	var quest_state := QuestManager.export_state()
@@ -50,14 +51,14 @@ func save_game(slot: int = 1, data: SaveData = null) -> bool:
 	return result == OK
 
 
-func get_cached_data() -> SaveData:
+func get_cached_data() -> Resource:
 	if _cache == null:
-		_cache = SaveData.new()
+		_cache = SaveDataScript.new()
 	return _cache
 
 
-func apply_loaded_data(data: SaveData) -> void:
-	if data == null:
+func apply_loaded_data(data: Resource) -> void:
+	if data == null or not (data is SaveDataScript):
 		return
 	_cache = data
 	WorldFlags.import_flags(data.world_flags)

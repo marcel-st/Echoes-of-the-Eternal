@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/interactables/lore_plinth.gd" id="1_lore"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/plinth.png" id="2_plinth"]
+[ext_resource type="Texture2D" path="res://kenney_pack/2D assets/Tiny Dungeon/Tiles/tile_0088.png" id="2_plinth"]
+[ext_resource type="PackedScene" path="res://scenes/ui/InteractPrompt.tscn" id="3_interact_prompt"]
+[ext_resource type="AudioStream" path="res://kenney_pack/Audio/Music Loops/Retro/Retro Mystic.ogg" id="4_magic_hum"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_plinth"]
 radius = 28.0
 
 [node name="LorePlinth" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_lore")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -17,10 +21,14 @@ texture = ExtResource("2_plinth")
 position = Vector2(0, -10)
 scale = Vector2(2.5, 2.5)
 
-[node name="TitleLabel" type="Label" parent="."]
-offset_left = -80.0
-offset_top = -34.0
-offset_right = 80.0
-offset_bottom = -12.0
-horizontal_alignment = 1
-text = "Lore Plinth"
+[node name="MagicHum" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_magic_hum")
+volume_db = -16.0
+autoplay = true
+max_distance = 200.0
+panning_strength = 2.1
+attenuation = 1.15
+bus = "Ambience"
+
+[node name="InteractPrompt" parent="." instance=ExtResource("3_interact_prompt")]
+position = Vector2(0, -40)

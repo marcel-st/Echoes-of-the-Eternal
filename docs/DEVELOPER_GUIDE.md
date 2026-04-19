@@ -1,10 +1,10 @@
 # Developer Guide — Echoes of the Eternal
 
-This project is a **Godot 4.2** top-down 2D RPG scaffold with data-driven narrative, quests, saves, and audio. This guide explains how the code is organized, how content flows into the game, and how to extend systems safely.
+This project is a **Godot 4.6** top-down 2D RPG with data-driven narrative, quests, saves, and audio. This guide explains how the code is organized, how content flows into the game, and how to extend systems safely.
 
 ## Requirements
 
-- **Godot 4.2+** (project `config/features` targets `4.2`; match export templates to your editor version).
+- **Godot 4.6** (see `project.godot` → `config/features`; match **export templates** to your exact editor build).
 - **Python 3** for the narrative importer (`tools/import_narrative.py`).
 
 ## Repository layout
@@ -17,6 +17,7 @@ This project is a **Godot 4.2** top-down 2D RPG scaffold with data-driven narrat
 | `narrative/` | Dialogue, portraits, world flags. |
 | `world/` | Lore catalog (`lore_manager.gd`) and world-adjacent logic. |
 | `audio/` | `AudioManager` — music, UI SFX, world SFX, ambience. |
+| `core/audio/` | **`SoundManager`** — pooled **SFX** (`play_sfx`), music/ambience helpers; named Kenney paths via `KenneyPackPaths`. |
 | `data/` | **Runtime** JSON consumed in-game (`dialogue/`, `quests/`, `items/`, `world/`, `npcs/`). |
 | `data/source/narrative/` | **Authoring** source for the importer (markdown + JSON). |
 | `tools/` | `import_narrative.py` — regenerates runtime `data/*` outputs. |
@@ -30,7 +31,7 @@ Generated/editor caches are ignored (see `.gitignore`): `.godot/`, `builds/`, et
 
 1. **Main scene:** `res://scenes/main.tscn` (`project.godot` → `run/main_scene`).
 2. **`main.gd`** wires global signals (autosave, map transitions, music), loads save state, and hosts **`WorldRoot`** for the active map.
-3. **Initial map:** `SceneRouter.load_initial_map()` defaults to `res://scenes/world/oakhaven.tscn` unless a save restores another map (see `SceneRouter.DEFAULT_MAP_SCENE`).
+3. **Initial map:** `SceneRouter.load_initial_map()` defaults to **`res://scenes/world/overworld.tscn`** unless a save restores another map (`SceneRouter.DEFAULT_MAP_SCENE`).
 
 ## Autoload singletons (`project.godot`)
 
@@ -47,6 +48,7 @@ Generated/editor caches are ignored (see `.gitignore`): `.godot/`, `builds/`, et
 | `WorldFlags` | `narrative/flags/world_flags.gd` | Key/value flags for conditions and story state. |
 | `LoreManager` | `world/lore_manager.gd` | Lore entries from `data/world/lore_entries.json`; discovery + runtime dialogue registration. |
 | `AudioManager` | `audio/audio_manager.gd` | Music tracks, UI/world SFX, ambience; listens to `EventBus.sfx_requested`. |
+| `SoundManager` | `core/audio/SoundManager.gd` | Short **SFX** by logical name or `res://` path; dialogue typewriter uses `play_sfx("dialogue_blip", …)`. |
 
 **Guideline:** Prefer **`EventBus` signals** for cross-feature reactions (e.g. UI prompts, audio hooks) instead of hardwiring nodes to each other.
 
@@ -76,8 +78,14 @@ Full checklist and formats: **`docs/NARRATIVE_PIPELINE.md`**.
 
 ## NPCs and dialogue
 
-- **`npc_base.tscn` / `npc_base.gd`:** interactable NPC; resolves `default_dialogue_id` or conditional dialogue from `WorldFlags` / `QuestManager` state.
-- **Dialogue requests:** emit `EventBus.dialogue_requested` or call `DialogueManager.request_dialogue(...)` depending on existing patterns in the scene you are editing — stay consistent with nearby code.
+- **`npc_base.tscn` / `npc_base.gd`:** `Area2D` NPC with **`InteractPrompt`**. `interact()` only runs when the player is in range **and** the prompt is **visible** (so UI and intent stay aligned). Dialogue id resolution:
+  - `dialogue_by_flag_true` — if `WorldFlags` says a flag is **true**, use that dialogue id (e.g. repeat lines after `set_flag:…` in JSON outcomes).
+  - `dialogue_by_quest_state` — map quest id → `{ "state_string": "DIALOGUE_ID" }`.
+  - **`default_dialogue_id`** — fallback.
+- **Runtime lines:** `data/dialogue/dialogues.json` (ids are string keys, e.g. `NPC_HERALD_CORWIN_FIRST`). Outcomes can call `start_quest:…`, `set_flag:…`, `prompt:…`, etc. (see `DialogueManager.apply_effects` / `_apply_effect_token`).
+- **Opening the box:** call **`DialogueManager.request_dialogue(dialogue_id, context_dict)`** (or emit `EventBus.dialogue_requested`). The **`DialogueBox`** scene (`scenes/ui/DialogueBox.tscn`) listens and renders lines with a **Timer**-driven typewriter; per-character ticks use **`SoundManager.play_sfx("dialogue_blip", …)`**.
+- **Signals (movement / UI):** `EventBus.dialogue_started` / **`dialogue_finished`** / `dialogue_closed`. The player freezes on **`dialogue_started`** and unfreezes on **`dialogue_finished`** (emitted when `DialogueManager.close_active_dialogue()` runs, before `dialogue_closed`).
+- **Example — Herald Corwin (overworld):** `HeraldNPC` uses `default_dialogue_id = NPC_HERALD_CORWIN_FIRST` and `dialogue_by_flag_true` so `npc_corwin_met` selects **`NPC_HERALD_CORWIN_REPEAT`**. First conversation outcomes start **`MQ_01_AWAKENING`** (“The First Spark”) and set the met flag.
 
 ## Lore plinths
 
@@ -111,6 +119,7 @@ Full checklist and formats: **`docs/NARRATIVE_PIPELINE.md`**.
 ## Related documents
 
 - **`docs/NARRATIVE_PIPELINE.md`** — author → runtime data workflow.
-- **`docs/BUILD.md`** — export templates, Linux build, CI notes.
+- **`docs/BUILD.md`** — export templates, Linux build, CI notes, headless import.
 - **`docs/PLAYER_GUIDE.md`** — controls and gameplay orientation for testers.
 - **`docs/ART_DIRECTION.md`**, **`docs/ASSET_LICENSES.md`**, **`assets/ATTRIBUTION.md`** — visual and legal source of truth for art/audio.
+- **`CONTRIBUTING.md`**, **`SECURITY.md`**, **`CODE_OF_CONDUCT.md`** — community and GitHub hygiene at repo root.

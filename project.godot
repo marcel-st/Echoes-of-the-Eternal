@@ -32,6 +32,7 @@ PortraitRegistry="*res://narrative/dialogue/portrait_registry.gd"
 WorldFlags="*res://narrative/flags/world_flags.gd"
 LoreManager="*res://world/lore_manager.gd"
 AudioManager="*res://audio/audio_manager.gd"
+SoundManager="*res://core/audio/SoundManager.gd"
 
 [display]
 
@@ -39,7 +40,14 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
+[layer_names]
+
+2d_physics/layer_1="environment"
+2d_physics/layer_2="player"
+2d_physics/layer_3="interactables"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-2d/snapping/use_gpu_pixel_snap=true
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

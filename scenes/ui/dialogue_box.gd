@@ -6,6 +6,8 @@ extends Control
 @onready var hint_label: Label = $Panel/MarginContainer/VBoxContainer/HintLabel
 @onready var portrait_panel: ColorRect = $Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel
 @onready var portrait_label: Label = $Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel/PortraitLabel
+@onready var _continue_arrow: TextureRect = $Panel/ContinueArrow
+@onready var _typewriter_timer: Timer = %TypewriterTimer
 
 var _active_dialogue_id: StringName = &""
 var _entries: Array = []
@@ -17,10 +19,18 @@ var _choice_mode := false
 var _context: Dictionary = {}
 var _bold_rx: RegEx
 
+## Letter-by-letter reveal (RichTextLabel); one step per `TypewriterTimer` tick + `SoundManager.play_sfx`.
+var _typewriting := false
+var _type_target_chars := 0
+const TYPEWRITER_SEC_PER_CHAR := 0.038
+
 func _ready() -> void:
 	_bold_rx = RegEx.new()
 	_bold_rx.compile("\\*\\*([^*]+?)\\*\\*")
 	visible = false
+	_typewriter_timer.wait_time = TYPEWRITER_SEC_PER_CHAR
+	if not _typewriter_timer.timeout.is_connected(_on_typewriter_timer_timeout):
+		_typewriter_timer.timeout.connect(_on_typewriter_timer_timeout)
 	EventBus.dialogue_requested.connect(_on_dialogue_requested)
 	EventBus.dialogue_closed.connect(_on_dialogue_closed)
 
@@ -46,13 +56,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			_update_choice_index(1)
 			get_viewport().set_input_as_handled()
 			return
-		if event.is_action_pressed("confirm"):
+		if event.is_action_pressed("confirm") or event.is_action_pressed("interact"):
 			AudioManager.play_ui("confirm")
 			_confirm_choice()
 			get_viewport().set_input_as_handled()
 		return
 
-	if event.is_action_pressed("confirm"):
+	if event.is_action_pressed("confirm") or event.is_action_pressed("interact"):
+		if _try_complete_typewriter():
+			get_viewport().set_input_as_handled()
+			return
 		AudioManager.play_ui("confirm")
 		_advance_dialogue()
 		get_viewport().set_input_as_handled()
@@ -62,6 +75,8 @@ func _on_dialogue_requested(dialogue_id: StringName, context: Dictionary) -> voi
 	var dialogue := DialogueManager.get_dialogue(dialogue_id)
 	var entries_variant: Variant = dialogue.get("entries", [])
 	if typeof(entries_variant) != TYPE_ARRAY or (entries_variant as Array).is_empty():
+		push_warning("Dialogue '%s' has no entries; closing." % String(dialogue_id))
+		DialogueManager.close_active_dialogue()
 		return
 
 	_active_dialogue_id = dialogue_id
@@ -72,10 +87,43 @@ func _on_dialogue_requested(dialogue_id: StringName, context: Dictionary) -> voi
 	_active_choices.clear()
 	_choice_mode = false
 	_clear_choices()
-	_set_hint("Confirm: continue   Cancel: close")
+	_set_hint("E / Space: continue   Cancel: close")
 	visible = true
 	AudioManager.play_ui("open")
 	_advance_to_next_entry()
+
+
+func _process(_delta: float) -> void:
+	_update_continue_arrow()
+
+
+func _on_typewriter_timer_timeout() -> void:
+	if not _typewriting or not visible:
+		_typewriter_timer.stop()
+		return
+	var cur: int = line_label.visible_characters
+	if cur < 0:
+		cur = 0
+	var next: int = cur + 1
+	if next >= _type_target_chars:
+		line_label.visible_characters = -1
+		_typewriting = false
+		_typewriter_timer.stop()
+		return
+	line_label.visible_characters = next
+	SoundManager.play_sfx("dialogue_blip", -14.0, true)
+
+
+func _update_continue_arrow() -> void:
+	if _continue_arrow == null:
+		return
+	var has_body := not line_label.text.strip_edges().is_empty()
+	var show := visible and not _choice_mode and has_body and not _typewriting
+	_continue_arrow.visible = show
+	if not show:
+		return
+	var pulse := 0.38 + 0.62 * (0.5 + 0.5 * sin(Time.get_ticks_msec() * 0.007))
+	_continue_arrow.modulate = Color(1, 1, 1, pulse)
 
 
 func _on_dialogue_closed(_dialogue_id: StringName) -> void:
@@ -91,6 +139,7 @@ func _on_dialogue_closed(_dialogue_id: StringName) -> void:
 	portrait_label.text = "?"
 	portrait_panel.color = Color(0.31, 0.46, 0.74, 1.0)
 	_clear_choices()
+	_stop_typewriter()
 	visible = false
 	AudioManager.play_ui("close")
 
@@ -132,8 +181,8 @@ func _advance_to_next_entry() -> void:
 		var speaker_raw := String(entry.get("speaker", "Unknown"))
 		speaker_label.text = PortraitRegistry.resolve_display_name(speaker_raw)
 		_update_portrait(speaker_raw)
-		line_label.text = _format_body_for_richtext(String(entry.get("text", "")))
-		_set_hint("Confirm: continue   Cancel: close")
+		_begin_typewriter_line(_format_body_for_richtext(String(entry.get("text", ""))))
+		_set_hint("E / Space: continue   Cancel: close")
 		return
 
 	_resolve_dialogue_end()
@@ -156,7 +205,7 @@ func _enter_choice_mode(raw_choices: Array) -> void:
 	_choice_mode = true
 	_choice_index = 0
 	choices_container.visible = true
-	_set_hint("Up/Down: select   Confirm: choose   Cancel: close")
+	_set_hint("Up/Down: select   E / Space: choose   Cancel: close")
 	_render_choices()
 
 
@@ -170,7 +219,7 @@ func _confirm_choice() -> void:
 	_choice_mode = false
 	_clear_choices()
 	choices_container.visible = false
-	_set_hint("Confirm: continue   Cancel: close")
+	_set_hint("E / Space: continue   Cancel: close")
 
 	if _apply_effects_from_value(selected.get("effect", null)):
 		return
@@ -215,6 +264,36 @@ func _clear_choices() -> void:
 
 func _set_hint(text: String) -> void:
 	hint_label.text = text
+
+
+func _begin_typewriter_line(formatted_bbcode: String) -> void:
+	_stop_typewriter()
+	line_label.text = formatted_bbcode
+	_type_target_chars = line_label.get_total_character_count()
+	if _type_target_chars <= 0:
+		line_label.visible_characters = -1
+		_typewriting = false
+		return
+	line_label.visible_characters = 0
+	_typewriting = true
+	_typewriter_timer.wait_time = TYPEWRITER_SEC_PER_CHAR
+	_typewriter_timer.start()
+
+
+func _stop_typewriter() -> void:
+	_typewriting = false
+	_typewriter_timer.stop()
+	if line_label != null:
+		line_label.visible_characters = -1
+
+
+func _try_complete_typewriter() -> bool:
+	if not _typewriting:
+		return false
+	line_label.visible_characters = -1
+	_typewriting = false
+	_typewriter_timer.stop()
+	return true
 
 
 func _format_body_for_richtext(raw: String) -> String:

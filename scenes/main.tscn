@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_5vepm"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="3_fu7au"]
-[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="4_fhh3k"]
+[ext_resource type="PackedScene" path="res://scenes/ui/DialogueBox.tscn" id="4_fhh3k"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="5_player"]
 
 [node name="Main" type="Node2D"]
@@ -10,18 +10,32 @@ script = ExtResource("1_5vepm")
 
 [node name="StatusLabel" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 750.0
 offset_bottom = 54.0
 text = "Booting Echoes of the Eternal..."
 
-[node name="WorldRoot" type="Node2D" parent="."]
+[node name="GameRoot" type="Node2D" parent="."]
+y_sort_enabled = true
 
-[node name="Player" parent="WorldRoot" instance=ExtResource("5_player")]
+[node name="Player" parent="GameRoot" instance=ExtResource("5_player")]
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
+layer = 32
 
-[node name="HUD" parent="UIRoot" instance=ExtResource("3_fu7au")]
+[node name="UIScaleRoot" type="Control" parent="UIRoot"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+pivot_offset = Vector2(960, 540)
+scale = Vector2(2.75, 2.75)
 
-[node name="DialogueBox" parent="UIRoot" instance=ExtResource("4_fhh3k")]
+[node name="HUD" parent="UIRoot/UIScaleRoot" instance=ExtResource("3_fu7au")]
+
+[node name="DialogueBox" parent="UIRoot/UIScaleRoot" instance=ExtResource("4_fhh3k")]

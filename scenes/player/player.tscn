@@ -1,22 +1,37 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_5m1qv"]
+[ext_resource type="Texture2D" path="res://kenney_pack/2D assets/Scribble Platformer/PNG/Default/ui_circle.png" id="2_shadow"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_player_body"]
 radius = 12.0
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 0
+collision_layer = 2
+collision_mask = 1
+y_sort_enabled = true
 script = ExtResource("1_5m1qv")
 groups = ["player"]
 
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 0
+position = Vector2(0, 3)
+scale = Vector2(1.65, 0.42)
+modulate = Color(0, 0, 0, 0.3)
+centered = true
+texture = ExtResource("2_shadow")
+
 [node name="Visual" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, 0)
+offset = Vector2(0, -8)
 scale = Vector2(2.5, 2.5)
 texture_filter = 1
 
 [node name="SwordPivot" type="Node2D" parent="."]
 visible = false
-z_index = 2
+z_index = 0
 
 [node name="SwordSprite" type="Sprite2D" parent="SwordPivot"]
 texture_filter = 1
@@ -25,3 +40,11 @@ centered = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_player_body")
 
+[node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"
+max_distance = 6000.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 5.0

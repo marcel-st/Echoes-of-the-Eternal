@@ -1,91 +1,80 @@
-# Echoes of the Eternal (Godot Starter)
+# Echoes of the Eternal
 
-2D RPG starter scaffold inspired by classic top-down adventures, prepared for a modern PC target (Windows/Linux/Steam Deck) with keyboard + gamepad support.
+2D top-down RPG built in **Godot 4.6**, with data-driven dialogue and quests, saves, regional maps, and keyboard + gamepad support (Windows / Linux / Steam Deck–friendly).
+
+**License:** game source and scripts in this repository are under the [MIT License](LICENSE). Bundled third-party art and audio remain under their respective licenses — see [`docs/ASSET_LICENSES.md`](docs/ASSET_LICENSES.md) and [`assets/ATTRIBUTION.md`](assets/ATTRIBUTION.md).
+
+## Community
+
+| Document | Purpose |
+|----------|---------|
+| [Contributing](CONTRIBUTING.md) | Branch workflow, PR expectations, narrative import, conduct pointer |
+| [Security](SECURITY.md) | How to report vulnerabilities privately |
+| [Code of Conduct](CODE_OF_CONDUCT.md) | Community standards |
 
 ## Documentation
 
 | Guide | Description |
 |-------|-------------|
-| [Developer guide](docs/DEVELOPER_GUIDE.md) | Architecture, autoloads, narrative pipeline, saves, audio, extension checklist. |
-| [Player guide](docs/PLAYER_GUIDE.md) | Controls, alpha gameplay loop, saves, how to give feedback. |
-| [Build instructions](docs/BUILD.md) | Engine version, narrative import, Linux export, troubleshooting. |
+| [Developer guide](docs/DEVELOPER_GUIDE.md) | Architecture, autoloads, dialogue UI, NPCs, narrative pipeline, saves, audio |
+| [Player guide](docs/PLAYER_GUIDE.md) | Controls, alpha loop, saves, feedback |
+| [Build instructions](docs/BUILD.md) | Engine version, asset import, narrative import, Linux export |
 
 Additional references: [Narrative pipeline](docs/NARRATIVE_PIPELINE.md), [Art direction](docs/ART_DIRECTION.md), [Alpha release plan](docs/ALPHA_RELEASE_PLAN.md).
 
 ## Current status
 
-This repository now contains a **Godot 4 starter architecture** with:
-
-- Project setup (`project.godot`) targeting 1920x1080 output.
-- Core AutoLoad systems for scene routing, save/load, settings, input profiles, dialogue, quests, and audio.
-- A minimal playable loop:
-  - `main.tscn` boot scene
-  - `starter_map.tscn` with map boundaries
-  - `player.tscn` with 8-direction movement and attack signal hook
-  - basic HUD prompt panel and dialogue line display
-- Data-driven starter JSON files for dialogue, quests, and items.
+- **Boot:** `scenes/main.tscn` → `SceneRouter` loads **`scenes/world/overworld.tscn`** by default (save games can restore other maps).
+- **Systems:** `EventBus`, `SceneRouter`, `SaveManager`, `DialogueManager`, `QuestManager`, `AudioManager`, **`SoundManager`** (overlapping SFX pool), `WorldFlags`, `LoreManager`, etc. (see developer guide).
+- **UI:** HUD, journal, **`DialogueBox.tscn`** (typewriter + continue prompt), world **`InteractPrompt`** for NPCs and props.
+- **Data:** `data/dialogue/dialogues.json`, `data/quests/quests.json`, and related JSON under `data/`.
 
 ## Open in Godot
 
-1. Install **Godot 4.2+**.
+1. Install **Godot 4.6** (match `project.godot` `config/features`).
 2. Open this folder as a project.
-3. Run project (`F5`).
-4. Controls:
-   - Move: `WASD` / arrows / left stick
-   - Interact: `E` / `Space` / gamepad south
-   - Attack: `J` / Ctrl / gamepad west
-   - Pause/menu: `Esc` / `Start`
+3. On first clone, let the editor **import** assets (or run `godot --headless --import --path .` once) so textures and fonts resolve.
+4. Press **F5** to run.
+
+### Controls (default)
+
+| Action | Keyboard | Gamepad |
+|--------|----------|---------|
+| Move | **W A S D** / arrows | Left stick |
+| Interact / dialogue advance | **E**, **Space** | South (e.g. A) |
+| Attack | **J** | West (e.g. X) |
+| Pause / journal | **Esc** | **Start** |
+
+Exact bindings are registered at runtime by `InputProfiles` (`core/config/input_profiles.gd`).
 
 ## Project layout (high level)
 
 ```txt
-core/         # autoload services (scene routing, save, settings, input, events)
-scenes/       # runnable scenes (main, world map, player, HUD)
-gameplay/     # quest/combat/inventory systems
-narrative/    # dialogue manager + world flags
-audio/        # music/sfx manager
-data/         # data-driven content inputs (dialogue, quests, items)
-assets/       # imported art/audio placeholders
+core/          # autoload services, audio (SoundManager), config, save, events
+scenes/        # main, world maps, player, HUD, UI (DialogueBox, InteractPrompt)
+gameplay/      # quests
+narrative/     # dialogue manager, portraits, flags
+audio/         # AudioManager — music, routed UI/world SFX
+data/          # runtime JSON (dialogue, quests, items, world)
+assets/        # shipped textures, fonts, tilesets (Kenney-derived where noted)
+docs/          # design and engineering docs
+tools/         # narrative import, optional Kenney / tileset helpers
 ```
 
-## Narrative/script ingestion workflow
+## Narrative workflow
 
-To let the agent turn your script into game content, add files into:
+Authoring under `data/source/narrative/` is merged into runtime JSON by:
 
-```txt
-data/source/narrative/
+```bash
+python3 tools/import_narrative.py
 ```
 
-Recommended files:
+See **`docs/NARRATIVE_PIPELINE.md`** for formats and checklist.
 
-- `story_outline.md` (main arc and acts)
-- `characters.json` (bios, speaking style, portraits)
-- `dialogue_master.(md|json|csv)` (all lines + choices + outcomes)
-- `quests_master.json` (quest definitions and objective steps)
-- `world_lore.md` (locations, factions, item lore)
+## Art and attribution
 
-After placing files, ask:
+- **`docs/ART_DIRECTION.md`** — visual direction  
+- **`docs/ASSET_LICENSES.md`** — approved sources and licenses  
+- **`assets/ATTRIBUTION.md`** — pack-level attribution  
 
-> "Parse `data/source/narrative` and generate Godot dialogue/quest data + NPC interaction stubs."
-
-I will convert your narrative into structured runtime files under `data/dialogue`, `data/quests`, and map them to interaction points.
-
-See `docs/NARRATIVE_PIPELINE.md` for the full ingestion checklist and recommended file formatting examples.
-
-## Art upgrade docs
-
-To drive the modern visual pass safely with open/free assets:
-
-- `docs/ART_DIRECTION.md` - visual style bible (palette, silhouettes, rendering rules)
-- `docs/ASSET_LICENSES.md` - approved asset shortlist with source URLs and licenses
-- `assets/ATTRIBUTION.md` - final attribution ledger for imported packs
-
-## Runtime data outputs
-
-Generated by `python3 tools/import_narrative.py`:
-
-- `data/dialogue/dialogues.json`
-- `data/quests/quests.json`
-- `data/items/items.json`
-
-These runtime files are loaded by `DialogueManager` and `QuestManager`.
+Optional local **Kenney all-in-one** copy: `kenney_pack/` (gitignored). Paths are documented in `core/config/kenney_pack_paths.gd`. A local `.resources/` mirror is also gitignored.

@@ -1,139 +1,36 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://npcbasepack01"]
 
 [ext_resource type="Script" path="res://scenes/actors/npcs/npc_base.gd" id="1_npc"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_idle_down.png" id="2_npc_idle_down"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_down_a.png" id="3_npc_walk_down_a"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_down_b.png" id="4_npc_walk_down_b"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_idle_up.png" id="5_npc_idle_up"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_up_a.png" id="6_npc_walk_up_a"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_up_b.png" id="7_npc_walk_up_b"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_idle_side.png" id="8_npc_idle_side"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_side_a.png" id="9_npc_walk_side_a"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/npc_walk_side_b.png" id="10_npc_walk_side_b"]
+[ext_resource type="PackedScene" path="res://scenes/ui/InteractPrompt.tscn" id="1_interact_prompt"]
+[ext_resource type="Texture2D" path="res://kenney_pack/2D assets/Scribble Platformer/PNG/Default/ui_circle.png" id="2_shadow"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_npc_collision"]
 radius = 48.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_npc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_npc_idle_down")
-}],
-"loop": true,
-"name": &"idle_down",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_npc_idle_side")
-}],
-"loop": true,
-"name": &"idle_left",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_npc_idle_side")
-}],
-"loop": true,
-"name": &"idle_right",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_npc_idle_up")
-}],
-"loop": true,
-"name": &"idle_up",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_npc_walk_down_a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_npc_idle_down")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_npc_walk_down_b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_npc_idle_down")
-}],
-"loop": true,
-"name": &"walk_down",
-"speed": 6.5
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("9_npc_walk_side_a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_npc_idle_side")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_npc_walk_side_b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_npc_idle_side")
-}],
-"loop": true,
-"name": &"walk_left",
-"speed": 6.5
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("9_npc_walk_side_a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_npc_idle_side")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_npc_walk_side_b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_npc_idle_side")
-}],
-"loop": true,
-"name": &"walk_right",
-"speed": 6.5
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_npc_walk_up_a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_npc_idle_up")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_npc_walk_up_b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_npc_idle_up")
-}],
-"loop": true,
-"name": &"walk_up",
-"speed": 6.5
-}]
-
 [node name="NPCBase" type="Area2D"]
+z_index = 0
+collision_layer = 4
+collision_mask = 2
+y_sort_enabled = true
 script = ExtResource("1_npc")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 0
+position = Vector2(0, 3)
+scale = Vector2(1.55, 0.4)
+modulate = Color(0, 0, 0, 0.3)
+centered = true
+texture = ExtResource("2_shadow")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_npc_collision")
 
 [node name="Visual" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, 0)
+offset = Vector2(0, -8)
 scale = Vector2(2.4, 2.4)
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_npc")
-animation = &"idle_down"
 
-[node name="NameLabel" type="Label" parent="."]
-offset_left = -60.0
-offset_top = -40.0
-offset_right = 60.0
-offset_bottom = -16.0
-horizontal_alignment = 1
-text = "NPC"
+[node name="InteractPrompt" parent="." instance=ExtResource("1_interact_prompt")]
+position = Vector2(0, -46)

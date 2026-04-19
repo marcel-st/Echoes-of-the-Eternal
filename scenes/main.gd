@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var world_root: Node = $WorldRoot
+@onready var game_root: Node = $GameRoot
 var _suppress_autosave := false
 var _transition_prompt := ""
 var _autosave_pending := false
@@ -11,7 +11,7 @@ const AUTOSAVE_DEBOUNCE_SECONDS := 0.45
 
 ## Map scene path -> music track id (AudioManager TRACKS). Unlisted maps use "overworld".
 const MAP_MUSIC := {
-	"res://scenes/world/oakhaven.tscn": "overworld",
+	"res://scenes/world/overworld.tscn": "overworld",
 	"res://scenes/world/starter_map.tscn": "overworld",
 	"res://scenes/world/whispering_vales.tscn": "veldt",
 	"res://scenes/world/cinder_peaks.tscn": "cinder",
@@ -38,7 +38,6 @@ func _ready() -> void:
 
 	_load_runtime_state()
 	_play_music_for_current_map()
-	AudioManager.play_ambience("creak")
 	EventBus.request_ui_prompt.emit("World loaded. Explore regions and speak with townsfolk.")
 
 
@@ -63,10 +62,10 @@ func _load_runtime_state() -> void:
 	var save_data := SaveManager.load_game(1)
 	SaveManager.apply_loaded_data(save_data)
 	if SaveManager.has_save(1) and save_data.map_scene_path.strip_edges() != "":
-		SceneRouter.change_map(save_data.map_scene_path, StringName(save_data.spawn_id), world_root)
+		SceneRouter.change_map(save_data.map_scene_path, StringName(save_data.spawn_id), game_root)
 		_restore_player_position(save_data.player_position)
 	else:
-		SceneRouter.load_initial_map(world_root)
+		SceneRouter.load_initial_map(game_root)
 	_suppress_autosave = false
 
 

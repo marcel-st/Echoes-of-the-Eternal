@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
 @export var move_speed: float = 140.0
-@export var footstep_interval_seconds: float = 0.24
+@export var footstep_interval_seconds: float = 0.35
 
 ## Kenney Tiny Dungeon `tilemap_packed.png`: 16×16 cells, 12 columns (no spacing).
 ## Loose `player_*.png` names are not in the official pack; wrong slices show as chests/tracks.
-const PLAYER_ATLAS_PATH := "res://assets/sprites/world/kenney_tiny-dungeon/tilemap_packed.png"
+const PLAYER_ATLAS_PATH := KenneyPackPaths.TINY_DUNGEON_TILEMAP_PACKED
 const PLAYER_ATLAS_CELL := 16
 const PLAYER_ATLAS_COLS := 12
 
@@ -13,6 +13,13 @@ const PLAYER_ATLAS_COLS := 12
 ## Tile 103 = sword icon — drawn on `SwordSprite` and tweened during attack (body stays on 86).
 const PLAYER_HERO_CELL := 86
 const PLAYER_ATTACK_SWING_CELL := 103
+
+## Kenney Impact Sounds — soft grass footstep variants (see `.resources/Audio/Impact Sounds/Audio/`).
+const FOOTSTEP_STREAM_PATHS: PackedStringArray = [
+	KenneyPackPaths.FOOTSTEP_GRASS_SOFT_0,
+	KenneyPackPaths.FOOTSTEP_GRASS_SOFT_1,
+	KenneyPackPaths.FOOTSTEP_GRASS_SOFT_2,
+]
 
 const PLAYER_ATLAS_FRAMES := {
 	"idle_down": [PLAYER_HERO_CELL],
@@ -31,24 +38,40 @@ var _interaction_target: Node = null
 var _facing := "down"
 var _facing_sign := 1
 var _action_lock := false
+## While true, dialogue UI is active — no move, interact, or attack (E/Space stay with the box).
+var _dialogue_movement_lock := false
 var _action_animation := ""
 var _footstep_timer := 0.0
+var _footstep_streams: Array[AudioStream] = []
 var _attack_sword_tween: Tween
 
 @onready var visual: AnimatedSprite2D = $Visual
 @onready var sword_pivot: Node2D = $SwordPivot
 @onready var sword_sprite: Sprite2D = $SwordPivot/SwordSprite
+@onready var _footstep_player: AudioStreamPlayer2D = $FootstepPlayer
 
 
 func _ready() -> void:
 	add_to_group("player")
+	_load_footstep_streams()
 	_build_visual_frames()
+	_align_sprite_feet_to_origin()
 	_update_animation(Vector2.DOWN, false)
 	if not visual.animation_finished.is_connected(_on_visual_animation_finished):
 		visual.animation_finished.connect(_on_visual_animation_finished)
+	if not EventBus.dialogue_started.is_connected(_on_dialogue_started):
+		EventBus.dialogue_started.connect(_on_dialogue_started)
+	if not EventBus.dialogue_finished.is_connected(_on_dialogue_finished):
+		EventBus.dialogue_finished.connect(_on_dialogue_finished)
 
 
 func _physics_process(_delta: float) -> void:
+	if _dialogue_movement_lock:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		_footstep_timer = 0.0
+		return
+
 	var direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if _action_lock:
 		direction = Vector2.ZERO
@@ -56,7 +79,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	if not _action_lock:
 		_update_animation(direction, direction.length() > 0.01)
-		_process_footsteps(_delta, direction.length() > 0.01)
+		_process_footsteps(_delta)
 	else:
 		_footstep_timer = 0.0
 	if Input.is_action_just_pressed("attack"):
@@ -88,6 +111,14 @@ func set_interaction_target(target: Node) -> void:
 func clear_interaction_target(target: Node) -> void:
 	if _interaction_target == target:
 		_interaction_target = null
+
+
+func _on_dialogue_started(_dialogue_id: String) -> void:
+	_dialogue_movement_lock = true
+
+
+func _on_dialogue_finished(_dialogue_id: String) -> void:
+	_dialogue_movement_lock = false
 
 
 func _interact() -> void:
@@ -151,14 +182,30 @@ func _on_visual_animation_finished() -> void:
 	visual.flip_h = _facing == "side" and _facing_sign < 0
 
 
-func _process_footsteps(delta: float, is_moving: bool) -> void:
-	if not is_moving:
+func _load_footstep_streams() -> void:
+	_footstep_streams.clear()
+	for path: String in FOOTSTEP_STREAM_PATHS:
+		var loaded := load(path)
+		if loaded is AudioStream:
+			_footstep_streams.append(loaded as AudioStream)
+		else:
+			push_warning("Player: missing footstep stream at %s" % path)
+
+
+func _process_footsteps(delta: float) -> void:
+	if _footstep_player == null or _footstep_streams.is_empty():
+		return
+	if velocity.length_squared() < 0.0001:
 		_footstep_timer = 0.0
 		return
 	_footstep_timer -= delta
 	if _footstep_timer > 0.0:
 		return
-	EventBus.sfx_requested.emit(&"footstep", -8.0)
+	var stream: AudioStream = _footstep_streams.pick_random()
+	_footstep_player.stream = stream
+	_footstep_player.pitch_scale = randf_range(0.9, 1.1)
+	_footstep_player.volume_db = -10.0
+	_footstep_player.play()
 	_footstep_timer = footstep_interval_seconds
 
 
@@ -213,6 +260,14 @@ func _build_visual_frames() -> void:
 	_setup_attack_sword_texture(atlas)
 
 
+## Centered 16×16 atlas frames: `AnimatedSprite2D.offset` is in unscaled local px (see engine draw);
+## bottom of the tile must sit at the body origin for correct y-sort among siblings.
+func _align_sprite_feet_to_origin() -> void:
+	if visual == null:
+		return
+	visual.offset = Vector2(0.0, -float(PLAYER_ATLAS_CELL) * 0.5)
+
+
 func _setup_attack_sword_texture(atlas: Texture2D) -> void:
 	if sword_sprite == null:
 		return
@@ -243,9 +298,9 @@ func _play_attack_sword_swing() -> void:
 	if _attack_sword_tween != null:
 		_attack_sword_tween.kill()
 	var dir := _attack_facing_dir().normalized()
-	# Orbit in front of the sprite (same space as Player; Visual is offset + scaled).
+	# Orbit in front of the sprite (same space as Player; Visual uses offset + scale).
 	const ORBIT := 20.0
-	sword_pivot.position = visual.position + dir * ORBIT
+	sword_pivot.position = visual.transform * Vector2(0.0, -float(PLAYER_ATLAS_CELL) * 0.5) + dir * ORBIT
 	sword_pivot.scale = visual.scale
 	# Atlas sword points “up” in its cell; align pivot so swing reads in facing plane.
 	sword_pivot.rotation = dir.angle() + PI * 0.5

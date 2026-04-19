@@ -1,5 +1,12 @@
 extends Area2D
 
+## Tiny Dungeon `tilemap_packed.png` (12×16 @ 16px). Cells from Kenney sample map object layer.
+const NPC_ATLAS_CELL := 16
+const NPC_ATLAS_COLS := 12
+const NPC_CELL_DOWN := 86
+const NPC_CELL_UP := 75
+const NPC_CELL_SIDE := 87
+
 @export var npc_id: StringName = &"npc_generic"
 @export var display_name: String = "Villager"
 @export var default_dialogue_id: StringName = &""
@@ -16,7 +23,7 @@ extends Area2D
 @export var dialogue_by_quest_state: Dictionary = {}
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var name_label: Label = $NameLabel
+@onready var interact_prompt: Node2D = $InteractPrompt
 @onready var visual: AnimatedSprite2D = $Visual
 
 var _player_in_range := false
@@ -28,8 +35,11 @@ var _facing := "down"
 
 
 func _ready() -> void:
+	_build_npc_sprite_frames()
+	_align_visual_feet_to_origin()
 	_configure_collision_shape()
-	name_label.text = display_name
+	if interact_prompt != null:
+		interact_prompt.visible = false
 	_origin_position = global_position
 	_wander_target = global_position
 	_play_idle_animation()
@@ -45,12 +55,13 @@ func _process(delta: float) -> void:
 	if _cooldown_timer > 0.0:
 		_cooldown_timer = maxf(0.0, _cooldown_timer - delta)
 	_update_wander(delta)
-	if _player_in_range and _cooldown_timer <= 0.0:
-		EventBus.request_ui_prompt.emit("%s (%s)" % [prompt_text, display_name])
 
 
 func interact(_actor: Node = null) -> void:
 	if not _player_in_range:
+		return
+	## Only open dialogue when the prompt is shown (player in range and UI ready).
+	if interact_prompt != null and not interact_prompt.visible:
 		return
 	if _cooldown_timer > 0.0:
 		return
@@ -77,7 +88,8 @@ func _on_body_entered(body: Node) -> void:
 	_player_in_range = true
 	if body.has_method("set_interaction_target"):
 		body.call("set_interaction_target", self)
-	EventBus.request_ui_prompt.emit("%s (%s)" % [prompt_text, display_name])
+	if interact_prompt != null:
+		interact_prompt.visible = true
 
 
 func _on_body_exited(body: Node) -> void:
@@ -88,6 +100,8 @@ func _on_body_exited(body: Node) -> void:
 	_player_in_range = false
 	if body.has_method("clear_interaction_target"):
 		body.call("clear_interaction_target", self)
+	if interact_prompt != null:
+		interact_prompt.visible = false
 
 
 func _on_dialogue_closed(_dialogue_id: StringName) -> void:
@@ -158,7 +172,7 @@ func _update_facing_from_direction(direction: Vector2) -> void:
 
 
 func _play_idle_animation() -> void:
-	if visual == null:
+	if visual == null or visual.sprite_frames == null:
 		return
 	var idle_anim := "idle_%s" % _facing
 	if visual.sprite_frames.has_animation(idle_anim):
@@ -166,8 +180,67 @@ func _play_idle_animation() -> void:
 
 
 func _play_walk_animation() -> void:
-	if visual == null:
+	if visual == null or visual.sprite_frames == null:
 		return
 	var walk_anim := "walk_%s" % _facing
 	if visual.sprite_frames.has_animation(walk_anim):
 		visual.play(walk_anim)
+
+
+func _build_npc_sprite_frames() -> void:
+	if visual == null:
+		return
+	var atlas_loaded := load(KenneyPackPaths.TINY_DUNGEON_TILEMAP_PACKED)
+	if atlas_loaded == null or not (atlas_loaded is Texture2D):
+		push_error("NPCBase: missing Tiny Dungeon atlas at %s" % KenneyPackPaths.TINY_DUNGEON_TILEMAP_PACKED)
+		return
+	var atlas := atlas_loaded as Texture2D
+	var frames := SpriteFrames.new()
+	var down := NPC_CELL_DOWN
+	var up := NPC_CELL_UP
+	var side := NPC_CELL_SIDE
+	_add_npc_frame(frames, "idle_down", atlas, down, 2.0, false)
+	_add_npc_frame(frames, "idle_up", atlas, up, 2.0, false)
+	_add_npc_frame(frames, "idle_left", atlas, side, 2.0, false)
+	_add_npc_frame(frames, "idle_right", atlas, side, 2.0, false)
+	_add_npc_walk(frames, "walk_down", atlas, down)
+	_add_npc_walk(frames, "walk_up", atlas, up)
+	_add_npc_walk(frames, "walk_left", atlas, side)
+	_add_npc_walk(frames, "walk_right", atlas, side)
+	visual.sprite_frames = frames
+
+
+## Same rule as player: `offset` is unscaled local px; feet sit on the Area2D origin for y-sort.
+func _align_visual_feet_to_origin() -> void:
+	if visual == null:
+		return
+	visual.position = Vector2.ZERO
+	visual.offset = Vector2(0.0, -float(NPC_ATLAS_CELL) * 0.5)
+
+
+func _add_npc_walk(frames: SpriteFrames, animation_name: String, atlas: Texture2D, cell_idx: int) -> void:
+	frames.add_animation(animation_name)
+	frames.set_animation_loop(animation_name, true)
+	frames.set_animation_speed(animation_name, 6.5)
+	for _i in range(4):
+		_add_npc_atlas_frame(frames, animation_name, atlas, cell_idx, 1.0)
+
+
+func _add_npc_frame(frames: SpriteFrames, animation_name: String, atlas: Texture2D, cell_idx: int, speed: float, loop: bool) -> void:
+	frames.add_animation(animation_name)
+	frames.set_animation_loop(animation_name, loop)
+	frames.set_animation_speed(animation_name, speed)
+	_add_npc_atlas_frame(frames, animation_name, atlas, cell_idx, 1.0)
+
+
+func _add_npc_atlas_frame(
+	frames: SpriteFrames, animation_name: String, atlas: Texture2D, cell_idx: int, frame_duration: float
+) -> void:
+	var col := cell_idx % NPC_ATLAS_COLS
+	var row: int = cell_idx / NPC_ATLAS_COLS
+	var region := Rect2i(col * NPC_ATLAS_CELL, row * NPC_ATLAS_CELL, NPC_ATLAS_CELL, NPC_ATLAS_CELL)
+	var slice := AtlasTexture.new()
+	slice.atlas = atlas
+	slice.region = region
+	slice.filter_clip = true
+	frames.add_frame(animation_name, slice, frame_duration)

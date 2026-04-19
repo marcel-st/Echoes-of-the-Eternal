@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/world/starter_map.gd" id="1_3a0f2"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_q8c4y"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_f.png" id="4_prop"]
+[ext_resource type="Texture2D" path="res://kenney_pack/2D assets/Tiny Dungeon/Tiles/tile_0051.png" id="4_prop"]
 
 [sub_resource type="RectangleShape2D" id="Rect_transition_h"]
 size = Vector2(720, 72)

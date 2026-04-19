@@ -7,18 +7,18 @@ extends Area2D
 @export var lore_title: String = ""
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var label: Label = $TitleLabel
+@onready var interact_prompt: Node2D = $InteractPrompt
+@onready var _magic_hum: AudioStreamPlayer2D = $MagicHum
 
 var _player_in_range := false
 var _cooldown := 0.0
 
 
 func _ready() -> void:
+	_ensure_magic_hum_loops()
 	_configure_collision()
-	var title := display_name
-	if lore_title.strip_edges() != "":
-		title = lore_title
-	label.text = title
+	if interact_prompt != null:
+		interact_prompt.visible = false
 	if not body_entered.is_connected(_on_body_entered):
 		body_entered.connect(_on_body_entered)
 	if not body_exited.is_connected(_on_body_exited):
@@ -30,8 +30,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if _cooldown > 0.0:
 		_cooldown = maxf(0.0, _cooldown - delta)
-	if _player_in_range and _cooldown <= 0.0:
-		EventBus.request_ui_prompt.emit("%s (%s)" % [prompt_text, display_name])
 
 
 func interact(_actor: Node = null) -> void:
@@ -58,6 +56,8 @@ func _on_body_entered(body: Node) -> void:
 	_player_in_range = true
 	if body.has_method("set_interaction_target"):
 		body.call("set_interaction_target", self)
+	if interact_prompt != null:
+		interact_prompt.visible = true
 
 
 func _on_body_exited(body: Node) -> void:
@@ -66,6 +66,8 @@ func _on_body_exited(body: Node) -> void:
 	_player_in_range = false
 	if body.has_method("clear_interaction_target"):
 		body.call("clear_interaction_target", self)
+	if interact_prompt != null:
+		interact_prompt.visible = false
 
 
 func _on_dialogue_closed(_dialogue_id: StringName) -> void:
@@ -76,3 +78,24 @@ func _configure_collision() -> void:
 	var circle := CircleShape2D.new()
 	circle.radius = interaction_radius
 	collision_shape.shape = circle
+
+
+## Child `MagicHum` may start via autoplay before loop is applied; duplicate stream so looping is reliable.
+func _ensure_magic_hum_loops() -> void:
+	if _magic_hum == null or _magic_hum.stream == null:
+		return
+	var base: AudioStream = _magic_hum.stream
+	var dup: AudioStream = base.duplicate()
+	if dup is AudioStreamOggVorbis:
+		(dup as AudioStreamOggVorbis).loop = true
+	_magic_hum.stream = dup
+	_magic_hum.bus = _audio_bus_or_master("Ambience")
+	if _magic_hum.autoplay:
+		_magic_hum.stop()
+		_magic_hum.play()
+
+
+func _audio_bus_or_master(bus_name: String) -> StringName:
+	if AudioServer.get_bus_index(bus_name) >= 0:
+		return StringName(bus_name)
+	return &"Master"

@@ -1,6 +1,6 @@
 extends Node2D
 
-const OAKHAVEN := "res://scenes/world/oakhaven.tscn"
+const OVERWORLD := "res://scenes/world/overworld.tscn"
 const WHISPERING_VALES := "res://scenes/world/whispering_vales.tscn"
 
 
@@ -17,7 +17,7 @@ func resolve_transition(player_position: Vector2) -> Dictionary:
 		}
 	if player_position.y >= 1048.0:
 		return {
-			"map_scene_path": OAKHAVEN,
+			"map_scene_path": OVERWORLD,
 			"spawn_id": "from_library_north",
 		}
 	return {}

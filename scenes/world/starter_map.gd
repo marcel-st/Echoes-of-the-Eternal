@@ -1,6 +1,6 @@
 extends Node2D
 
-const OAKHAVEN := "res://scenes/world/oakhaven.tscn"
+const OVERWORLD := "res://scenes/world/overworld.tscn"
 const WHISPERING_VALES := "res://scenes/world/whispering_vales.tscn"
 const SUNKEN_LIBRARY := "res://scenes/world/sunken_library_entry.tscn"
 const CINDER_PEAKS := "res://scenes/world/cinder_peaks.tscn"
@@ -64,7 +64,7 @@ func _handle_gate(direction: String, target_scene: String) -> void:
 
 
 func _scene_label(scene_path: String) -> String:
-	if scene_path == OAKHAVEN:
+	if scene_path == OVERWORLD:
 		return "Oakhaven"
 	if scene_path == WHISPERING_VALES:
 		return "Whispering Vales"
@@ -78,7 +78,7 @@ func _scene_label(scene_path: String) -> String:
 
 
 func _spawn_for_target(scene_path: String) -> StringName:
-	if scene_path == OAKHAVEN:
+	if scene_path == OVERWORLD:
 		return &"from_starter"
 	if scene_path == WHISPERING_VALES:
 		return &"from_oakhaven"

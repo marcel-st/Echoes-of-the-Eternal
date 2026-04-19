@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scenes/world/sinking_sands.gd" id="1_i2dp1"]
 [ext_resource type="PackedScene" path="res://scenes/actors/npcs/npc_base.tscn" id="2_0qqh8"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactables/lore_plinth.tscn" id="3_lore"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_tiny-dungeon/prop_g.png" id="5_sands_prop"]
-[ext_resource type="Texture2D" path="res://assets/sprites/world/kenney_rpg-urban-pack/tilemap_packed.png" id="6_sands_overlay"]
+[ext_resource type="Texture2D" path="res://kenney_pack/2D assets/Tiny Dungeon/Tiles/tile_0052.png" id="5_sands_prop"]
+[ext_resource type="Texture2D" path="res://kenney_pack/2D assets/RPG Urban Pack/Tilemap/tilemap_packed.png" id="6_sands_overlay"]
 
 [node name="SinkingSands" type="Node2D"]
 script = ExtResource("1_i2dp1")

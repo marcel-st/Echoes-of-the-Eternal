@@ -6,7 +6,7 @@ Thank you for helping improve the project. This document explains how we work in
 
 - **Engine:** Open the project in **Godot 4.6** (see `project.godot` → `config/features`). Match export templates to your editor build.
 - **Scope:** Prefer small, focused pull requests that solve one problem or add one feature.
-- **Assets:** Third-party art and audio must comply with **`docs/ASSET_LICENSES.md`** and be recorded in **`assets/ATTRIBUTION.md`**. Do not commit large proprietary bundles; use `kenney_pack/` or documented sync scripts as described in **`core/config/kenney_pack_paths.gd`**.
+- **Assets:** Third-party art and audio must comply with **`docs/ASSET_LICENSES.md`** and be recorded in **`assets/ATTRIBUTION.md`**. **Kenney** assets are typically **CC0 1.0 Universal** (see each pack’s `license.txt` and the Kenney section in `docs/ASSET_LICENSES.md`). Do not commit large proprietary bundles; use `kenney_pack/` or documented sync scripts as described in **`core/config/kenney_pack_paths.gd`**.
 
 ## Workflow
 

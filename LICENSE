@@ -19,3 +19,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## Third-party assets (art, audio, fonts)
+
+This repository includes **binary assets** (images, sounds, fonts) that are **not** covered by the MIT license above. Those files remain under their **original authors’ licenses** (see **`docs/ASSET_LICENSES.md`** and **`assets/ATTRIBUTION.md`**).
+
+In particular, **Kenney** (www.kenney.nl) art and audio used here are distributed under **Creative Commons Zero (CC0 1.0 Universal)** — public domain dedication — as stated in each pack’s **`license.txt`** and on Kenney’s site. Legal text: https://creativecommons.org/publicdomain/zero/1.0/

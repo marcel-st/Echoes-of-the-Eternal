@@ -8,7 +8,7 @@
 
 I am **vibecoding** much of this—experimenting, iterating, and learning in public—yet I would **love help** from anyone who wants to make it **nicer-looking and genuinely playable**: art passes, UI polish, balance, bugs, accessibility, and playtesting all count. **Storyline additions, changes, and expansions are welcome**; treat the narrative as a living draft. The aim is an **excellent free, open-source game** anyone can enjoy and build on.
 
-**License:** game source and scripts in this repository are under the [MIT License](LICENSE). Bundled third-party art and audio remain under their respective licenses — see [`docs/ASSET_LICENSES.md`](docs/ASSET_LICENSES.md) and [`assets/ATTRIBUTION.md`](assets/ATTRIBUTION.md).
+**License:** **Game code** (GDScript and other original source in this repo) is under the [MIT License](LICENSE). **Art, sound effects, music loops, and fonts** from **Kenney** (www.kenney.nl) are used under **CC0 1.0 Universal** (public domain dedication — see each pack’s `license.txt` beside the files, the [CC0 legal text](https://creativecommons.org/publicdomain/zero/1.0/), and the [Kenney asset registry](https://kenney.nl/assets)). A full per-file inventory and other third-party items live in [`docs/ASSET_LICENSES.md`](docs/ASSET_LICENSES.md) and [`assets/ATTRIBUTION.md`](assets/ATTRIBUTION.md).
 
 ## Community
 

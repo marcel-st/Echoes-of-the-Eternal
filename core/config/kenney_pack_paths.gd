@@ -4,6 +4,7 @@ class_name KenneyPackPaths
 ## Paths into the local Kenney all-in-one pack under `kenney_pack/` (gitignored).
 ## Godot does not import assets under dot-folders (e.g. `.resources/`), so use this name
 ## and copy or symlink the pack here: `kenney_pack/` → same layout as Kenney's bundle.
+## Licensing: Kenney assets are **CC0 1.0 Universal** — see `docs/ASSET_LICENSES.md` and `assets/ATTRIBUTION.md`.
 
 const _R := "res://kenney_pack/"
 

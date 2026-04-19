@@ -2,6 +2,12 @@
 
 2D top-down RPG built in **Godot 4.6**, with data-driven dialogue and quests, saves, regional maps, and keyboard + gamepad support (Windows / Linux / Steam Deck–friendly).
 
+## Story
+
+*Echoes of the Eternal* follows **Kaelen**—once tied to a vast **Living Archive** of memory—and the people caught between restoration and forgetting: shards of identity, old alliances, and a world still reacting to choices buried under amnesia. It is **my own story at its core**, with **expansions and rewrites shaped with Gemini** so the arc, side characters, and quest beats read like a **proper RPG**: clearer motives, richer dialogue, and room to grow as the game does.
+
+I am **vibecoding** much of this—experimenting, iterating, and learning in public—yet I would **love help** from anyone who wants to make it **nicer-looking and genuinely playable**: art passes, UI polish, balance, bugs, accessibility, and playtesting all count. **Storyline additions, changes, and expansions are welcome**; treat the narrative as a living draft. The aim is an **excellent free, open-source game** anyone can enjoy and build on.
+
 **License:** game source and scripts in this repository are under the [MIT License](LICENSE). Bundled third-party art and audio remain under their respective licenses — see [`docs/ASSET_LICENSES.md`](docs/ASSET_LICENSES.md) and [`assets/ATTRIBUTION.md`](assets/ATTRIBUTION.md).
 
 ## Community

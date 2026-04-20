@@ -154,6 +154,14 @@
       "side_quest_title": "Mirror of the Unforgotten",
       "side_quest_description": "Witness three memory rifts and accept a painful truth in each without rejecting the vision.",
       "side_quest_reward": "Passive: Steady Heart (reduced fear/slow effects in memory zones)"
+    },
+    "npc_oak_herald": {
+      "name": "Herald Corwin",
+      "location": "Oakhaven Gate",
+      "role": "Town Herald / Gate Keeper",
+      "speech_style": "Formal, measured, town-crier cadence.",
+      "key_phrase": "The bells still mark your road, Warden.",
+      "side_quest": ""
     }
   },
   "lookup": {
@@ -173,6 +181,7 @@
     "npc_cat_005": "Null",
     "npc_diplomat_006": "Mira Thenn",
     "npc_knight_007": "Ser Caldrin",
-    "npc_seer_008": "Nyx, the Mirror-Seer"
+    "npc_seer_008": "Nyx, the Mirror-Seer",
+    "npc_oak_herald": "Herald Corwin"
   }
 }

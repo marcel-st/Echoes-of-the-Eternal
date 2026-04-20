@@ -83,5 +83,10 @@
     "name": "Nyx",
     "portrait": "res://assets/sprites/portraits/nyx_001.png",
     "color": "#a8555e"
+  },
+  "npc_oak_herald": {
+    "name": "Herald Corwin",
+    "portrait": "res://assets/sprites/portraits/npc_oak_herald.png",
+    "color": "#4a91ab"
   }
 }

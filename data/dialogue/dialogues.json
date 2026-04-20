@@ -421,7 +421,7 @@
   "MERCHANT_SILAS_001_01": {
     "entries": [
       {
-        "speaker": "silas_001",
+        "speaker": "Silas the Chronos-Smith",
         "text": "The gears turn. What requires mending?"
       }
     ]
@@ -429,7 +429,7 @@
   "MERCHANT_SILAS_001_02": {
     "entries": [
       {
-        "speaker": "silas_001",
+        "speaker": "Silas the Chronos-Smith",
         "text": "History is a blade that needs constant sharpening."
       }
     ]
@@ -437,7 +437,7 @@
   "MERCHANT_SILAS_001_INSUFFICIENT": {
     "entries": [
       {
-        "speaker": "silas_001",
+        "speaker": "Silas the Chronos-Smith",
         "text": "Your thoughts are too shallow for this trade. Bring more Essence."
       }
     ]
@@ -445,7 +445,7 @@
   "MERCHANT_SILAS_001_UPGRADE": {
     "entries": [
       {
-        "speaker": "silas_001",
+        "speaker": "Silas the Chronos-Smith",
         "text": "It is restored. May it strike with the weight of a century."
       }
     ]

@@ -66,8 +66,11 @@ func start_dialogue(npc_id: String, dialogue_key: String) -> void:
 ## Emit dialogue_line_ready for the current speaker + text.
 ## Called by DialogueBox._advance_to_next_entry() just before rendering.
 func emit_line(speaker_token: String, text: String) -> void:
-	var char_id      := _resolve_character_id(speaker_token)
-	var display_name := _display_name_from(char_id, get_character(char_id))
+	var char_id   := _resolve_character_id(speaker_token)
+	var char_data := get_character(char_id)
+	# Prefer the name field from characters.json; fall back to the raw token so
+	# "Herald Corwin" is never mangled to "herald_corwin" by PortraitRegistry.
+	var display_name := String(char_data.get("name", ""))
 	if display_name.is_empty():
 		display_name = speaker_token
 	var portrait := get_portrait_path(char_id)

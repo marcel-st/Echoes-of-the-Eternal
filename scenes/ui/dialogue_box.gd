@@ -1,12 +1,11 @@
-extends Control
+extends CanvasLayer
 
-@onready var speaker_label: Label = $Panel/MarginContainer/VBoxContainer/HeaderContainer/SpeakerLabel
-@onready var line_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/TextLabel
-@onready var choices_container: VBoxContainer = $Panel/MarginContainer/VBoxContainer/ChoicesContainer
-@onready var hint_label: Label = $Panel/MarginContainer/VBoxContainer/HintLabel
-@onready var portrait_panel: ColorRect = $Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel
-@onready var portrait_label: Label = $Panel/MarginContainer/VBoxContainer/HeaderContainer/PortraitPanel/PortraitLabel
-@onready var _continue_arrow: TextureRect = $Panel/ContinueArrow
+@onready var speaker_label: Label = %SpeakerLabel
+@onready var line_label: RichTextLabel = %TextLabel
+@onready var choices_container: VBoxContainer = $Root/Panel/MarginContainer/HBox/TextColumn/ChoicesContainer
+@onready var hint_label: Label = $Root/Panel/MarginContainer/HBox/TextColumn/HintLabel
+@onready var portrait_rect: TextureRect = %Portrait
+@onready var _continue_arrow: TextureRect = $Root/Panel/ContinueArrow
 @onready var _typewriter_timer: Timer = %TypewriterTimer
 
 var _active_dialogue_id: StringName = &""
@@ -31,8 +30,27 @@ func _ready() -> void:
 	_typewriter_timer.wait_time = TYPEWRITER_SEC_PER_CHAR
 	if not _typewriter_timer.timeout.is_connected(_on_typewriter_timer_timeout):
 		_typewriter_timer.timeout.connect(_on_typewriter_timer_timeout)
+	if not DialogueManager.dialogue_line_ready.is_connected(_on_dialogue_line_ready):
+		DialogueManager.dialogue_line_ready.connect(_on_dialogue_line_ready)
 	EventBus.dialogue_requested.connect(_on_dialogue_requested)
 	EventBus.dialogue_closed.connect(_on_dialogue_closed)
+
+
+func _on_dialogue_line_ready(speaker_name: String, text: String, portrait_path: String) -> void:
+	if not visible:
+		return
+	speaker_label.text = speaker_name
+	_apply_portrait_texture(portrait_path)
+	_begin_typewriter_line(_format_body_for_richtext(text))
+
+
+func _apply_portrait_texture(portrait_path: String) -> void:
+	var trimmed := portrait_path.strip_edges()
+	if trimmed.is_empty() or not ResourceLoader.exists(trimmed):
+		portrait_rect.texture = null
+		return
+	var loaded := load(trimmed)
+	portrait_rect.texture = loaded as Texture2D
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -88,6 +106,10 @@ func _on_dialogue_requested(dialogue_id: StringName, context: Dictionary) -> voi
 	_choice_mode = false
 	_clear_choices()
 	_set_hint("E / Space: continue   Cancel: close")
+	speaker_label.text = ""
+	line_label.text = ""
+	portrait_rect.texture = null
+	_stop_typewriter()
 	visible = true
 	AudioManager.play_ui("open")
 	_advance_to_next_entry()
@@ -136,8 +158,7 @@ func _on_dialogue_closed(_dialogue_id: StringName) -> void:
 	_context.clear()
 	speaker_label.text = ""
 	line_label.text = ""
-	portrait_label.text = "?"
-	portrait_panel.color = Color(0.31, 0.46, 0.74, 1.0)
+	portrait_rect.texture = null
 	_clear_choices()
 	_stop_typewriter()
 	visible = false
@@ -179,10 +200,9 @@ func _advance_to_next_entry() -> void:
 
 		_current_entry = entry
 		var speaker_raw := String(entry.get("speaker", "Unknown"))
-		speaker_label.text = PortraitRegistry.resolve_display_name(speaker_raw)
-		_update_portrait(speaker_raw)
-		_begin_typewriter_line(_format_body_for_richtext(String(entry.get("text", ""))))
+		var text_raw    := String(entry.get("text", ""))
 		_set_hint("E / Space: continue   Cancel: close")
+		DialogueManager.emit_line(speaker_raw, text_raw)
 		return
 
 	_resolve_dialogue_end()
@@ -207,6 +227,7 @@ func _enter_choice_mode(raw_choices: Array) -> void:
 	choices_container.visible = true
 	_set_hint("Up/Down: select   E / Space: choose   Cancel: close")
 	_render_choices()
+	DialogueManager.emit_choices(_active_dialogue_id, _active_choices)
 
 
 func _confirm_choice() -> void:
@@ -220,6 +241,7 @@ func _confirm_choice() -> void:
 	_clear_choices()
 	choices_container.visible = false
 	_set_hint("E / Space: continue   Cancel: close")
+	DialogueManager.confirm_choice(_choice_index, selected)
 
 	if _apply_effects_from_value(selected.get("effect", null)):
 		return
@@ -310,28 +332,6 @@ func _format_body_for_richtext(raw: String) -> String:
 			p = p.substr(1).strip_edges()
 		lines[i] = p
 	return "\n".join(lines)
-
-
-func _update_portrait(speaker_token: String) -> void:
-	var color := PortraitRegistry.resolve_portrait_color(speaker_token)
-	portrait_panel.color = color
-	var portrait_name := PortraitRegistry.resolve_display_name(speaker_token)
-	portrait_label.text = _portrait_initials(portrait_name)
-
-
-func _portrait_initials(name: String) -> String:
-	var words := name.strip_edges().split(" ")
-	var initials := ""
-	for token in words:
-		var cleaned := token.strip_edges()
-		if cleaned.is_empty():
-			continue
-		initials += cleaned.substr(0, 1).to_upper()
-		if initials.length() >= 2:
-			break
-	if initials.is_empty():
-		return "?"
-	return initials
 
 
 func _apply_effects_from_value(effects: Variant) -> bool:

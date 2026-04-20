@@ -1,0 +1,87 @@
+{
+  "kaelen_001": {
+    "name": "Kaelen",
+    "portrait": "res://assets/sprites/portraits/kaelen_001.png",
+    "color": "#4f76bd"
+  },
+  "malakor_001": {
+    "name": "Malakor",
+    "portrait": "res://assets/sprites/portraits/malakor_001.png",
+    "color": "#9e4fbd"
+  },
+  "elara_001": {
+    "name": "Elara",
+    "portrait": "res://assets/sprites/portraits/elara_001.png",
+    "color": "#3f9e78"
+  },
+  "vaxas_001": {
+    "name": "General Vaxas",
+    "portrait": "res://assets/sprites/portraits/vaxas_001.png",
+    "color": "#c78540"
+  },
+  "the_smith_001": {
+    "name": "Silas the Chronos-Smith",
+    "portrait": "res://assets/sprites/portraits/the_smith_001.png",
+    "color": "#a8555e"
+  },
+  "ser_caldrin_001": {
+    "name": "Ser Caldrin",
+    "portrait": "res://assets/sprites/portraits/ser_caldrin_001.png",
+    "color": "#4a91ab"
+  },
+  "mira_thenn_001": {
+    "name": "Mira Thenn",
+    "portrait": "res://assets/sprites/portraits/mira_thenn_001.png",
+    "color": "#4f76bd"
+  },
+  "nyx_001": {
+    "name": "Nyx, the Mirror-Seer",
+    "portrait": "res://assets/sprites/portraits/nyx_001.png",
+    "color": "#9e4fbd"
+  },
+  "lord_veyr_001": {
+    "name": "Lord Veyr",
+    "portrait": "res://assets/sprites/portraits/lord_veyr_001.png",
+    "color": "#3f9e78"
+  },
+  "npc_baker_001": {
+    "name": "Bram",
+    "portrait": "res://assets/sprites/portraits/npc_baker_001.png",
+    "color": "#c78540"
+  },
+  "npc_knight_002": {
+    "name": "Sir Kestral",
+    "portrait": "res://assets/sprites/portraits/npc_knight_002.png",
+    "color": "#a8555e"
+  },
+  "npc_mercant_003": {
+    "name": "Milo the Scavenger",
+    "portrait": "res://assets/sprites/portraits/npc_mercant_003.png",
+    "color": "#4a91ab"
+  },
+  "npc_spirit_004": {
+    "name": "The Weeping Willow",
+    "portrait": "res://assets/sprites/portraits/npc_spirit_004.png",
+    "color": "#4f76bd"
+  },
+  "npc_cat_005": {
+    "name": "Null the Cat",
+    "portrait": "res://assets/sprites/portraits/npc_cat_005.png",
+    "color": "#9e4fbd"
+  },
+  "npc_diplomat_006": {
+    "name": "Mira Thenn",
+    "portrait": "res://assets/sprites/portraits/mira_thenn_001.png",
+    "color": "#3f9e78"
+  },
+  "npc_knight_007": {
+    "name": "Ser Caldrin",
+    "portrait": "res://assets/sprites/portraits/ser_caldrin_001.png",
+    "color": "#c78540"
+  },
+  "npc_seer_008": {
+    "name": "Nyx",
+    "portrait": "res://assets/sprites/portraits/nyx_001.png",
+    "color": "#a8555e"
+  }
+}

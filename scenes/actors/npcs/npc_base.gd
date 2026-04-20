@@ -35,6 +35,7 @@ var _facing := "down"
 
 
 func _ready() -> void:
+	add_to_group("npc")
 	_build_npc_sprite_frames()
 	_align_visual_feet_to_origin()
 	_configure_collision_shape()

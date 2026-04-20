@@ -30,13 +30,12 @@ func _ready() -> void:
 		push_warning("InteractPrompt: missing blip at %s" % KenneyPackPaths.UI_TICK_POP)
 	visible = false
 	if _glyph != null:
-		## Texture is assigned in `InteractPrompt.tscn` (Kenney Default 64×64 `keyboard_e.png`).
-		if _glyph.texture == null:
-			var tex := load(KenneyPackPaths.KEYBOARD_E)
-			if tex is Texture2D:
-				_glyph.texture = tex as Texture2D
-			else:
-				push_error("InteractPrompt: missing %s" % KenneyPackPaths.KEYBOARD_E)
+		var path := KenneyPackPaths.resolve_keyboard_e_texture_path()
+		var tex := load(path)
+		if tex is Texture2D:
+			_glyph.texture = tex as Texture2D
+		else:
+			push_error("InteractPrompt: missing keyboard E texture at %s" % path)
 		_bob_base_y = _glyph.position.y
 
 

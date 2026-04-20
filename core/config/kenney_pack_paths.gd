@@ -26,8 +26,16 @@ const UI_PANEL_INSET_BLUE := _R + "UI assets/UI Adventure Pack/PNG/panelInset_bl
 const INPUT_KB_DEFAULT := _R + "Icons/Input Prompts/Keyboard & Mouse/Default/"
 const INPUT_KB_DOUBLE := _R + "Icons/Input Prompts/Keyboard & Mouse/Double/"
 const INPUT_XBOX_DOUBLE := _R + "Icons/Input Prompts/Xbox Series/Double/"
-## Same art as Kenney `Default/keyboard_e.png` (sheet cell 640,320 @ 64×64); shipped under `assets/ui` so UI works without `kenney_pack/`.
+## Kenney bundle path after `tools/sync_kenney_pack_from_dot_resources.sh` (source: `.resources/Icons/.../keyboard_e.png`).
+const KEYBOARD_E_PACK := INPUT_KB_DEFAULT + "keyboard_e.png"
+## Fallback when `kenney_pack/` is absent (may differ from bundle import); prefer `resolve_keyboard_e_texture_path()`.
 const KEYBOARD_E := "res://assets/ui/input_prompt_keyboard_e.png"
+
+
+static func resolve_keyboard_e_texture_path() -> String:
+	if FileAccess.file_exists(KEYBOARD_E_PACK):
+		return KEYBOARD_E_PACK
+	return KEYBOARD_E
 #endregion
 
 #region Audio

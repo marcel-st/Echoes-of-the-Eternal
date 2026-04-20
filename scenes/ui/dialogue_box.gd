@@ -277,13 +277,17 @@ func _update_choice_index(delta: int) -> void:
 func _render_choices() -> void:
 	_clear_choices()
 	choices_container.visible = true
+	var inherited_font := speaker_label.get_theme_font("font")
 	for index in _active_choices.size():
 		var choice: Dictionary = _active_choices[index] as Dictionary
 		var row := Label.new()
 		row.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		var prefix := "   "
-		if index == _choice_index:
-			prefix = "> "
+		if inherited_font != null:
+			row.add_theme_font_override("font", inherited_font)
+		row.add_theme_font_size_override("font_size", 22)
+		var col := Color(0.94, 0.95, 0.97, 1.0) if index == _choice_index else Color(0.65, 0.68, 0.75, 1.0)
+		row.add_theme_color_override("font_color", col)
+		var prefix := "  " if index != _choice_index else "> "
 		row.text = "%s%s" % [prefix, String(choice.get("text", "..."))]
 		choices_container.add_child(row)
 

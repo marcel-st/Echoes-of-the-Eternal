@@ -1,19 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dialogueboxcanvas01"]
+[gd_scene load_steps=6 format=3 uid="uid://dialogueboxcanvas01"]
 
 [ext_resource type="Script" path="res://scenes/ui/dialogue_box.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/kenney_custom_atlas.png" id="2_atlas"]
+[ext_resource type="Texture2D" path="res://kenney_pack/UI assets/UI Adventure Pack/PNG/panel_blue.png" id="2_panel"]
 [ext_resource type="Texture2D" path="res://assets/ui/dialogue_arrow_blue_right.png" id="3_arrow"]
-[ext_resource type="FontFile" path="res://assets/fonts/Kenney_Pixel.ttf" id="4_font_pixel"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_main_panel"]
-atlas = ExtResource("2_atlas")
-region = Rect2(48, 80, 48, 48)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_portrait_frame"]
-atlas = ExtResource("2_atlas")
-region = Rect2(0, 80, 48, 48)
-filter_clip = true
+[ext_resource type="FontFile" path="res://assets/fonts/Kenney_Pixel.ttf" id="4_font"]
+[ext_resource type="Texture2D" path="res://kenney_pack/UI assets/UI Adventure Pack/PNG/panelInset_blue.png" id="5_portrait_panel"]
 
 [node name="DialogueBox" type="CanvasLayer"]
 layer = 48
@@ -40,30 +31,30 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -288.0
+offset_top = -300.0
 offset_right = -20.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 0
 texture_filter = 0
-texture = SubResource("AtlasTexture_main_panel")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+texture = ExtResource("2_panel")
+patch_margin_left = 4
+patch_margin_top = 7
+patch_margin_right = 4
+patch_margin_bottom = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="Root/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 10.0
-offset_right = -12.0
-offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
 
 [node name="HBox" type="HBoxContainer" parent="Root/Panel/MarginContainer"]
 layout_mode = 2
@@ -75,21 +66,21 @@ layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture_filter = 0
-texture = SubResource("AtlasTexture_portrait_frame")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+texture = ExtResource("5_portrait_panel")
+patch_margin_left = 2
+patch_margin_top = 5
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="PortraitBackdrop" type="ColorRect" parent="Root/Panel/MarginContainer/HBox/PortraitFrame"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -101,10 +92,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = -12.0
-offset_bottom = -12.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -115,13 +106,14 @@ stretch_mode = 5
 [node name="TextColumn" type="VBoxContainer" parent="Root/Panel/MarginContainer/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 6
 
 [node name="SpeakerLabel" type="Label" parent="Root/Panel/MarginContainer/HBox/TextColumn"]
 unique_name_in_owner = true
 layout_mode = 2
 vertical_alignment = 1
-theme_override_fonts/font = ExtResource("4_font_pixel")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 28
 theme_override_colors/font_color = Color(0.92, 0.94, 0.98, 1)
 text = "Speaker"
 
@@ -131,24 +123,25 @@ layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 fit_content = false
-scroll_active = true
+scroll_active = false
 autowrap_mode = 3
 custom_minimum_size = Vector2(0, 120)
 theme_override_colors/default_color = Color(0.94, 0.95, 0.97, 1)
-theme_override_fonts/normal_font = ExtResource("4_font_pixel")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_fonts/normal_font = ExtResource("4_font")
+theme_override_font_sizes/normal_font_size = 26
 theme_override_constants/line_separation = 6
 text = "Dialogue text appears here."
 
 [node name="ChoicesContainer" type="VBoxContainer" parent="Root/Panel/MarginContainer/HBox/TextColumn"]
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="HintLabel" type="Label" parent="Root/Panel/MarginContainer/HBox/TextColumn"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.76, 0.82, 1)
-theme_override_fonts/font = ExtResource("4_font_pixel")
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 18
 text = "Confirm: continue   Cancel: close"
 
 [node name="ContinueArrow" type="TextureRect" parent="Root/Panel"]
@@ -159,10 +152,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
+offset_left = -44.0
 offset_top = -36.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2

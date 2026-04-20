@@ -12,13 +12,14 @@ This project is a **Godot 4.6** top-down 2D RPG with data-driven narrative, ques
 | Path | Purpose |
 |------|---------|
 | `core/` | Autoload services: events, routing, save, settings, input, small UI helpers. |
+| `core/systems/` | **`DialogueManager`** — dialogue + portrait manager (global autoload). |
+| `core/audio/` | **`SoundManager`** — pooled **SFX** (`play_sfx`), music/ambience helpers; named Kenney paths via `KenneyPackPaths`. |
 | `scenes/` | Playable scenes: `main`, world maps, player, HUD, interactables. |
 | `gameplay/` | Gameplay systems (e.g. `quest_manager.gd`). |
-| `narrative/` | Dialogue, portraits, world flags. |
+| `narrative/` | Legacy dialogue scripts, portraits, world flags. |
 | `world/` | Lore catalog (`lore_manager.gd`) and world-adjacent logic. |
 | `audio/` | `AudioManager` — music, UI SFX, world SFX, ambience. |
-| `core/audio/` | **`SoundManager`** — pooled **SFX** (`play_sfx`), music/ambience helpers; named Kenney paths via `KenneyPackPaths`. |
-| `data/` | **Runtime** JSON consumed in-game (`dialogue/`, `quests/`, `items/`, `world/`, `npcs/`). |
+| `data/` | **Runtime** JSON consumed in-game (`dialogue/`, `quests/`, `items/`, `world/`, `npcs/`). `characters.json` at root holds per-character portrait paths and UI colours. |
 | `data/source/narrative/` | **Authoring** source for the importer (markdown + JSON). |
 | `tools/` | `import_narrative.py` — regenerates runtime `data/*` outputs. |
 | `docs/` | Design and process docs (narrative pipeline, art, alpha, **this guide**). |
@@ -43,8 +44,8 @@ Generated/editor caches are ignored (see `.gitignore`): `.godot/`, `builds/`, et
 | `SaveManager` | `core/save/save_manager.gd` | Slot save/load; coordinates `SaveData` + gameplay state. |
 | `SceneRouter` | `core/game/scene_router.gd` | Loads/unloads map scenes under `WorldRoot`; emits `map_changed`. |
 | `QuestManager` | `gameplay/quests/quest_manager.gd` | Loads `data/quests/quests.json`; tracks states and objective progress. |
-| `DialogueManager` | `narrative/dialogue/dialogue_manager.gd` | Loads `data/dialogue/dialogues.json`; runs dialogue requests. |
-| `PortraitRegistry` | `narrative/dialogue/portrait_registry.gd` | Speaker portraits for UI. |
+| `DialogueManager` | `core/systems/DialogueManager.gd` | Loads `data/dialogue/dialogues.json` + `data/characters.json`; drives `start_dialogue`, per-line signals, actor pausing. |
+| `PortraitRegistry` | `narrative/dialogue/portrait_registry.gd` | Speaker display-name resolution and 6-colour palette fallback. |
 | `WorldFlags` | `narrative/flags/world_flags.gd` | Key/value flags for conditions and story state. |
 | `LoreManager` | `world/lore_manager.gd` | Lore entries from `data/world/lore_entries.json`; discovery + runtime dialogue registration. |
 | `AudioManager` | `audio/audio_manager.gd` | Music tracks, UI/world SFX, ambience; listens to `EventBus.sfx_requested`. |
@@ -78,14 +79,79 @@ Full checklist and formats: **`docs/NARRATIVE_PIPELINE.md`**.
 
 ## NPCs and dialogue
 
-- **`npc_base.tscn` / `npc_base.gd`:** `Area2D` NPC with **`InteractPrompt`**. `interact()` only runs when the player is in range **and** the prompt is **visible** (so UI and intent stay aligned). Dialogue id resolution:
-  - `dialogue_by_flag_true` — if `WorldFlags` says a flag is **true**, use that dialogue id (e.g. repeat lines after `set_flag:…` in JSON outcomes).
-  - `dialogue_by_quest_state` — map quest id → `{ "state_string": "DIALOGUE_ID" }`.
-  - **`default_dialogue_id`** — fallback.
-- **Runtime lines:** `data/dialogue/dialogues.json` (ids are string keys, e.g. `NPC_HERALD_CORWIN_FIRST`). Outcomes can call `start_quest:…`, `set_flag:…`, `prompt:…`, etc. (see `DialogueManager.apply_effects` / `_apply_effect_token`).
-- **Opening the box:** call **`DialogueManager.request_dialogue(dialogue_id, context_dict)`** (or emit `EventBus.dialogue_requested`). The **`DialogueBox`** scene (`scenes/ui/DialogueBox.tscn`) listens and renders lines with a **Timer**-driven typewriter; per-character ticks use **`SoundManager.play_sfx("dialogue_blip", …)`**.
-- **Signals (movement / UI):** `EventBus.dialogue_started` / **`dialogue_finished`** / `dialogue_closed`. The player freezes on **`dialogue_started`** and unfreezes on **`dialogue_finished`** (emitted when `DialogueManager.close_active_dialogue()` runs, before `dialogue_closed`).
-- **Example — Herald Corwin (overworld):** `HeraldNPC` uses `default_dialogue_id = NPC_HERALD_CORWIN_FIRST` and `dialogue_by_flag_true` so `npc_corwin_met` selects **`NPC_HERALD_CORWIN_REPEAT`**. First conversation outcomes start **`MQ_01_AWAKENING`** (“The First Spark”) and set the met flag.
+### Starting dialogue
+
+The primary entry point is `DialogueManager.start_dialogue(npc_id, dialogue_key)`:
+
+```gdscript
+# From NPC interact(), scene trigger, cutscene, etc.
+DialogueManager.start_dialogue(“elara_001”, “MS_ACT1_01”)
+```
+
+This resolves the character's display name and portrait path from `data/characters.json`, freezes the NPC's `_process` (stopping wander and cooldown timers), then fires the dialogue pipeline through `EventBus.dialogue_requested`.
+
+For scripted triggers that don't involve a specific NPC node, call the lower-level form directly:
+
+```gdscript
+DialogueManager.request_dialogue(&”MS_MALAKOR_TAUNT_01”, { “speaker_id”: “malakor_001” })
+```
+
+### NPC scene setup
+
+- **`npc_base.tscn` / `npc_base.gd`:** `Area2D` NPC in group **`”npc”`** (added in `_ready`; required for `DialogueManager` to find and pause the node). Has an **`InteractPrompt`** child instanced from `scenes/ui/InteractPrompt.tscn`.
+- `interact()` only fires when the player is in range **and** the prompt is **visible**.
+- Dialogue id resolution order:
+  1. `dialogue_by_flag_true` — if a `WorldFlags` key is **true**, use that dialogue id.
+  2. `dialogue_by_quest_state` — map quest id → `{ “state_string”: “DIALOGUE_ID” }`.
+  3. **`default_dialogue_id`** — fallback.
+
+### DialogueBox rendering
+
+`scenes/ui/DialogueBox.tscn` (CanvasLayer, layer 48) subscribes to `DialogueManager.dialogue_line_ready` and renders each line with:
+
+- A **Timer-driven typewriter** (`TYPEWRITER_SEC_PER_CHAR = 0.038 s`); pressing Confirm while typing skips to full reveal.
+- **`SoundManager.play_sfx(“dialogue_blip”, -14.0, true)`** on every revealed character → `KenneyPackPaths.UI_TICK_TYPEWRITER` (`tick_001.ogg`) with random pitch jitter.
+- **Portrait area:** loads a `Texture2D` from the character's `”portrait”` path in `data/characters.json` when the file exists. When it doesn't, the `PortraitBackdrop` `ColorRect` is tinted with `PortraitRegistry.resolve_portrait_color()` so every speaker has a distinct colour identity before art ships.
+
+### Per-line and choice signals
+
+Connect these on `DialogueManager` to drive subtitles, voice-over, analytics, or any system that needs to react to spoken lines and player decisions:
+
+| Signal | Arguments | When |
+|--------|-----------|------|
+| `dialogue_line_ready` | `speaker_name, text, portrait_path` | Each new line is displayed |
+| `dialogue_choices_ready` | `dialogue_id, choices: Array` | Player is shown a choice list |
+| `dialogue_choice_made` | `dialogue_id, choice_index, choice_data` | Player confirms a choice (before effects run) |
+
+`dialogue_choice_made` is the recommended hook for **QuestManager** branching logic instead of coupling directly to the UI.
+
+### Effect tokens (dialogue JSON outcomes)
+
+Outcomes / effects in `data/dialogue/dialogues.json` are processed by `DialogueManager.apply_effects()`:
+
+| Token | Effect |
+|-------|--------|
+| `set_flag:key=value` | Sets a `WorldFlags` entry |
+| `start_quest:quest_id` | Calls `QuestManager.start_quest` |
+| `set_quest_state:quest_id:state` | Transitions quest state |
+| `complete_objective:quest_id:obj_id[:amount]` | Advances an objective counter |
+| `complete_quest:quest_id` | Marks quest complete |
+| `give_item:item_id[:amount]` | Emits `EventBus.item_received` |
+| `jump_to:dialogue_id` | Immediately loads another dialogue |
+| `prompt:text` | Emits `EventBus.request_ui_prompt` |
+| bare token | Sets that flag to `true` (shorthand) |
+
+### Movement locking
+
+The player freezes automatically on `EventBus.dialogue_started` (`_dialogue_movement_lock = true` in `player.gd`) and unfreezes on `EventBus.dialogue_finished`. `DialogueBox._unhandled_input` marks all input handled while the box is visible, so attack and interact actions do not bleed through.
+
+### InteractPrompt
+
+`scenes/ui/InteractPrompt.tscn` renders a Kenney keyboard-E glyph above NPCs. The `Glyph` Sprite2D is `scale = Vector2(0.25, 0.25)` — at the project's Camera2D zoom of 4× this renders the 64×64 source icon at 64×64 screen pixels, matching the pixel-art character proportions. The script (`interact_prompt.gd`) prefers the kenney_pack path at runtime and falls back to `res://assets/ui/input_prompt_keyboard_e.png`; the `.tscn` references the fallback directly so the editor preview is always correct.
+
+### Example — Herald Corwin (overworld)
+
+`HeraldNPC` uses `default_dialogue_id = NPC_HERALD_CORWIN_FIRST` and `dialogue_by_flag_true = { “npc_corwin_met”: “NPC_HERALD_CORWIN_REPEAT” }`. First-conversation outcomes run `start_quest:MQ_01_AWAKENING` and `set_flag:npc_corwin_met=true`.
 
 ## Lore plinths
 

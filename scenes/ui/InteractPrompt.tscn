@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8interactprompt01"]
+[gd_scene load_steps=3 format=3 uid="uid://c8interactprompt01"]
 
 [ext_resource type="Script" path="res://scenes/ui/interact_prompt.gd" id="1_prompt"]
+[ext_resource type="Texture2D" path="res://assets/ui/input_prompt_keyboard_e.png" id="2_glyph_tex"]
 
 [node name="InteractPrompt" type="Node2D"]
 visible = false
@@ -13,4 +14,5 @@ bus = "UI"
 [node name="Glyph" type="Sprite2D" parent="."]
 texture_filter = 0
 centered = true
-scale = Vector2(1, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_glyph_tex")

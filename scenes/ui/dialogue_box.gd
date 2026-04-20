@@ -5,8 +5,11 @@ extends CanvasLayer
 @onready var choices_container: VBoxContainer = $Root/Panel/MarginContainer/HBox/TextColumn/ChoicesContainer
 @onready var hint_label: Label = $Root/Panel/MarginContainer/HBox/TextColumn/HintLabel
 @onready var portrait_rect: TextureRect = %Portrait
+@onready var _portrait_backdrop: ColorRect = $Root/Panel/MarginContainer/HBox/PortraitFrame/PortraitBackdrop
 @onready var _continue_arrow: TextureRect = $Root/Panel/ContinueArrow
 @onready var _typewriter_timer: Timer = %TypewriterTimer
+
+const _BACKDROP_DEFAULT := Color(0.08, 0.09, 0.12, 1.0)
 
 var _active_dialogue_id: StringName = &""
 var _entries: Array = []
@@ -40,17 +43,21 @@ func _on_dialogue_line_ready(speaker_name: String, text: String, portrait_path: 
 	if not visible:
 		return
 	speaker_label.text = speaker_name
-	_apply_portrait_texture(portrait_path)
+	_apply_portrait(speaker_name, portrait_path)
 	_begin_typewriter_line(_format_body_for_richtext(text))
 
 
-func _apply_portrait_texture(portrait_path: String) -> void:
+## Loads a portrait sprite from portrait_path when it exists; otherwise tints
+## the backdrop with the character's colour from PortraitRegistry so every
+## speaker has a distinct visual identity even before portrait art ships.
+func _apply_portrait(speaker_name: String, portrait_path: String) -> void:
 	var trimmed := portrait_path.strip_edges()
-	if trimmed.is_empty() or not ResourceLoader.exists(trimmed):
+	if not trimmed.is_empty() and ResourceLoader.exists(trimmed):
+		portrait_rect.texture = load(trimmed) as Texture2D
+		_portrait_backdrop.color = _BACKDROP_DEFAULT
+	else:
 		portrait_rect.texture = null
-		return
-	var loaded := load(trimmed)
-	portrait_rect.texture = loaded as Texture2D
+		_portrait_backdrop.color = PortraitRegistry.resolve_portrait_color(speaker_name)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -109,6 +116,7 @@ func _on_dialogue_requested(dialogue_id: StringName, context: Dictionary) -> voi
 	speaker_label.text = ""
 	line_label.text = ""
 	portrait_rect.texture = null
+	_portrait_backdrop.color = _BACKDROP_DEFAULT
 	_stop_typewriter()
 	visible = true
 	AudioManager.play_ui("open")
@@ -159,6 +167,7 @@ func _on_dialogue_closed(_dialogue_id: StringName) -> void:
 	speaker_label.text = ""
 	line_label.text = ""
 	portrait_rect.texture = null
+	_portrait_backdrop.color = _BACKDROP_DEFAULT
 	_clear_choices()
 	_stop_typewriter()
 	visible = false

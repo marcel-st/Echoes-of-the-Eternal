@@ -181,6 +181,28 @@
           "Bring me three grievances from opposing houses, each stamped and witnessed.",
           "If you can hold contradictions without drawing steel, we may avoid a civil collapse."
         ]
+      },
+      {
+        "id": "NPC_HERALD_CORWIN_FIRST",
+        "speaker": "npc_oak_herald",
+        "quest_id": "MQ_01_AWAKENING",
+        "state": "not_started",
+        "lines": [
+          "Kaelen—ink on the wind said you might pass this gate again.",
+          "The First Spark is stirring: speak to Elara in the Oakhaven Archives before the thread frays.",
+          "The Herald's word is given."
+        ],
+        "action": "herald_corwin_met"
+      },
+      {
+        "id": "NPC_HERALD_CORWIN_REPEAT",
+        "speaker": "npc_oak_herald",
+        "quest_id": "MQ_01_AWAKENING",
+        "state": "active",
+        "lines": [
+          "The bells still mark your road, Warden.",
+          "Elara keeps a lantern by the old shelves."
+        ]
       }
     ],
     "merchant_dialogue": {

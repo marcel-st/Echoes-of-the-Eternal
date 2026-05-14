@@ -1,7 +1,4 @@
-import os
-
-# Define the markdown content for the story outline
-story_outline = """# Echoes of the Eternal: Story Outline & Narrative Design (Canon Expansion)
+# Echoes of the Eternal: Story Outline & Narrative Design (Canon Expansion)
 
 **Game Style:** Top-down 2D Action RPG (Zelda-like)  
 **Estimated Playtime:** 25+ Hours  
@@ -98,4 +95,3 @@ Instead of traditional XP, players spend **Essence of Thought** (dropped by enem
 ## 7. Narrative Design Tips for Cursor
 * **Environmental Storytelling:** Since it's a Zelda-like, use the map! A broken statue in Act I should be "Remembered" and fixed in Act II to reveal a secret.
 * **Dialogue Portraits:** Use different portraits for Kaelen as he regains his memory—starting with a hooded, shadowed face and ending with a clear, determined warrior.
-"""

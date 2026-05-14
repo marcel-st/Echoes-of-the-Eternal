@@ -158,10 +158,11 @@
     "npc_oak_herald": {
       "name": "Herald Corwin",
       "location": "Oakhaven Gate",
-      "role": "Town Herald / Gate Keeper",
       "speech_style": "Formal, measured, town-crier cadence.",
       "key_phrase": "The bells still mark your road, Warden.",
-      "side_quest": ""
+      "side_quest_title": "",
+      "side_quest_description": "",
+      "side_quest_reward": ""
     }
   },
   "lookup": {

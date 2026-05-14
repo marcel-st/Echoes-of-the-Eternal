@@ -17,7 +17,8 @@ This project is a **Godot 4.6** top-down 2D RPG with data-driven narrative, ques
 | `scenes/` | Playable scenes: `main`, world maps, player, HUD, interactables. |
 | `gameplay/` | Gameplay systems (e.g. `quest_manager.gd`). |
 | `narrative/` | Legacy dialogue scripts, portraits, world flags. |
-| `world/` | Lore catalog (`lore_manager.gd`) and world-adjacent logic. |
+| `world/` | Lore catalog (`lore_manager.gd`), Tiny Town tile constants, and procedural world painters. |
+| `assets/tilesets/` | Generated runtime TileSet resources such as `tiny_town.tres`. |
 | `audio/` | `AudioManager` — music, UI SFX, world SFX, ambience. |
 | `data/` | **Runtime** JSON consumed in-game (`dialogue/`, `quests/`, `items/`, `world/`, `npcs/`). `characters.json` at root holds per-character portrait paths and UI colours. |
 | `data/source/narrative/` | **Authoring** source for the importer (markdown + JSON). |
@@ -58,6 +59,9 @@ Generated/editor caches are ignored (see `.gitignore`): `.godot/`, `builds/`, et
 - **Maps** live under `scenes/world/*.tscn` with optional sibling `*.gd` for `resolve_transition(player_position)` returning a dictionary with `map_scene_path` and `spawn_id`, or empty prompt behavior.
 - **Player** is `scenes/player/player.tscn` (group `player`). Movement and combat hooks live in `player.gd`.
 - **Map change:** `main.gd` listens for transition zones and calls `SceneRouter.request_map_change(...)` when the player confirms.
+- **Outdoor map painting:** map scripts call `world/world_painter.gd` in `_ready()` to build terrain from `assets/tilesets/tiny_town.tres`. Add new Tiny Town atlas cells to `world/tiny_town_tiles.gd` before using them.
+- **Village structures:** `scenes/objects/VillageHouse.tscn` is the current Oakhaven house prefab. Keep collision aligned to the visible facade so the player cannot walk through walls or roofs.
+- **Minimap:** `scenes/ui/minimap.gd` is attached through `scenes/ui/hud.tscn`. It reads the current player/world state and draws the region, player dot, and objective marker in the top-right HUD.
 
 ## Narrative pipeline (summary)
 
@@ -99,7 +103,8 @@ DialogueManager.request_dialogue(&”MS_MALAKOR_TAUNT_01”, { “speaker_id”:
 ### NPC scene setup
 
 - **`npc_base.tscn` / `npc_base.gd`:** `Area2D` NPC in group **`”npc”`** (added in `_ready`; required for `DialogueManager` to find and pause the node). Has an **`InteractPrompt`** child instanced from `scenes/ui/InteractPrompt.tscn`.
-- `interact()` only fires when the player is in range **and** the prompt is **visible**.
+- `interact()` fires when the player is inside the prompt area or the NPC grace radius. This keeps dialogue usable when the player is one step outside the visible prompt but still clearly next to the character.
+- The player tracks overlapping interaction targets and prefers the highest `get_interaction_priority()` value. NPCs return `100`; lore plinths return `10`.
 - Dialogue id resolution order:
   1. `dialogue_by_flag_true` — if a `WorldFlags` key is **true**, use that dialogue id.
   2. `dialogue_by_quest_state` — map quest id → `{ “state_string”: “DIALOGUE_ID” }`.
@@ -157,6 +162,19 @@ The player freezes automatically on `EventBus.dialogue_started` (`_dialogue_move
 
 - **`lore_plinth.tscn`:** `lore_entry_id` ties to `data/world/lore_entries.json` via `LoreManager`.
 - Discoveries persist through **`SaveManager`** / `SaveData.lore_discovered` and emit **`EventBus.lore_discovered`** for autosave and UI refresh.
+- Lore plinths use a smaller interaction radius than NPCs and lower interaction priority. Keep them physically separated from main quest NPCs, otherwise a player can stand in overlapping interaction areas and get ambiguous prompts.
+
+## Content validation and smoke checks
+
+Use these lightweight checks before committing gameplay or narrative changes:
+
+```bash
+python3 tools/validate_content.py
+godot --headless --path . --script tools/smoke_load_worlds.gd
+godot --headless --path . --quit-after 2
+```
+
+`tools/validate_content.py` checks generated dialogue, NPC, quest, item, and lore references. `tools/smoke_load_worlds.gd` instantiates the world scenes headlessly so missing resources and scene parse errors are caught before manual playtesting.
 
 ## Saves
 
@@ -173,8 +191,9 @@ The player freezes automatically on `EventBus.dialogue_started` (`_dialogue_move
 1. **Data first** (if narrative-driven): edit `data/source/narrative/*`, run `import_narrative.py`, verify generated JSON.
 2. **Runtime code:** extend the smallest surface (one manager or one scene) and connect via **`EventBus`** where possible.
 3. **Scenes:** prefer instancing existing patterns (`npc_base`, `lore_plinth`, map `Area2D` gates).
-4. **Save/load:** if it is player progress, extend `SaveData` + import/export in `SaveManager` + any `main.gd` hooks.
-5. **Export sanity:** run a **Release** export locally (see **`docs/BUILD.md`**) before tagging.
+4. **World art:** add Tiny Town tile roles through `world/tiny_town_tiles.gd` and map painter functions rather than hard-coded atlas coordinates.
+5. **Save/load:** if it is player progress, extend `SaveData` + import/export in `SaveManager` + any `main.gd` hooks.
+6. **Export sanity:** run a **Release** export locally (see **`docs/BUILD.md`**) before tagging.
 
 ## Debugging tips
 
@@ -187,5 +206,5 @@ The player freezes automatically on `EventBus.dialogue_started` (`_dialogue_move
 - **`docs/NARRATIVE_PIPELINE.md`** — author → runtime data workflow.
 - **`docs/BUILD.md`** — export templates, Linux build, CI notes, headless import.
 - **`docs/PLAYER_GUIDE.md`** — controls and gameplay orientation for testers.
-- **`docs/ART_DIRECTION.md`**, **`docs/ASSET_LICENSES.md`**, **`assets/ATTRIBUTION.md`** — visual and legal source of truth for art/audio.
+- **`docs/ART_DIRECTION.md`**, **`docs/WORLD_ASSET_ANALYSIS.md`**, **`docs/ASSET_LICENSES.md`**, **`assets/ATTRIBUTION.md`** — visual and legal source of truth for art/audio.
 - **`CONTRIBUTING.md`**, **`SECURITY.md`**, **`CODE_OF_CONDUCT.md`** — community and GitHub hygiene at repo root.

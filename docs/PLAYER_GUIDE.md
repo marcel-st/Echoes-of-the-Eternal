@@ -36,6 +36,7 @@ Exact bindings may follow your OS layout; see in-game HUD hints when available.
 - **Open the journal** with Esc / Start to see **active quests** and **discovered lore** titles.
 - **Explore map exits** — when you stand in a travel zone, the HUD shows a confirm prompt; press **Interact** (or the same binding shown) to change regions.
 - **Inspect lore plinths** for world text (counts toward your journal’s lore list when discovered).
+- **Use the minimap** in the top-right to orient yourself. The player dot shows your position and the marker points toward the current objective, such as Herald Corwin, a gate, or a region goal.
 
 ## Saves
 

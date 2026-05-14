@@ -1,7 +1,4 @@
-import os
-
-# Define the markdown content for the world lore
-world_lore = """# The Lore of Aethelgard: The World of Echoes
+# The Lore of Aethelgard: The World of Echoes
 
 This document serves as the historical and cultural foundation for the world of **Aethelgard**. Use these details to flavor NPC dialogue, item descriptions, and environmental design.
 
@@ -75,5 +72,4 @@ Malakor’s army consists of:
 ---
 
 ## 7. Current World State
-The world is "fragile." Areas that Kaelen hasn't "Remembered" yet should appear desaturated or slightly blurry (a great visual effect for your Pygame implementation). As you collect Shards, the world regains its color and music becomes more complex.
-"""
+The world is "fragile." Areas that Kaelen hasn't "Remembered" yet should appear desaturated or slightly blurry. As you collect Shards, the world regains its color and music becomes more complex.

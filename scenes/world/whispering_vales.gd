@@ -1,9 +1,11 @@
 extends Node2D
 
+const WorldPainter := preload("res://world/world_painter.gd")
 const OVERWORLD := "res://scenes/world/overworld.tscn"
 const SUNKEN_LIBRARY := "res://scenes/world/sunken_library_entry.tscn"
 
 func _ready() -> void:
+	WorldPainter.paint_vales(self)
 	EventBus.request_ui_prompt.emit("Whispering Vales: the trees murmur forgotten names.")
 	LoreManager.mark_entry_discovered("world_lore_006")
 
@@ -20,5 +22,4 @@ func resolve_transition(player_position: Vector2) -> Dictionary:
 			"spawn_id": "from_vales_west",
 		}
 	return {}
-
 

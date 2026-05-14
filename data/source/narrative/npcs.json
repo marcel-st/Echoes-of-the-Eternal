@@ -167,6 +167,27 @@
         "reward": "Passive: Steady Heart (reduced fear/slow effects in memory zones)",
         "narrative_impact": "Deepens Kaelen's voiced introspection and unlocks final pre-citadel dialogue with Elara."
       }
+    },
+    {
+      "id": "npc_oak_herald",
+      "name": "Herald Corwin",
+      "location": "Oakhaven Gate",
+      "gender": "Male",
+      "visuals": {
+        "description": "An elderly town herald in a patched blue tabard, carrying a bell and a bundle of archive notices.",
+        "quirk": "Recites village news as if each announcement is a sacred record."
+      },
+      "speech": {
+        "style": "Formal, measured, town-crier cadence.",
+        "key_phrase": "The bells still mark your road, Warden."
+      },
+      "side_quest": {
+        "title": "",
+        "description": "",
+        "requirement": "",
+        "reward": "",
+        "narrative_impact": "Points Kaelen toward Elara and the first main quest without becoming a separate quest chain."
+      }
     }
   ]
 }

@@ -26,6 +26,7 @@ if [[ -z "${GODOT_BIN}" || ! -x "${GODOT_BIN}" ]]; then
 fi
 
 python3 tools/import_narrative.py
+python3 tools/validate_content.py
 
 OUT_DIR="${ROOT}/builds/linux"
 mkdir -p "$OUT_DIR"

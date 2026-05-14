@@ -339,6 +339,49 @@
       "set_quest_state:SQ_MIRA_01:active"
     ]
   },
+  "NPC_HERALD_CORWIN_FIRST": {
+    "entries": [
+      {
+        "speaker": "Herald Corwin",
+        "text": "Kaelen—ink on the wind said you might pass this gate again."
+      },
+      {
+        "speaker": "Herald Corwin",
+        "text": "The First Spark is stirring: speak to Elara in the Oakhaven Archives before the thread frays."
+      },
+      {
+        "speaker": "Herald Corwin",
+        "text": "The Herald's word is given."
+      }
+    ],
+    "meta": {
+      "quest_id": "MQ_01_AWAKENING",
+      "state": "not_started",
+      "action": "herald_corwin_met"
+    },
+    "outcomes": [
+      "start_quest:MQ_01_AWAKENING",
+      "set_quest_state:MQ_01_AWAKENING:active",
+      "set_flag:npc_corwin_met=true",
+      "prompt:Journal updated: The First Spark"
+    ]
+  },
+  "NPC_HERALD_CORWIN_REPEAT": {
+    "entries": [
+      {
+        "speaker": "Herald Corwin",
+        "text": "The bells still mark your road, Warden."
+      },
+      {
+        "speaker": "Herald Corwin",
+        "text": "Elara keeps a lantern by the old shelves."
+      }
+    ],
+    "meta": {
+      "quest_id": "MQ_01_AWAKENING",
+      "state": "active"
+    }
+  },
   "SQ_MILO_01": {
     "entries": [
       {
@@ -396,27 +439,6 @@
     "meta": {
       "condition": "location_battlefield"
     }
-  },
-  "NPC_HERALD_CORWIN_FIRST": {
-    "entries": [
-      {
-        "speaker": "Herald Corwin",
-        "text": "Kaelen—ink on the wind said you might pass this gate again. The First Spark is stirring: speak to Elara in the Oakhaven Archives before the thread frays. The Herald's word is given."
-      }
-    ],
-    "outcomes": [
-      "start_quest:MQ_01_AWAKENING",
-      "set_flag:npc_corwin_met=true",
-      "prompt:Journal — The First Spark: Speak to Elara in the Oakhaven Archives."
-    ]
-  },
-  "NPC_HERALD_CORWIN_REPEAT": {
-    "entries": [
-      {
-        "speaker": "Herald Corwin",
-        "text": "The bells still mark your road, Warden. Elara keeps a lantern by the old shelves."
-      }
-    ]
   },
   "MERCHANT_SILAS_001_01": {
     "entries": [
@@ -699,6 +721,18 @@
       {
         "speaker": "Nyx, the Mirror-Seer",
         "text": "Reward: Passive: Steady Heart (reduced fear/slow effects in memory zones)"
+      }
+    ]
+  },
+  "NPC_NPC_OAK_HERALD_INTRO": {
+    "entries": [
+      {
+        "speaker": "Herald Corwin",
+        "text": "The bells still mark your road, Warden."
+      },
+      {
+        "speaker": "Herald Corwin",
+        "text": "Reward: "
       }
     ]
   },

@@ -117,6 +117,8 @@ def _build_speaker_lookup(
         if not entry_id:
             continue
         lookup[entry_id] = str(entry.get("name", entry_id))
+        if entry_id == "the_smith_001":
+            lookup["silas_001"] = str(entry.get("name", entry_id))
 
     for entry in npcs_payload.get("sidequest_npcs", []):
         if not isinstance(entry, dict):
@@ -196,6 +198,14 @@ def _action_to_effects(node_id: str, action: str) -> list[str]:
                 "give_item:art_heart_piece:1",
                 "complete_quest:SQ_BRAM_01",
                 "prompt:Received Fragment of Vitality",
+            ]
+        )
+    elif action_token == "herald_corwin_met":
+        mapped.extend(
+            [
+                "set_flag:npc_corwin_met=true",
+                "start_quest:MQ_01_AWAKENING",
+                "prompt:Journal updated: The First Spark",
             ]
         )
     else:

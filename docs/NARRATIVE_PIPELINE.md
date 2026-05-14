@@ -108,3 +108,11 @@ This order reduces dependency mismatches while building.
 - Circular quest dependencies
 - Reward definitions with unknown items
 
+Run these commands from the repository root after editing narrative source:
+
+```bash
+python3 tools/import_narrative.py
+python3 tools/validate_content.py
+```
+
+`import_narrative.py` regenerates runtime JSON. `validate_content.py` checks that generated dialogue, lore, NPC, quest, and item references are still consistent before export.

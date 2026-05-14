@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/journal_panel.tscn" id="2_journal"]
+[ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="3_minimap"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -39,3 +40,16 @@ text = "System prompt output appears here."
 theme_override_colors/font_color = Color(0.980392, 0.941176, 0.764706, 1)
 
 [node name="JournalPanel" parent="." instance=ExtResource("2_journal")]
+
+[node name="MiniMap" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -132.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 108.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("3_minimap")

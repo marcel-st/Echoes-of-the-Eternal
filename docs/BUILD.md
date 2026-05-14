@@ -25,6 +25,7 @@ Whenever you edit files under `data/source/narrative/`:
 ```bash
 cd /path/to/Echoes-of-the-Eternal
 python3 tools/import_narrative.py
+python3 tools/validate_content.py
 ```
 
 Outputs include (among others):
@@ -36,6 +37,8 @@ Outputs include (among others):
 - `data/npcs/npc_registry.json`
 
 Commit these when you want the repo to reflect the new narrative state, or regenerate in CI before export.
+
+`tools/validate_content.py` checks generated dialogue, NPC, quest, item, and lore references after import. The Linux export script runs both import and validation before exporting.
 
 ## First-time asset import (CLI)
 
@@ -94,6 +97,7 @@ chmod +x echoes-of-the-eternal.x86_64
 
 ```bash
 python3 tools/import_narrative.py
+python3 tools/validate_content.py
 godot4 --headless --path . --export-release "Linux/X11" "builds/linux/echoes-of-the-eternal.x86_64"
 ```
 
@@ -118,6 +122,7 @@ godot4 --headless --path . --export-release --help
 | Export fails: missing templates | Export templates not installed | Install templates matching your Godot version |
 | Export fails: parse errors in `.tscn` | Scene saved by a newer incompatible format | Open and re-save in your 4.2.x editor, or align engine versions |
 | Game runs but no dialogue | Stale or missing `data/dialogue/dialogues.json` | Run `import_narrative.py` |
+| Dialogue or lore opens from the wrong object | Overlapping interaction areas | Move interactables apart; NPCs have higher priority, but scene layout should avoid overlap |
 | Silent `sfx_requested` | Old build or wrong bus | Verify `EventBus` wiring and `AudioManager` autoload order |
 | Linux binary won’t start | Missing `.pck` beside executable | Keep both release artifacts together |
 
@@ -126,9 +131,11 @@ godot4 --headless --path . --export-release --help
 A minimal pipeline would:
 
 1. `python3 tools/import_narrative.py`
-2. Download pinned Godot + templates
-3. `godot --headless --path . --export-release "Linux/X11" dist/echoes-of-the-eternal.x86_64`
-4. Upload `dist/*.x86_64` + `dist/*.pck` as release assets
+2. `python3 tools/validate_content.py`
+3. Download pinned Godot + templates
+4. `godot --headless --path . --script tools/smoke_load_worlds.gd`
+5. `godot --headless --path . --export-release "Linux/X11" dist/echoes-of-the-eternal.x86_64`
+6. Upload `dist/*.x86_64` + `dist/*.pck` as release assets
 
 ## Related docs
 

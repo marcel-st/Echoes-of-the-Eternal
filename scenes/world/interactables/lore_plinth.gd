@@ -3,7 +3,7 @@ extends Area2D
 @export var lore_entry_id: String = ""
 @export var prompt_text: String = "Inspect [E]"
 @export var display_name: String = "Lore Plinth"
-@export var interaction_radius: float = 52.0
+@export var interaction_radius: float = 44.0
 @export var lore_title: String = ""
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -48,6 +48,10 @@ func interact(_actor: Node = null) -> void:
 	DialogueManager.request_dialogue(StringName(dialogue_id), {"lore_entry_id": lore_entry_id})
 	EventBus.sfx_requested.emit(&"interact", -8.0)
 	_cooldown = 0.3
+
+
+func get_interaction_priority() -> int:
+	return 10
 
 
 func _on_body_entered(body: Node) -> void:

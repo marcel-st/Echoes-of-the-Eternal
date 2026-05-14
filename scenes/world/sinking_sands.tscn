@@ -27,7 +27,7 @@ modulate = Color(1, 0.8, 0.58, 0.24)
 [node name="SpawnStart" type="Marker2D" parent="."]
 position = Vector2(960, 520)
 
-[node name="Spawn_from_oakhaven_north" type="Marker2D" parent="."]
+[node name="Spawn_from_oakhaven_east" type="Marker2D" parent="."]
 position = Vector2(960, 140)
 
 [node name="Spawn_from_cinder_south" type="Marker2D" parent="."]

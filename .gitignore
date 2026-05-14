@@ -2,6 +2,8 @@
 .import/
 *.import
 .DS_Store
+Screenshot_*.png
+.claude/
 # Kenney all-in-one bundle (copy or extract here; see core/config/kenney_pack_paths.gd)
 kenney_pack
 # Local mirror of Kenney / asset bundles (not committed; use tools/sync_kenney_pack_from_dot_resources.sh)

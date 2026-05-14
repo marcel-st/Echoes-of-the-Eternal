@@ -6,6 +6,7 @@ const NPC_ATLAS_COLS := 12
 const NPC_CELL_DOWN := 86
 const NPC_CELL_UP := 75
 const NPC_CELL_SIDE := 87
+const INTERACTION_GRACE_MARGIN := 64.0
 
 @export var npc_id: StringName = &"npc_generic"
 @export var display_name: String = "Villager"
@@ -59,10 +60,10 @@ func _process(delta: float) -> void:
 
 
 func interact(_actor: Node = null) -> void:
-	if not _player_in_range:
+	if not _can_actor_interact(_actor):
 		return
 	## Only open dialogue when the prompt is shown (player in range and UI ready).
-	if interact_prompt != null and not interact_prompt.visible:
+	if interact_prompt != null and not interact_prompt.visible and not _is_actor_within_grace(_actor):
 		return
 	if _cooldown_timer > 0.0:
 		return
@@ -79,6 +80,22 @@ func interact(_actor: Node = null) -> void:
 		}
 	)
 	_cooldown_timer = interaction_cooldown_seconds
+
+
+func get_interaction_priority() -> int:
+	return 100
+
+
+func _can_actor_interact(actor: Node) -> bool:
+	if _player_in_range:
+		return true
+	return _is_actor_within_grace(actor)
+
+
+func _is_actor_within_grace(actor: Node) -> bool:
+	if not (actor is Node2D):
+		return false
+	return global_position.distance_to((actor as Node2D).global_position) <= interaction_radius + INTERACTION_GRACE_MARGIN
 
 
 func _on_body_entered(body: Node) -> void:

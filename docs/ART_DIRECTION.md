@@ -13,9 +13,12 @@ This document defines the visual direction for Echoes of the Eternal so the game
 
 - Character sprite baseline: **32x48** pixels.
 - Small props: **16x16** or **32x32**.
-- Major props/structures: multiples of 16.
+- Major props/structures: multiples of 16, visually scaled against the current 2.4x-2.5x character sprites. A walkable village house should read as at least 2-3 characters wide and taller than a character.
 - Keep nearest-neighbor filtering for world sprites.
 - Avoid mixed texel density within the same region.
+- Approved Tiny Town atlas coordinates live in `world/tiny_town_tiles.gd`; do not add raw atlas coordinates directly to map painters.
+- Outdoor world maps are painted through `world/world_painter.gd` using `assets/tilesets/tiny_town.tres`. Add new atlas cells by naming them in `world/tiny_town_tiles.gd` first, then use the named constant from a painter.
+- Village buildings use prefab scenes rather than one-off TileMap stamps. `scenes/objects/VillageHouse.tscn` is the current scale reference for Oakhaven houses.
 
 ## 3) Color and palette system
 
@@ -57,6 +60,7 @@ Rules:
 - Use one icon family for all journal/dialogue/menu icons.
 - Portrait panel style must be consistent between all dialogues.
 - Keep UI scale readable on 1280x720 (Steam Deck).
+- The HUD minimap is a functional navigation aid, not decorative art. It should show the current region, player position, and the active objective marker without covering dialogue or prompts.
 
 ## 7) Animation quality bar
 
@@ -73,3 +77,5 @@ Minimum target:
 - No mixed perspective angle between tiles and sprites.
 - No unlicensed assets.
 - Attribution entries added for every non-CC0 resource.
+- Screenshot review passes should use local `Screenshot_*.png` files only; these are ignored and should not be committed.
+- Interaction objects should not visually overlap their gameplay radius with quest NPCs unless intentionally designed. Lore plinths use a lower interaction priority than NPCs and should be placed away from primary dialogue clusters.

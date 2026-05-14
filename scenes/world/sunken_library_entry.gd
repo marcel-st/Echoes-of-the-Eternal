@@ -1,10 +1,12 @@
 extends Node2D
 
+const WorldPainter := preload("res://world/world_painter.gd")
 const OVERWORLD := "res://scenes/world/overworld.tscn"
 const WHISPERING_VALES := "res://scenes/world/whispering_vales.tscn"
 
 
 func _ready() -> void:
+	WorldPainter.paint_library(self)
 	EventBus.request_ui_prompt.emit("Sunken Library approach: knowledge sleeps beneath the waterline.")
 	LoreManager.mark_entry_discovered("world_lore_009")
 
@@ -13,12 +15,12 @@ func resolve_transition(player_position: Vector2) -> Dictionary:
 	if player_position.x <= 24.0:
 		return {
 			"map_scene_path": WHISPERING_VALES,
-			"spawn_id": "from_library_east",
+			"spawn_id": "from_library_west",
 		}
 	if player_position.y >= 1048.0:
 		return {
 			"map_scene_path": OVERWORLD,
-			"spawn_id": "from_library_north",
+			"spawn_id": "from_sunken_library",
 		}
 	return {}
 

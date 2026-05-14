@@ -13,6 +13,8 @@ const PLAYER_ATLAS_COLS := 12
 ## Tile 103 = sword icon — drawn on `SwordSprite` and tweened during attack (body stays on 86).
 const PLAYER_HERO_CELL := 86
 const PLAYER_ATTACK_SWING_CELL := 103
+const NPC_INTERACTION_GRACE_RADIUS := 112.0
+const NPC_INTERACTION_GRACE_MARGIN := 64.0
 
 ## Kenney Impact Sounds — soft grass footstep variants (see `.resources/Audio/Impact Sounds/Audio/`).
 const FOOTSTEP_STREAM_PATHS: PackedStringArray = [
@@ -35,6 +37,7 @@ const PLAYER_ATLAS_FRAMES := {
 }
 
 var _interaction_target: Node = null
+var _interaction_targets: Array[Node] = []
 var _facing := "down"
 var _facing_sign := 1
 var _action_lock := false
@@ -105,12 +108,16 @@ func warp_to_spawn(_spawn_id: StringName, map_root: Node) -> void:
 
 
 func set_interaction_target(target: Node) -> void:
-	_interaction_target = target
+	if target == null:
+		return
+	if not _interaction_targets.has(target):
+		_interaction_targets.append(target)
+	_refresh_interaction_target()
 
 
 func clear_interaction_target(target: Node) -> void:
-	if _interaction_target == target:
-		_interaction_target = null
+	_interaction_targets.erase(target)
+	_refresh_interaction_target()
 
 
 func _on_dialogue_started(_dialogue_id: String) -> void:
@@ -122,10 +129,70 @@ func _on_dialogue_finished(_dialogue_id: String) -> void:
 
 
 func _interact() -> void:
+	_refresh_interaction_target()
+	var nearby_npc := _nearest_nearby_npc()
+	if nearby_npc != null and nearby_npc.has_method("interact"):
+		nearby_npc.call("interact", self)
+		return
 	if _interaction_target != null and _interaction_target.has_method("interact"):
 		_interaction_target.call("interact", self)
 		return
 	EventBus.request_ui_prompt.emit("No one is close enough to interact.")
+
+
+func _refresh_interaction_target() -> void:
+	_interaction_targets = _interaction_targets.filter(
+		func(target: Node) -> bool:
+			return target != null and is_instance_valid(target) and target.has_method("interact")
+	)
+	var best_target: Node = null
+	var best_priority := -999999
+	var best_distance := INF
+	for target in _interaction_targets:
+		var priority := _interaction_priority(target)
+		var distance := _interaction_distance(target)
+		if priority > best_priority or (priority == best_priority and distance < best_distance):
+			best_target = target
+			best_priority = priority
+			best_distance = distance
+	_interaction_target = best_target
+
+
+func _interaction_priority(target: Node) -> int:
+	if target.has_method("get_interaction_priority"):
+		return int(target.call("get_interaction_priority"))
+	if target.is_in_group("npc"):
+		return 100
+	return 0
+
+
+func _interaction_distance(target: Node) -> float:
+	if target is Node2D:
+		return global_position.distance_to((target as Node2D).global_position)
+	return INF
+
+
+func _nearest_nearby_npc() -> Node:
+	var best_npc: Node = null
+	var best_distance := INF
+	for candidate in get_tree().get_nodes_in_group("npc"):
+		if candidate == null or not is_instance_valid(candidate):
+			continue
+		if not candidate.has_method("interact"):
+			continue
+		if not (candidate is Node2D):
+			continue
+		var distance := global_position.distance_to((candidate as Node2D).global_position)
+		var radius := NPC_INTERACTION_GRACE_RADIUS
+		var candidate_radius: Variant = candidate.get("interaction_radius")
+		if typeof(candidate_radius) == TYPE_FLOAT or typeof(candidate_radius) == TYPE_INT:
+			radius = maxf(NPC_INTERACTION_GRACE_RADIUS, float(candidate_radius) + NPC_INTERACTION_GRACE_MARGIN)
+		if distance > radius:
+			continue
+		if distance < best_distance:
+			best_npc = candidate
+			best_distance = distance
+	return best_npc
 
 
 func _update_animation(direction: Vector2, is_moving: bool) -> void:
